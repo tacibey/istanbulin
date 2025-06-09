@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map').setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
 
-    // ESRI WorldStreetMap katmanını ekleme (DEĞİŞTİRİLDİ)
+    // ESRI WorldStreetMap katmanını güncellenmiş parametrelerle ekleme
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
-        maxZoom: 20
+        attribution: 'Tiles &copy; Esri,
+        maxZoom: 23, // Maksimum zoom seviyesi artırıldı
+        maxNativeZoom: 19, // Orijinal karo verilerinin maksimum seviyesi
+        noWrap: true // Harita dışındaki boş alanlarda uyarı göstermeyi engeller
     }).addTo(map);
 
     // Konum butonunu ekleme
