@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map').setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
 
-    // CartoDB Positron katmanını ekleme (Daha sade ve minimalist görünüm)
+    // CartoDB Positron katmanını ekleme (Mevcut çalışan seçimin)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         drawCircle: false, // Konum doğruluk dairesini çizme
         initialZoomLevel: 16 // locateOptions.maxZoom ayarlanmamışsa başlangıç yakınlaştırma seviyesi
     }).addTo(map);
+
+    // Arama kutusunu haritaya ekleme (YENİ EKLENTİ KODU)
+    L.Control.geocoder({
+        defaultMarkGeocoded: false, // Arama sonucuna otomatik marker eklemez
+        placeholder: "Adres veya yer ara...", // Arama kutusu için placeholder
+        collapsed: true // Arama kutusu başlangıçta kapalı olsun (sadece ikon görünür)
+    }).addTo(map);
+
 
     // Özel "i" ikonunu tanımlama
     const customMarkerIcon = L.divIcon({
