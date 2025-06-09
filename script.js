@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Özel attribution kontrolünü ekleme (sadece "Leaflet" yazısı)
     L.control.attribution({
         position: 'bottomright',
-        prefix: 'Leaflet|Esri'
+        prefix: 'Leaflet | Esri'
     }).addTo(map);
 
     // Konum butonunu ekleme
