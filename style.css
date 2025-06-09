@@ -1,0 +1,145 @@
+:root {
+    --primary-bg-color: #f8f8f8;
+    --secondary-bg-color: #ffffff;
+    --text-color: #333333;
+    --accent-color: #666666;
+    --border-color: #e0e0e0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Google Font kullanılıyorsa */
+    line-height: 1.6;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Mobil uyumluluk için */
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.main-header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; /* Mobil uyumluluk için */
+}
+
+.main-header nav ul li {
+    margin-left: 25px;
+}
+
+.main-header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.main-header nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* Map Container */
+.map-container {
+    flex-grow: 1; /* Haritanın kalan alanı doldurmasını sağlar */
+    display: flex; /* İçindeki haritanın tam boyutu alması için */
+}
+
+#map {
+    height: 100%; /* Map container'ın tam yüksekliğini al */
+    width: 100%; /* Map container'ın tam genişliğini al */
+    min-height: calc(100vh - 120px); /* Header ve Footer yüksekliğini hesaba kat */
+    /* Bu min-height değeri header ve footer'ınızın toplam yüksekliğine göre ayarlanmalıdır. */
+    /* Örneğin, header 70px, footer 50px ise 120px. */
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--secondary-bg-color);
+    color: var(--accent-color);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.02);
+}
+
+.main-footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Leaflet Custom Marker (i harfi) */
+/* Varsayılan Leaflet ikonunu gizle ve kendi ikonunu kullan */
+.leaflet-marker-icon {
+    background-image: none !important;
+}
+
+.custom-marker-icon {
+    background-color: var(--accent-color); /* Gri arka plan */
+    border-radius: 50%; /* Yuvarlak şekil */
+    width: 30px !important; /* İkon boyutu */
+    height: 30px !important; /* İkon boyutu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* 'i' harfinin boyutu */
+    color: var(--secondary-bg-color); /* Beyaz 'i' harfi */
+    font-weight: bold;
+    border: 2px solid var(--secondary-bg-color); /* Beyaz çerçeve */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-header h1 {
+        margin-bottom: 10px;
+    }
+
+    .main-header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-header nav ul li {
+        margin: 5px 0;
+    }
+
+    #map {
+        min-height: calc(100vh - 150px); /* Mobil için header/footer yüksekliğini ayarla */
+    }
+}

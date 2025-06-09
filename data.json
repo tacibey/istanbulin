@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "lat": 41.0082,
+        "lng": 28.9784,
+        "title": "Ayasofya Camii",
+        "description": "Doğu Roma İmparatorluğu döneminde bazilika, Osmanlı İmparatorluğu döneminde cami olarak kullanılan, günümüzde ise cami olarak hizmet veren tarihi yapı.",
+        "source": "Vikipedi",
+        "contributor": "Geliştirici",
+        "address": "Ayasofya Meydanı, Fatih",
+        "place": "Cami"
+    },
+    {
+        "id": "2",
+        "lat": 41.0116,
+        "lng": 28.9806,
+        "title": "Topkapı Sarayı",
+        "description": "Osmanlı İmparatorluğu'nun yaklaşık 400 yıl boyunca idari merkezi ve padişahların ikametgahı.",
+        "source": "Milli Saraylar",
+        "contributor": "Geliştirici",
+        "address": "Cankurtaran, Fatih",
+        "place": "Saray"
+    },
+    {
+        "id": "3",
+        "lat": 41.0371,
+        "lng": 29.0069,
+        "title": "Ahmet Hamdi Tanpınar Evi (Tahmini)",
+        "description": "Yazar Ahmet Hamdi Tanpınar'ın yaşamının belirli dönemlerini geçirdiği Çamlıca'daki bir ev. (Kesin adres bilgisi araştırmaya muhtaçtır.)",
+        "source": "Tanpınar üzerine akademik çalışmalar",
+        "contributor": "istanbulin Ekibi",
+        "address": "Çamlıca (Tahmini)",
+        "place": "Konut"
+    },
+    {
+        "id": "4",
+        "lat": 41.0085,
+        "lng": 28.9754,
+        "title": "Kapalı Çarşı",
+        "description": "Dünyanın en eski ve en büyük kapalı çarşılarından biri, 1455 yılında Fatih Sultan Mehmet tarafından kurulmuştur.",
+        "source": "Kapalı Çarşı Resmi Sitesi",
+        "contributor": "Geliştirici",
+        "address": "Beyazıt, Fatih",
+        "place": "Çarşı"
+    }
+]
