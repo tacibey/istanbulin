@@ -11,13 +11,16 @@
     --place-konut-color: #50B498;  /* Yeşil tonu */
     --place-carsi-color: #F7C548;  /* Sarımsı turuncu tonu */
     --place-default-color: var(--accent-color); /* Varsayılan gri tonu */
+
+    /* YENİ: İkon Harf Rengi */
+    --icon-i-color: #550049;
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* HTML ve body elementlerinin tam yüksekliği alması önemli */
-    overflow: hidden; /* Kaydırma çubuklarını engellemek için */
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -41,7 +44,7 @@ body {
     padding: 15px 0;
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    flex-shrink: 0; /* Header'ın küçülmesini engeller */
+    flex-shrink: 0;
 }
 
 .main-header .container {
@@ -83,15 +86,14 @@ body {
 
 /* Map Container */
 .map-container {
-    flex-grow: 1; /* Haritanın kalan alanı doldurmasını sağlar */
+    flex-grow: 1;
     display: flex;
-    overflow: hidden; /* Harita dışına taşan içerikleri gizler */
+    overflow: hidden;
 }
 
 #map {
-    height: 100%; /* Kapsayıcısının (map-container) tam yüksekliğini al */
-    width: 100%; /* Kapsayıcısının (map-container) tam genişliğini al */
-    /* min-height burada artık map-container tarafından kontrol ediliyor, bu yüzden kaldırılabilir */
+    height: 100%;
+    width: 100%;
 }
 
 /* Footer */
@@ -102,7 +104,7 @@ body {
     text-align: center;
     border-top: 1px solid var(--border-color);
     box-shadow: 0 -2px 5px rgba(0,0,0,0.02);
-    flex-shrink: 0; /* Footer'ın küçülmesini engeller */
+    flex-shrink: 0;
 }
 
 .main-footer p {
@@ -116,35 +118,39 @@ body {
 }
 
 .custom-marker-icon {
-    border-radius: 50%;
+    /* border-radius: 50%; YUVARLAK ŞEKLİ KALDIRILDI */
     width: 30px !important;
     height: 30px !important;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
-    color: var(--secondary-bg-color);
+    color: var(--icon-i-color); /* İ HARFİNİN RENGİ SABİT #550049 */
     font-weight: bold;
-    border: 2px solid var(--secondary-bg-color);
+    border: 2px solid var(--accent-color); /* Gri çerçeve */
+    background-color: transparent; /* Arka planı şeffaf yapıldı */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
 }
 
-/* Kategoriye Özel Arka Plan Renkleri (önceki değişiklikten korunmuştur) */
+/* Kategoriye Özel Arka Plan Renkleri - İkonun kendisi şeffaf, çerçeve rengini ayarlayabiliriz */
+/* Şu an için 'i' harfi sabit renk, ikonun arka planı şeffaf. */
+/* Eğer kategori renklerini ikonun çerçevesi veya farklı bir şekilde kullanmak istersen belirtebilirsin. */
+/* Şimdilik bunlar etkisiz kalacak çünkü arka plan transparent. */
 .custom-marker-icon.place-cami {
-    background-color: var(--place-cami-color);
+    border-color: var(--place-cami-color); /* Kategori renginde çerçeve */
 }
 .custom-marker-icon.place-saray {
-    background-color: var(--place-saray-color);
+    border-color: var(--place-saray-color);
 }
 .custom-marker-icon.place-konut {
-    background-color: var(--place-konut-color);
+    border-color: var(--place-konut-color);
 }
 .custom-marker-icon.place-carsi {
-    background-color: var(--place-carsi-color);
+    border-color: var(--place-carsi-color);
 }
 .custom-marker-icon.place-default {
-    background-color: var(--place-default-color);
+    border-color: var(--place-default-color);
 }
 
 /* Mobil Uyumluluk */
@@ -166,7 +172,4 @@ body {
     .main-header nav ul li {
         margin: 5px 0;
     }
-
-    /* #map için artık min-height yerine flex-grow ve height:100% kullanılacak */
-    /* Bu medya sorgusunda özel bir min-height ayarına gerek kalmaz */
 }
