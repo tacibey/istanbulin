@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ESRI WorldStreetMap katmanını güncellenmiş parametrelerle ekleme
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri,
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
         maxZoom: 23, // Maksimum zoom seviyesi artırıldı
         maxNativeZoom: 19, // Orijinal karo verilerinin maksimum seviyesi
         noWrap: true // Harita dışındaki boş alanlarda uyarı göstermeyi engeller
