@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ESRI WorldStreetMap katmanını güncellenmiş parametrelerle ekleme
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19, // Maksimum zoom seviyesi artırıldı
-        maxNativeZoom: 19, // Orijinal karo verilerinin maksimum seviyesi
+        maxZoom: 20, // Maksimum zoom seviyesi artırıldı
+        maxNativeZoom: 20, // Orijinal karo verilerinin maksimum seviyesi
         noWrap: true // Harita dışındaki boş alanlarda uyarı göstermeyi engeller
     }).addTo(map);
 
