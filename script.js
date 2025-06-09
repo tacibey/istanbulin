@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Harita Başlangıç Ayarları
+    // ... (dosyanın başındaki harita ayarları ve fetch kısmı aynı kalacak) ...
     const map = L.map('map', {
         attributionControl: false
     }).setView([41.0082, 28.9784], 13);
@@ -41,22 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(item => {
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
-                // === DÜZELTME BURADA YAPILDI ===
-                // Bu kod, resim yolunun tam bir URL mi yoksa yerel bir dosya mı olduğunu kontrol eder.
                 let imageUrl = '';
                 if (item.image) {
-                    // Eğer 'image' alanı http ile başlıyorsa, bu tam bir URL'dir. Olduğu gibi kullan.
                     if (item.image.startsWith('http')) {
                         imageUrl = item.image;
                     } 
-                    // Değilse, bu yerel bir dosyadır. Başına 'images/' ekle.
                     else {
                         imageUrl = `images/${item.image}`;
                     }
                 }
                 const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}">` : '';
-                // === DÜZELTME SONU ===
-
                 const sourceLink = item.source ? `<a href="${item.source}" target="_blank">Kaynak</a>` : 'Belirtilmemiş';
                 
                 const popupContent = `
@@ -80,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Harita verileri yüklenirken bir sorun oluştu.');
         });
         
-    // === YER EKLEME FONKSİYONLARI (DEĞİŞİKLİK YOK) ===
+    // === YER EKLEME FONKSİYONLARI ===
 
     const addPlaceBtn = document.getElementById('add-place-btn');
     const formContainer = document.getElementById('form-container');
@@ -93,25 +87,40 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAddMode = false;
     let tempMarker = null;
 
+    // YENİ: Pinleme moduna girmek için yardımcı fonksiyon
+    function enterPinningMode() {
+        isAddMode = true;
+        map.getContainer().style.cursor = 'crosshair'; // İmleci '+' yap
+        addPlaceInfo.classList.remove('hidden'); // "Yer seçin" mesajını göster
+    }
+
+    // YENİ: Pinleme modundan çıkmak için yardımcı fonksiyon
+    function exitPinningMode() {
+        isAddMode = false;
+        map.getContainer().style.cursor = ''; // İmleci normale döndür
+        addPlaceInfo.classList.add('hidden'); // Bilgi mesajını gizle
+    }
+
+    // DEĞİŞTİ: Formu kapatma fonksiyonu daha basit hale getirildi. Sadece DOM temizliği yapıyor.
     function closeForm() {
         formContainer.classList.add('hidden');
         if (tempMarker) {
             map.removeLayer(tempMarker);
             tempMarker = null;
         }
-        if (isAddMode) {
-            isAddMode = false;
-            map.getContainer().style.cursor = '';
-            addPlaceInfo.classList.add('hidden');
-        }
     }
 
+    // '+' butonuna tıklandığında
     addPlaceBtn.addEventListener('click', () => {
-        isAddMode = true;
-        map.getContainer().style.cursor = 'crosshair';
-        addPlaceInfo.classList.remove('hidden');
+        // Eğer zaten ekleme modundaysak, modu kapat ve işlemi iptal et.
+        if (isAddMode) {
+            exitPinningMode();
+        } else {
+            enterPinningMode();
+        }
     });
 
+    // Haritaya tıklandığında
     map.on('click', (e) => {
         if (!isAddMode) return;
 
@@ -125,17 +134,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         formContainer.classList.remove('hidden');
 
-        isAddMode = false;
-        map.getContainer().style.cursor = '';
-        addPlaceInfo.classList.add('hidden');
+        // DEĞİŞTİ: Kullanıcı pin koyduktan sonra, formu doldururken yeni pin koyamasın diye moddan çıkıyoruz.
+        exitPinningMode();
     });
 
-    closeFormBtn.addEventListener('click', closeForm);
+    // DEĞİŞTİ: Formdaki 'X' butonuna tıklandığında kullanıcıyı tekrar pinleme moduna alıyoruz.
+    closeFormBtn.addEventListener('click', () => {
+        closeForm();        // Formu ve geçici pini temizle
+        enterPinningMode(); // Kullanıcının yeni bir yer seçebilmesi için modu TEKRAR AÇ
+    });
     
+    // DEĞİŞTİ: Form gönderildiğinde işlem tamamen biter.
     placeForm.addEventListener('submit', () => {
         setTimeout(() => {
-             placeForm.reset();
-             closeForm();
+             placeForm.reset(); 
+             closeForm(); // Sadece formu ve pini temizle. Mod zaten kapalı.
         }, 500);
     });
 });
