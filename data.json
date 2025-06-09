@@ -1,46 +1,79 @@
 [
-    {
-        "id": "1",
-        "lat": 41.0082,
-        "lng": 28.9784,
-        "title": "Ayasofya Camii",
-        "description": "Doğu Roma İmparatorluğu döneminde bazilika, Osmanlı İmparatorluğu döneminde cami olarak kullanılan, günümüzde ise cami olarak hizmet veren tarihi yapı.",
-        "source": "Vikipedi",
-        "contributor": "Geliştirici",
-        "address": "Ayasofya Meydanı, Fatih",
-        "place": "Cami"
-    },
-    {
-        "id": "2",
-        "lat": 41.0116,
-        "lng": 28.9806,
-        "title": "Topkapı Sarayı",
-        "description": "Osmanlı İmparatorluğu'nun yaklaşık 400 yıl boyunca idari merkezi ve padişahların ikametgahı.",
-        "source": "Milli Saraylar",
-        "contributor": "Geliştirici",
-        "address": "Cankurtaran, Fatih",
-        "place": "Saray"
-    },
-    {
-        "id": "3",
-        "lat": 41.0371,
-        "lng": 29.0069,
-        "title": "Ahmet Hamdi Tanpınar Evi (Tahmini)",
-        "description": "Yazar Ahmet Hamdi Tanpınar'ın yaşamının belirli dönemlerini geçirdiği Çamlıca'daki bir ev. (Kesin adres bilgisi araştırmaya muhtaçtır.)",
-        "source": "Tanpınar üzerine akademik çalışmalar",
-        "contributor": "istanbulin Ekibi",
-        "address": "Çamlıca (Tahmini)",
-        "place": "Konut"
-    },
-    {
-        "id": "4",
-        "lat": 41.0085,
-        "lng": 28.9754,
-        "title": "Kapalı Çarşı",
-        "description": "Dünyanın en eski ve en büyük kapalı çarşılarından biri, 1455 yılında Fatih Sultan Mehmet tarafından kurulmuştur.",
-        "source": "Kapalı Çarşı Resmi Sitesi",
-        "contributor": "Geliştirici",
-        "address": "Beyazıt, Fatih",
-        "place": "Çarşı"
-    }
+  {
+    "id": "1",
+    "title": "Ayasofya Cami",
+    "description": "Bizans İmparatoru I. Justinianus tarafından yaptırılan, daha sonra camiye çevrilen önemli bir yapıdır.",
+    "address": "Ayasofya Meydanı, Fatih/İstanbul",
+    "lat": 41.008583,
+    "lng": 28.980145,
+    "place": "Cami",
+    "source": "https://tr.wikipedia.org/wiki/Ayasofya",
+    "contributor": "Ahmet Y."
+  },
+  {
+    "id": "2",
+    "title": "Topkapı Sarayı",
+    "description": "Osmanlı İmparatorluğu'nun yaklaşık 400 yıl boyunca idari merkezi olarak kullanılan büyük bir saray kompleksidir.",
+    "address": "Cankurtaran, 34122 Fatih/İstanbul",
+    "lat": 41.011667,
+    "lng": 28.983333,
+    "place": "Saray",
+    "source": "https://www.millisaraylar.gov.tr/saraylar/topkapi-sarayi",
+    "contributor": "Zeynep K."
+  },
+  {
+    "id": "3",
+    "title": "Çemberlitaş Sütunu",
+    "description": "Roma İmparatoru Konstantin adına dikilmiş anıtsal bir sütundur. Üzerinde Güneş Tanrısı Apollon heykeli bulunuyordu.",
+    "address": "Beyazıt, Çemberlitaş, 34126 Fatih/İstanbul",
+    "lat": 41.0065,
+    "lng": 28.9715,
+    "place": "Diğer",
+    "source": "https://en.wikipedia.org/wiki/Column_of_Constantine",
+    "contributor": "Anonim"
+  },
+  {
+    "id": "4",
+    "title": "Kapalıçarşı",
+    "description": "Dünyanın en eski ve en büyük kapalı çarşılarından biridir. Binlerce dükkana ev sahipliği yapar.",
+    "address": "Beyazıt, Kalpakçılar Cd. No:22, 34126 Fatih/İstanbul",
+    "lat": 41.0100,
+    "lng": 28.9680,
+    "place": "Çarşı",
+    "source": "https://www.kapalicarsi.org.tr/",
+    "contributor": "Fatma D."
+  },
+  {
+    "id": "5",
+    "title": "Perili Köşk",
+    "description": "Boğaz'da, eşsiz mimarisi ve rivayetleriyle ünlü tarihi bir köşk. Bugün modern bir sanat merkezine ev sahipliği yapıyor.",
+    "address": "Yeniköy, Köybaşı Cd. No:124, 34464 Sarıyer/İstanbul",
+    "lat": 41.0968,
+    "lng": 29.0560,
+    "place": "Konut",
+    "source": "https://www.haberturk.com/perili-kosk-neden-perili-deniyor-istanbul-un-esrarengiz-kosku-2735749",
+    "contributor": "Can U."
+  },
+  {
+    "id": "6",
+    "title": "Sultanahmet Camii",
+    "description": "Mavi Camii olarak da bilinen, 17. yüzyılda inşa edilmiş, altı minaresiyle ünlü bir Osmanlı camisidir.",
+    "address": "Sultan Ahmet, Atmeydanı Cd. No:7, 34122 Fatih/İstanbul",
+    "lat": 41.0053,
+    "lng": 28.9769,
+    "place": "Cami",
+    "source": "https://tr.wikipedia.org/wiki/Sultan_Ahmet_Camii",
+    "contributor": "Deniz C."
+  },
+  {
+    "id": "7",
+    "title": "Dolmabahçe Sarayı",
+    "description": "Osmanlı İmparatorluğu'nun son döneminde kullanılan ve ihtişamlı mimarisiyle dikkat çeken bir saraydır.",
+    "address": "Dolmabahçe Cd., 34357 Beşiktaş/İstanbul",
+    "lat": 41.0396,
+    "lng": 29.0062,
+    "place": "Saray",
+    "source": "https://www.millisaraylar.gov.tr/saraylar/dolmabahce-sarayi",
+    "contributor": "Efe S."
+  }
 ]
