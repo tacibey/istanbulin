@@ -1,23 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map', {
-        attributionControl: false // Varsayılan attribution kontrolünü devre dışı bırak
-    }).setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
+        attributionControl: false
+    }).setView([41.0082, 28.9784], 13);
 
-    // ESRI WorldStreetMap katmanını güncellenmiş parametrelerle ekleme
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19, // Maksimum zoom seviyesi artırıldı
-        maxNativeZoom: 19, // Orijinal karo verilerinin maksimum seviyesi
-        noWrap: true // Harita dışındaki boş alanlarda uyarı göstermeyi engeller
+        maxZoom: 19,
+        maxNativeZoom: 19,
+        noWrap: true
     }).addTo(map);
 
-    // Özel attribution kontrolünü ekleme (sadece "Leaflet" yazısı)
     L.control.attribution({
         position: 'bottomright',
         prefix: 'Leaflet | Esri'
     }).addTo(map);
 
-    // Konum butonunu ekleme
     L.control.locate({
         position: 'topleft',
         setView: 'once',
@@ -25,15 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         strings: {
             title: "Mevcut Konumumu Göster",
             popup: "Buradasınız!"
-        },
-        locateOptions: {
-            maxZoom: 16
-        },
-        drawCircle: false,
-        initialZoomLevel: 16
+        }
     }).addTo(map);
 
-    // Özel "i" ikonunu tanımlama
     const customMarkerIcon = L.divIcon({
         className: 'custom-marker-icon',
         html: 'i',
@@ -42,31 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -25]
     });
 
-    // Marker küme grubunu oluşturma
     const markers = L.markerClusterGroup();
 
-    // data.json dosyasından verileri çekme ve haritaya ekleme
     fetch('data.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             data.forEach(item => {
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
-
-                // YENİ: Görsel etiketini oluşturma
-                // Eğer JSON'da 'image' alanı varsa, bir <img> etiketi oluştur. Yoksa boş bir string ata.
-                const imageHtml = item.image ? `<img src="images/${item.image}" alt="${item.title}">` : '';
-
-                // Kaynak linkini oluşturma
-                const sourceLink = item.source && item.source.startsWith('http') ?
-                                   `<a href="${item.source}" target="_blank">Kaynak</a>` :
-                                   'Belirtilmemiş';
-
-                // YENİ: Popup içeriğini görseli de içerecek şekilde güncelleme
+                const imageHtml = item.image ? `<img src="${item.image}" alt="${item.title}">` : ''; // Görsel yolunu images/ klasörü olmadan direkt alıyoruz
+                const sourceLink = item.source ? `<a href="${item.source}" target="_blank">Kaynak</a>` : 'Belirtilmemiş';
+                
                 const popupContent = `
                     ${imageHtml}
                     <div class="popup-text-content">
@@ -78,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p><strong>Ekleyen:</strong> ${item.contributor || 'Anonim'}</p>
                     </div>
                 `;
-
                 marker.bindPopup(popupContent);
                 markers.addLayer(marker);
             });
@@ -86,6 +61,79 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Veri çekilirken bir hata oluştu:', error);
-            alert('Harita verileri yüklenirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin.');
+            alert('Harita verileri yüklenirken bir sorun oluştu.');
         });
+        
+    // === YENİ: YER EKLEME FONKSİYONLARI ===
+
+    // HTML elemanlarını seçelim
+    const addPlaceBtn = document.getElementById('add-place-btn');
+    const formContainer = document.getElementById('form-container');
+    const closeFormBtn = document.getElementById('close-form-btn');
+    const placeForm = document.getElementById('place-form');
+    const latInput = document.getElementById('lat');
+    const lngInput = document.getElementById('lng');
+    const addPlaceInfo = document.getElementById('add-place-info');
+
+    let isAddMode = false; // Yer ekleme modu aktif mi?
+    let tempMarker = null; // Kullanıcının seçtiği yeri gösteren geçici marker
+
+    // Formu kapatma fonksiyonu
+    function closeForm() {
+        formContainer.classList.add('hidden');
+        if (tempMarker) {
+            map.removeLayer(tempMarker); // Geçici markeri haritadan kaldır
+            tempMarker = null;
+        }
+        // Eğer yer ekleme modu açıksa kapat
+        if (isAddMode) {
+            isAddMode = false;
+            map.getContainer().style.cursor = ''; // İmleci normale döndür
+            addPlaceInfo.classList.add('hidden'); // Bilgi mesajını gizle
+        }
+    }
+
+    // '+' butonuna tıklandığında
+    addPlaceBtn.addEventListener('click', () => {
+        isAddMode = true;
+        map.getContainer().style.cursor = 'crosshair'; // İmleci '+' yap
+        addPlaceInfo.classList.remove('hidden'); // "Yer seçin" mesajını göster
+    });
+
+    // Haritaya tıklandığında
+    map.on('click', (e) => {
+        if (!isAddMode) return; // Eğer yer ekleme modunda değilsek hiçbir şey yapma
+
+        // Geçici bir marker oluştur ve haritaya ekle
+        if (tempMarker) {
+            map.removeLayer(tempMarker); // Önceki geçici markeri kaldır
+        }
+        tempMarker = L.marker(e.latlng).addTo(map);
+
+        // Gizli inputlara koordinatları yaz
+        latInput.value = e.latlng.lat;
+        lngInput.value = e.latlng.lng;
+
+        // Formu göster
+        formContainer.classList.remove('hidden');
+
+        // Yer ekleme modunu kapat
+        isAddMode = false;
+        map.getContainer().style.cursor = ''; // İmleci normale döndür
+        addPlaceInfo.classList.add('hidden'); // Bilgi mesajını gizle
+    });
+
+    // Formdaki 'X' butonuna tıklandığında formu kapat
+    closeFormBtn.addEventListener('click', closeForm);
+    
+    // Form gönderildiğinde (başarıyla gönderilirse Formspree teşekkür sayfasına yönlendirir)
+    // Eğer kullanıcı formu gönderdikten sonra aynı sayfada kalmasını istersek daha karmaşık bir yapı gerekir,
+    // ama bu haliyle en basit ve en etkili çözüm.
+    placeForm.addEventListener('submit', () => {
+        // Form gönderildikten 0.5 saniye sonra formu ve geçici pini temizle
+        setTimeout(() => {
+             placeForm.reset(); // Formu sıfırla
+             closeForm();
+        }, 500);
+    });
 });
