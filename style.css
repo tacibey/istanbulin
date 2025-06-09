@@ -4,16 +4,28 @@
     --text-color: #333333;
     --accent-color: #666666;
     --border-color: #e0e0e0;
+
+    /* Mekan Tipi Renkleri */
+    --place-cami-color: #4A90E2;   /* Mavi tonu */
+    --place-saray-color: #FF6F61;  /* Mercan tonu */
+    --place-konut-color: #50B498;  /* Yeşil tonu */
+    --place-carsi-color: #F7C548;  /* Sarımsı turuncu tonu */
+    --place-default-color: var(--accent-color); /* Varsayılan gri tonu */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* HTML ve body elementlerinin tam yüksekliği alması önemli */
+    overflow: hidden; /* Kaydırma çubuklarını engellemek için */
 }
 
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif; /* Google Font kullanılıyorsa */
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 .container {
@@ -29,13 +41,14 @@ body {
     padding: 15px 0;
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex-shrink: 0; /* Header'ın küçülmesini engeller */
 }
 
 .main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Mobil uyumluluk için */
+    flex-wrap: wrap;
 }
 
 .main-header h1 {
@@ -50,7 +63,7 @@ body {
     padding: 0;
     list-style: none;
     display: flex;
-    flex-wrap: wrap; /* Mobil uyumluluk için */
+    flex-wrap: wrap;
 }
 
 .main-header nav ul li {
@@ -71,15 +84,14 @@ body {
 /* Map Container */
 .map-container {
     flex-grow: 1; /* Haritanın kalan alanı doldurmasını sağlar */
-    display: flex; /* İçindeki haritanın tam boyutu alması için */
+    display: flex;
+    overflow: hidden; /* Harita dışına taşan içerikleri gizler */
 }
 
 #map {
-    height: 100%; /* Map container'ın tam yüksekliğini al */
-    width: 100%; /* Map container'ın tam genişliğini al */
-    min-height: calc(100vh - 120px); /* Header ve Footer yüksekliğini hesaba kat */
-    /* Bu min-height değeri header ve footer'ınızın toplam yüksekliğine göre ayarlanmalıdır. */
-    /* Örneğin, header 70px, footer 50px ise 120px. */
+    height: 100%; /* Kapsayıcısının (map-container) tam yüksekliğini al */
+    width: 100%; /* Kapsayıcısının (map-container) tam genişliğini al */
+    /* min-height burada artık map-container tarafından kontrol ediliyor, bu yüzden kaldırılabilir */
 }
 
 /* Footer */
@@ -90,6 +102,7 @@ body {
     text-align: center;
     border-top: 1px solid var(--border-color);
     box-shadow: 0 -2px 5px rgba(0,0,0,0.02);
+    flex-shrink: 0; /* Footer'ın küçülmesini engeller */
 }
 
 .main-footer p {
@@ -98,25 +111,40 @@ body {
 }
 
 /* Leaflet Custom Marker (i harfi) */
-/* Varsayılan Leaflet ikonunu gizle ve kendi ikonunu kullan */
 .leaflet-marker-icon {
     background-image: none !important;
 }
 
 .custom-marker-icon {
-    background-color: var(--accent-color); /* Gri arka plan */
-    border-radius: 50%; /* Yuvarlak şekil */
-    width: 30px !important; /* İkon boyutu */
-    height: 30px !important; /* İkon boyutu */
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em; /* 'i' harfinin boyutu */
-    color: var(--secondary-bg-color); /* Beyaz 'i' harfi */
+    font-size: 1.2em;
+    color: var(--secondary-bg-color);
     font-weight: bold;
-    border: 2px solid var(--secondary-bg-color); /* Beyaz çerçeve */
+    border: 2px solid var(--secondary-bg-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
+}
+
+/* Kategoriye Özel Arka Plan Renkleri (önceki değişiklikten korunmuştur) */
+.custom-marker-icon.place-cami {
+    background-color: var(--place-cami-color);
+}
+.custom-marker-icon.place-saray {
+    background-color: var(--place-saray-color);
+}
+.custom-marker-icon.place-konut {
+    background-color: var(--place-konut-color);
+}
+.custom-marker-icon.place-carsi {
+    background-color: var(--place-carsi-color);
+}
+.custom-marker-icon.place-default {
+    background-color: var(--place-default-color);
 }
 
 /* Mobil Uyumluluk */
@@ -139,7 +167,6 @@ body {
         margin: 5px 0;
     }
 
-    #map {
-        min-height: calc(100vh - 150px); /* Mobil için header/footer yüksekliğini ayarla */
-    }
+    /* #map için artık min-height yerine flex-grow ve height:100% kullanılacak */
+    /* Bu medya sorgusunda özel bir min-height ayarına gerek kalmaz */
 }
