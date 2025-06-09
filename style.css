@@ -75,6 +75,12 @@ body {
     margin: 0; /* İçerik kaymasını engellemek için */
 }
 
+/* YENİ: Logo linkinin varsayılan stilini sıfırlama */
+#logo-link {
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    color: inherit; /* Rengi parent elementinden (yani header'ın beyaz renginden) al */
+}
+
 .main-header h1 {
     font-family: 'Gotico Antiqua', serif; /* Gotico Antiqua fontu */
     margin: 0;
@@ -121,6 +127,7 @@ body {
     flex-grow: 1;
     display: flex;
     overflow: hidden;
+    position: relative; /* Buton ve formun konumlanabilmesi için eklendi */
 }
 
 #map {
@@ -167,8 +174,6 @@ body {
     font-family: 'Gotico Antiqua', serif !important;
 }
 
-
-
 /* Kategoriye Özel Arka Plan Renkleri (Şu an kullanılmıyor ama durabilir) */
 .custom-marker-icon.place-cami {}
 .custom-marker-icon.place-saray {}
@@ -176,34 +181,8 @@ body {
 .custom-marker-icon.place-carsi {}
 .custom-marker-icon.place-default {}
 
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-    .main-header .container {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .main-header h1 {
-        margin-bottom: 5px;
-        font-size: 2.5em;
-        letter-spacing: -2px;
-    }
-
-    .main-header .subtitle {
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-
-    .main-header nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .main-header nav ul li {
-        margin: 5px 0;
-    }
-}
-/* === YENİ: Leaflet Popup Stil Düzenlemeleri === */
+/* === Leaflet Popup Stil Düzenlemeleri === */
 
 .leaflet-popup-content-wrapper {
     border-radius: 8px; /* Popup köşelerini yumuşat */
@@ -271,7 +250,8 @@ body {
     color: #ddd !important;
 }
 
-/* === YENİ: Yer Ekleme Özellikleri Stilleri === */
+
+/* === Yer Ekleme Özellikleri Stilleri === */
 
 /* Genel "Gizli" sınıfı */
 .hidden {
@@ -316,7 +296,6 @@ body {
     font-size: 0.9em;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-
 
 /* Form Konteyneri (Tüm ekranı kaplayan overlay) */
 #form-container {
@@ -415,4 +394,33 @@ body {
 }
 .close-btn:hover {
     color: #333;
+}
+
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-header h1 {
+        margin-bottom: 5px;
+        font-size: 2.5em;
+        letter-spacing: -2px;
+    }
+
+    .main-header .subtitle {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .main-header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-header nav ul li {
+        margin: 5px 0;
+    }
 }
