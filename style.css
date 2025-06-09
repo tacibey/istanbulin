@@ -157,14 +157,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.1em;
+    font-size: 1.35em; /* i harfi bir tık daha büyük */
     color: var(--icon-text-color);
-    font-weight: bold;
+    font-weight: normal; /* Gotico fontu bold değil */
     background-color: var(--icon-background-color);
     border: 2px solid var(--secondary-bg-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
+    font-family: 'Gotico Antiqua', serif !important; /* LOGO FONTU */
 }
+
 
 /* Kategoriye Özel Arka Plan Renkleri (Şu an kullanılmıyor ama durabilir) */
 .custom-marker-icon.place-cami {}
