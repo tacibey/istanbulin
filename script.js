@@ -2,10 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map').setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
 
-    // Esri WorldStreetMap katmanını ekleme (Tekrar deneme)
-    // Bu URL'in 'mature support' olduğu unutulmamalıdır, gelecekte sorunlar yaşanabilir.
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_StreetMap/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    // CartoDB Positron katmanını ekleme (Mevcut çalışan seçimin)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
     }).addTo(map);
 
     // Konum butonunu ekleme
@@ -24,12 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
         initialZoomLevel: 16 // locateOptions.maxZoom ayarlanmamışsa başlangıç yakınlaştırma seviyesi
     }).addTo(map);
 
-    // Arama kutusunu haritaya ekleme
+    // Arama kutusunu haritaya ekleme (YENİ EKLENTİ KODU)
     L.Control.geocoder({
-        defaultMarkGeocoded: false,
-        placeholder: "Adres veya yer ara...",
-        collapsed: true
+        defaultMarkGeocoded: false, // Arama sonucuna otomatik marker eklemez
+        placeholder: "Adres veya yer ara...", // Arama kutusu için placeholder
+        collapsed: true // Arama kutusu başlangıçta kapalı olsun (sadece ikon görünür)
     }).addTo(map);
+
+
+    // Özel "i" ikonunu tanımlama
+    const customMarkerIcon = L.divIcon({
+        className: 'custom-marker-icon',
+        html: 'i',
+        iconSize: [30, 30], // İkonun boyutu
+        iconAnchor: [15, 30], // İkonun alt ortasının koordinatı (işaretçinin dibi)
+        popupAnchor: [0, -25] // Popup'ın açılacağı nokta (ikonun üstünde)
+    });
 
     // Marker küme grubunu oluşturma
     const markers = L.markerClusterGroup();
@@ -44,18 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             data.forEach(item => {
-                const placeType = item.place ? item.place.toLowerCase() : 'default';
-                const iconClassName = `custom-marker-icon place-${placeType}`;
-
-                // Özel "i" ikonunu tanımlama (önceki istek üzerine siyah yuvarlak, beyaz 'i')
-                const customMarkerIcon = L.divIcon({
-                    className: iconClassName,
-                    html: 'i',
-                    iconSize: [26, 26], // Küçük boyut
-                    iconAnchor: [13, 26], // İkonun alt ortası (boyutun yarısı)
-                    popupAnchor: [0, -25] // Popup konumu
-                });
-
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
                 // Popup içeriğini oluşturma
@@ -69,12 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 marker.bindPopup(popupContent);
-                markers.addLayer(marker);
+                markers.addLayer(marker); // Marker'ı doğrudan haritaya değil, küme grubuna ekle
             });
-            map.addLayer(markers);
+            map.addLayer(markers); // Tüm küme grubunu haritaya ekle
         })
         .catch(error => {
             console.error('Veri çekilirken bir hata oluştu:', error);
+            // Kullanıcıya daha anlaşılır bir hata mesajı gösterebiliriz
             alert('Harita verileri yüklenirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin.');
         });
 });
