@@ -21,8 +21,8 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">İletişim</a></li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdyrF8ALZpfQtTAUMK7lNnS4vzDuHmpir62aexZtuhwnAGNYw/viewform?usp=sharing&ouid=115094213582764304671" target="_blank">Yer Ekle</a></li>
+                    <!-- YER EKLE LİNKİ BURADAN KALDIRILDI -->
+                    <li><a href="#">İletişim</a></li> 
                 </ul>
             </nav>
         </div>
@@ -30,11 +30,52 @@
 
     <main class="map-container">
         <div id="map"></div>
+        
+        <!-- YENİ: Yer Ekle Butonu -->
+        <button id="add-place-btn" title="Haritaya Yeni Yer Ekle">+</button>
+
+        <!-- YENİ: Bilgilendirme Mesajı -->
+        <div id="add-place-info" class="hidden">
+            <p>Eklemek istediğiniz yeri harita üzerinde işaretleyin.</p>
+        </div>
+
+        <!-- YENİ: Yer Ekleme Formu (Başlangıçta Gizli) -->
+        <div id="form-container" class="hidden">
+            <form id="place-form" action="SENİN_FORMspree_URLN" method="POST">
+                <button type="button" id="close-form-btn" class="close-btn">×</button>
+                <h2>Yeni Yer Ekle</h2>
+                <p>Lütfen aşağıdaki bilgileri eksiksiz doldurun.</p>
+                
+                <label for="title">Başlık:</label>
+                <input type="text" id="title" name="title" required>
+                
+                <label for="description">Açıklama:</label>
+                <textarea id="description" name="description" rows="3" required></textarea>
+                
+                <label for="address">Adres:</label>
+                <input type="text" id="address" name="address">
+
+                <label for="image">Görsel URL'si: (Opsiyonel)</label>
+                <input type="url" id="image" name="image" placeholder="https://ornek.com/resim.jpg">
+                
+                <label for="source">Kaynak URL'si: (Opsiyonel)</label>
+                <input type="url" id="source" name="source" placeholder="https://wikipedia.org/...">
+
+                <label for="contributor">Sizin Adınız / Rumuzunuz:</label>
+                <input type="text" id="contributor" name="contributor" required>
+                
+                <!-- Gizli alanlar: Koordinatları göndermek için -->
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="lng" name="lng">
+                
+                <button type="submit">Gönder</button>
+            </form>
+        </div>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 istanbulin. Tüm Hakları Saklıdır.</p>
+            <p>© 2025 istanbulin. Tüm Hakları Saklıdır.</p>
         </div>
     </footer>
 
