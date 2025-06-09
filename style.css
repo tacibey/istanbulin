@@ -203,3 +203,70 @@ body {
         margin: 5px 0;
     }
 }
+/* === YENİ: Leaflet Popup Stil Düzenlemeleri === */
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px; /* Popup köşelerini yumuşat */
+    background-color: var(--secondary-bg-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.leaflet-popup-content {
+    margin: 0 !important; /* Leaflet'in varsayılan margin'ini sıfırla */
+    padding: 0 !important; /* Leaflet'in varsayılan padding'ini sıfırla */
+    width: 300px !important; /* Popup genişliğini sabitle */
+    line-height: 1.5;
+}
+
+.leaflet-popup-content img {
+    width: 100%; /* Resim, popup genişliğine tam otursun */
+    height: auto;
+    display: block; /* Altında oluşabilecek boşluğu engeller */
+    border-top-left-radius: 8px; /* Resmin üst köşelerini popup ile uyumlu yap */
+    border-top-right-radius: 8px;
+}
+
+/* Metin içeriğini saran div için stiller */
+.popup-text-content {
+    padding: 15px; /* Metinler için iç boşluk */
+}
+
+.popup-text-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.popup-text-content p {
+    margin: 0 0 8px 0;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.popup-text-content p:last-child {
+    margin-bottom: 0; /* Son paragrafın alt boşluğunu kaldır */
+}
+
+.popup-text-content a {
+    color: var(--place-cami-color); /* Linkler için dikkat çekici bir renk */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.popup-text-content a:hover {
+    text-decoration: underline;
+}
+
+/* Kapatma (X) butonu için daha belirgin stil */
+.leaflet-popup-close-button {
+    padding: 8px 8px 0 0;
+    color: white !important; /* Buton rengi beyaz */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7); /* Okunabilirlik için gölge */
+    font-size: 20px !important;
+}
+
+.leaflet-popup-close-button:hover {
+    color: #ddd !important;
+}
