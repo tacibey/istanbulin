@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map').setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
 
-    // Esri WorldStreetMap katmanını ekleme
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_StreetMap/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    // OpenStreetMap katmanını ekleme (Tekrar Güvenilir Seçenek)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     // Konum butonunu ekleme
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -25] // Popup'ın açılacağı nokta (ikonun üstünde)
     });
 
-    // Marker küme grubunu oluşturma (YENİ KOD)
+    // Marker küme grubunu oluşturma
     const markers = L.markerClusterGroup();
 
     // data.json dosyasından verileri çekme ve haritaya ekleme
