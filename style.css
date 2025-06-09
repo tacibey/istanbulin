@@ -12,8 +12,9 @@
     --place-carsi-color: #F7C548;  /* Sarımsı turuncu tonu */
     --place-default-color: var(--accent-color); /* Varsayılan gri tonu */
 
-    /* YENİ: İkon Harf Rengi */
-    --icon-i-color: #550049;
+    /* YENİ: İkon Harf Rengi (Beyaz) ve Arka Plan Rengi (Siyah) */
+    --icon-text-color: #ffffff; /* Beyaz font rengi */
+    --icon-background-color: #000000; /* Siyah yuvarlak arka plan */
 }
 
 html, body {
@@ -118,40 +119,39 @@ body {
 }
 
 .custom-marker-icon {
-    /* border-radius: 50%; YUVARLAK ŞEKLİ KALDIRILDI */
-    width: 30px !important;
-    height: 30px !important;
+    border-radius: 50%; /* YUVARLAK ŞEKİL GERİ GELDİ */
+    width: 26px !important; /* Bir tık küçük boyutu (önceki 30px idi) */
+    height: 26px !important; /* Bir tık küçük boyutu */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em;
-    color: var(--icon-i-color); /* İ HARFİNİN RENGİ SABİT #550049 */
+    font-size: 1.1em; /* 'i' harfinin boyutunu da küçülttük */
+    color: var(--icon-text-color); /* BEYAZ İ HARFİ */
     font-weight: bold;
-    border: 2px solid var(--accent-color); /* Gri çerçeve */
-    background-color: transparent; /* Arka planı şeffaf yapıldı */
+    background-color: var(--icon-background-color); /* SİYAH ARKA PLAN */
+    border: 2px solid var(--secondary-bg-color); /* Beyaz çerçeve */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
 }
 
-/* Kategoriye Özel Arka Plan Renkleri - İkonun kendisi şeffaf, çerçeve rengini ayarlayabiliriz */
-/* Şu an için 'i' harfi sabit renk, ikonun arka planı şeffaf. */
-/* Eğer kategori renklerini ikonun çerçevesi veya farklı bir şekilde kullanmak istersen belirtebilirsin. */
-/* Şimdilik bunlar etkisiz kalacak çünkü arka plan transparent. */
+/* Kategoriye Özel Arka Plan Renkleri - Bunlar artık ikonun kendisi siyah olduğu için etkisizdir. */
+/* Eğer gelecekte yuvarlak ikonun çerçeve rengini kategoriye göre değiştirmek istersen bu sınıfları kullanabiliriz. */
 .custom-marker-icon.place-cami {
-    border-color: var(--place-cami-color); /* Kategori renginde çerçeve */
+    /* background-color: var(--place-cami-color); */
 }
 .custom-marker-icon.place-saray {
-    border-color: var(--place-saray-color);
+    /* background-color: var(--place-saray-color); */
 }
 .custom-marker-icon.place-konut {
-    border-color: var(--place-konut-color);
+    /* background-color: var(--place-konut-color); */
 }
 .custom-marker-icon.place-carsi {
-    border-color: var(--place-carsi-color);
+    /* background-color: var(--place-carsi-color); */
 }
 .custom-marker-icon.place-default {
-    border-color: var(--place-default-color);
+    /* background-color: var(--place-default-color); */
 }
+
 
 /* Mobil Uyumluluk */
 @media (max-width: 768px) {
