@@ -33,13 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
         initialZoomLevel: 16 // locateOptions.maxZoom ayarlanmamışsa başlangıç yakınlaştırma seviyesi
     }).addTo(map);
 
-    // Arama kutusunu haritaya ekleme
-    L.Control.geocoder({
-        defaultMarkGeocoded: false, // Arama sonucuna otomatik marker eklemez
-        placeholder: "Adres veya yer ara...", // Arama kutusu için placeholder
-        collapsed: true // Arama kutusu başlangıçta kapalı olsun (sadece ikon görünür)
-    }).addTo(map);
-
+    // Arama kutusu kaldırıldı. L.Control.geocoder kısmı yorum satırı yapıldı veya silindi.
+    // L.Control.geocoder({
+    //     defaultMarkGeocoded: false,
+    //     placeholder: "Adres veya yer ara...",
+    //     collapsed: true
+    // }).addTo(map);
 
     // Özel "i" ikonunu tanımlama
     const customMarkerIcon = L.divIcon({
@@ -65,14 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(item => {
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
-                // Popup içeriğini oluşturma
+                // Kaynak linkini oluşturma
+                const sourceLink = item.source && item.source.startsWith('http') ? 
+                                   `<a href="${item.source}" target="_blank">Kaynak</a>` : 
+                                   'Belirtilmemiş';
+
+                // Popup içeriğini oluşturma - YENİ DÜZENLEMELERLE
                 const popupContent = `
                     <h3>${item.title}</h3>
-                    <p><strong>Açıklama:</strong> ${item.description}</p>
+                    <p>${item.description}</p>
                     <p><strong>Adres:</strong> ${item.address || 'Belirtilmemiş'}</p>
-                    <p><strong>Mekan Tipi:</strong> ${item.place || 'Belirtilmemiş'}</p>
-                    <p><strong>Kaynak:</strong> ${item.source || 'Belirtilmemiş'}</p>
-                    <p><strong>Gönderen:</strong> ${item.contributor || 'Anonim'}</p>
+                    <p><strong>Mekan:</strong> ${item.place || 'Belirtilmemiş'}</p>
+                    <p>${sourceLink}</p>
+                    <p><strong>Ekleyen:</strong> ${item.contributor || 'Anonim'}</p>
                 `;
 
                 marker.bindPopup(popupContent);
