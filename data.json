@@ -8,7 +8,8 @@
     "lng": 28.980145,
     "place": "Cami",
     "source": "https://tr.wikipedia.org/wiki/Ayasofya",
-    "contributor": "Ahmet Y."
+    "contributor": "Ahmet Y.",
+    "image": "ayasofya.avif"
   },
   {
     "id": "2",
@@ -19,7 +20,8 @@
     "lng": 28.983333,
     "place": "Saray",
     "source": "https://www.millisaraylar.gov.tr/saraylar/topkapi-sarayi",
-    "contributor": "Zeynep K."
+    "contributor": "Zeynep K.",
+    "image": "topkapi-sarayi-muzesi.avif"
   },
   {
     "id": "3",
