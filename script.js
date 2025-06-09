@@ -2,12 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Harita Başlangıç Ayarları
     const map = L.map('map').setView([41.0082, 28.9784], 13); // İstanbul merkez koordinatları ve zoom seviyesi
 
-    // Stadia Maps Stamen Toner Lite katmanını ekleme (minimalist harita görünümü için)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 20
-}).addTo(map);
+    // Esri WorldStreetMap katmanını ekleme
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_StreetMap/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    }).addTo(map);
 
     // Konum butonunu ekleme
     L.control.locate({
@@ -34,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -25] // Popup'ın açılacağı nokta (ikonun üstünde)
     });
 
+    // Marker küme grubunu oluşturma (YENİ KOD)
+    const markers = L.markerClusterGroup();
+
     // data.json dosyasından verileri çekme ve haritaya ekleme
     fetch('data.json')
         .then(response => {
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             data.forEach(item => {
-                const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon }).addTo(map);
+                const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
                 // Popup içeriğini oluşturma
                 const popupContent = `
@@ -57,7 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 marker.bindPopup(popupContent);
+                markers.addLayer(marker); // Marker'ı doğrudan haritaya değil, küme grubuna ekle
             });
+            map.addLayer(markers); // Tüm küme grubunu haritaya ekle
         })
         .catch(error => {
             console.error('Veri çekilirken bir hata oluştu:', error);
