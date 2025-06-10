@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yeni Yer Ekle - istanbulin</title>
-    <!-- KALDIRILDI: Leaflet CSS'e artık ihtiyaç yok -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- KALDIRILDI: Botpoison JS'e artık ihtiyaç yok -->
+    
+    <!-- YENİ: Botpoison Script'i geri eklendi -->
+    <script src="https://unpkg.com/@botpoison/browser" defer></script>
 </head>
 <body class="yeni-page-body">
 
@@ -27,19 +28,14 @@
 
     <main class="yeni-container">
         <div class="yeni-content">
-            <!-- DEĞİŞTİ: Talimatlar güncellendi -->
             <h2>Yeni Yer Önerisi</h2>
             <p class="instruction">Lütfen eklemek istediğiniz yerin Google Haritalar linkiyle birlikte aşağıdaki formu doldurun.</p>
             <p class="helper-text">Google Haritalar → Lokasyon → Paylaş → Bağlantıyı Kopyala</p>
 
-            <!-- KALDIRILDI: Harita div'i buradan kaldırıldı -->
-
             <form class="yeni-form" action="https://submit-form.com/XbOQK08Qf" method="POST">
-                <!-- Formspark ve Botpoison için gizli alanlar -->
-                <input type="hidden" name="_redirect" value="https://istanbulin.netlify.app/"> <!-- KENDİ SİTE ADRESİNİ KONTROL ET -->
-                <input type="checkbox" name="_botpoison" tabindex="-1" autocomplete="off" style="display: none;">
-
-                <!-- KALDIRILDI: lat, lng ve botpoison-challenge div'i kaldırıldı -->
+                <!-- YENİ: Botpoison challenge'ı için div geri eklendi -->
+                <div id="botpoison-challenge"></div>
+                <!-- KALDIRILDI: Basit honeypot ve _redirect alanları kaldırıldı, çünkü JS her şeyi yönetecek -->
 
                 <div class="form-group">
                     <label for="baslik">Başlık</label>
@@ -51,7 +47,6 @@
                     <textarea id="aciklama" name="aciklama" rows="4" required></textarea>
                 </div>
 
-                <!-- YENİ: Lokasyon Linki alanı eklendi -->
                 <div class="form-group">
                     <label for="lokasyon">Lokasyon Linki (Google Haritalar)</label>
                     <input type="url" id="lokasyon" name="lokasyon" placeholder="https://www.google.com/maps/place/..." required>
@@ -82,9 +77,7 @@
                     <input type="text" id="rumuz" name="rumuz">
                 </div>
 
-                <!-- DEĞİŞTİ: Buton artık başlangıçta aktif -->
                 <button type="submit">Öneriyi Gönder</button>
-                <!-- KALDIRILDI: Buton uyarısı kaldırıldı -->
             </form>
         </div>
     </main>
@@ -93,6 +86,7 @@
        <div class="container"><p>© 2025 istanbulin. Tüm Hakları Saklıdır.</p></div>
     </footer>
 
-    <!-- KALDIRILDI: Leaflet ve yeni-script.js script'leri kaldırıldı -->
+    <!-- YENİ: yeni-script.js geri eklendi -->
+    <script src="yeni-script.js"></script>
 </body>
 </html>
