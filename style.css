@@ -279,3 +279,7 @@ body:not(.yeni-page-body) {
     .main-header nav ul { flex-direction: column; align-items: center; }
     .main-header nav ul li { margin: 5px 0; }
 }
+/* Botpoison challenge div'ini gizle */
+#botpoison-challenge {
+    display: none;
+}
