@@ -1,81 +1,26 @@
 [
   {
     "id": "1",
-    "title": "Ayasofya Cami",
-    "description": "Bizans İmparatoru I. Justinianus tarafından yaptırılan, daha sonra camiye çevrilen önemli bir yapıdır.",
-    "address": "Ayasofya Meydanı, Fatih/İstanbul",
-    "lat": 41.008583,
-    "lng": 28.980145,
+    "title": "Ahi Çelebi Camii",
+    "description": "Evliya Çelebi'nin rüyasında Hz. Muhammed'i görerek, "Şefaat ya Resulallah" diyecek yerde heyecandan "Seyahat ya Resulallah" dediği cami.",
+    "address": "Sarıdemir, Ragıp Gümüşpala Cd. No:36, 34134 Fatih/İstanbul",
+    "lat": 41.01906176769344,
+    "lng": 28.96838791050819,
     "place": "Cami",
-    "source": "https://tr.wikipedia.org/wiki/Ayasofya",
-    "contributor": "Ahmet Y.",
-    "image": "ayasofya.avif"
+    "source": "https://tr.wikipedia.org/wiki/Ahi_%C3%87elebi_Camii",
+    "contributor": "istanbulin",
+    "image": "ahicelebicamii.avif"
   },
   {
     "id": "2",
-    "title": "Topkapı Sarayı",
-    "description": "Osmanlı İmparatorluğu'nun yaklaşık 400 yıl boyunca idari merkezi olarak kullanılan büyük bir saray kompleksidir.",
-    "address": "Cankurtaran, 34122 Fatih/İstanbul",
-    "lat": 41.011667,
-    "lng": 28.983333,
-    "place": "Saray",
-    "source": "https://www.millisaraylar.gov.tr/saraylar/topkapi-sarayi",
-    "contributor": "Zeynep K.",
-    "image": "topkapi-sarayi-muzesi.avif"
+    "title": "Abidin Dino'nun Evi",
+    "description": "Çağdaş Türk resminin öncülerinden, ressam, karikatürist, yazar, film yönetmeni kısaca çok yönlü bir kültür adamı olan Abidin Dino Serdar-ı Ekrem Sokağında bu binanın çatı katını atölye olarak kiralamış ve uzunca bir süre burada hem yaşamış hem de çalışmıştı. Dino’nun ünlü Liman Sergisinin hazırlıklarının yapıldığı bu atölye, Orhan Veli Kanık, Oktay Rifat, Melih Cevdet gibi ünlü şairlerin; Sait Faik, Yaşar Kemal gibi ünlü yazarların, uğrak yerlerinden biri olmuştu. Bir yandan Garip şiirinin tartışmalarının, İstanbul manzarasına karşı uzun ve eğlenceli sohbetlerin yapıldığı bu atölyenin her odasını Abidin Dino ayrı bir renge boyamış, mekan böylece kelimenin her anlamıyla renkli bir yer haline gelmişti.",
+    "lat": 41.0268002922993, 
+    "lng": 28.975440740943547,
+    "place": "Kamondo Apartmanı",
+    "source": "https://www.asperahotel.com/tr/kamondo-apartmani/",
+    "contributor": "istanbulin",
+    "image": "abidindino.avif"
   },
-  {
-    "id": "3",
-    "title": "Çemberlitaş Sütunu",
-    "description": "Roma İmparatoru Konstantin adına dikilmiş anıtsal bir sütundur. Üzerinde Güneş Tanrısı Apollon heykeli bulunuyordu.",
-    "address": "Beyazıt, Çemberlitaş, 34126 Fatih/İstanbul",
-    "lat": 41.0065,
-    "lng": 28.9715,
-    "place": "Diğer",
-    "source": "https://en.wikipedia.org/wiki/Column_of_Constantine",
-    "contributor": "Anonim"
-  },
-  {
-    "id": "4",
-    "title": "Kapalıçarşı",
-    "description": "Dünyanın en eski ve en büyük kapalı çarşılarından biridir. Binlerce dükkana ev sahipliği yapar.",
-    "address": "Beyazıt, Kalpakçılar Cd. No:22, 34126 Fatih/İstanbul",
-    "lat": 41.0100,
-    "lng": 28.9680,
-    "place": "Çarşı",
-    "source": "https://www.kapalicarsi.org.tr/",
-    "contributor": "Fatma D."
-  },
-  {
-    "id": "5",
-    "title": "Perili Köşk",
-    "description": "Boğaz'da, eşsiz mimarisi ve rivayetleriyle ünlü tarihi bir köşk. Bugün modern bir sanat merkezine ev sahipliği yapıyor.",
-    "address": "Yeniköy, Köybaşı Cd. No:124, 34464 Sarıyer/İstanbul",
-    "lat": 41.0968,
-    "lng": 29.0560,
-    "place": "Konut",
-    "source": "https://www.haberturk.com/perili-kosk-neden-perili-deniyor-istanbul-un-esrarengiz-kosku-2735749",
-    "contributor": "Can U."
-  },
-  {
-    "id": "6",
-    "title": "Sultanahmet Camii",
-    "description": "Mavi Camii olarak da bilinen, 17. yüzyılda inşa edilmiş, altı minaresiyle ünlü bir Osmanlı camisidir.",
-    "address": "Sultan Ahmet, Atmeydanı Cd. No:7, 34122 Fatih/İstanbul",
-    "lat": 41.0053,
-    "lng": 28.9769,
-    "place": "Cami",
-    "source": "https://tr.wikipedia.org/wiki/Sultan_Ahmet_Camii",
-    "contributor": "Deniz C."
-  },
-  {
-    "id": "7",
-    "title": "Dolmabahçe Sarayı",
-    "description": "Osmanlı İmparatorluğu'nun son döneminde kullanılan ve ihtişamlı mimarisiyle dikkat çeken bir saraydır.",
-    "address": "Dolmabahçe Cd., 34357 Beşiktaş/İstanbul",
-    "lat": 41.0396,
-    "lng": 29.0062,
-    "place": "Saray",
-    "source": "https://www.millisaraylar.gov.tr/saraylar/dolmabahce-sarayi",
-    "contributor": "Efe S."
-  }
+
 ]
