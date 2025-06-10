@@ -21,6 +21,16 @@
   },
   {
     "id": "3",
+    "title": "Kapıcılar Kralı",
+    "description": "Kemal Sunal'ın başrolde olduğu Kapıcılar Kralı, Güneşli sokakta çekilmiştir. Filmin ana mekanı olan Selahattin Zeren apartmanı buradadır.",
+    "lat": 41.03234, 
+    "lng": 28.98505,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "kapicilar.webp"
+  },
+  {
+    "id": "4",
     "title": "Masumlar Apartmanı",
     "description": "İstanbul'da aynı evde yaşayan dört kardeşin psikolojik durumunu ve etraflarındaki hayatı konu alan Masumlar Apartmanı dizisinin çekildiği apartman.",
     "lat": 41.02961, 
