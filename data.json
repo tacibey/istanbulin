@@ -1,14 +1,16 @@
-{
-  "id": "1",
-  "slug": "ahi-celebi-camii",
-  "title": "Ahi Çelebi Camii",
-  "description": "Evliya Çelebi'nin ünlü rüyasına sahne olan, Unkapanı Yemiş İskelesi'nde bulunan tarihi cami.",
-  "long_description": "Evliya Çelebi, seyahatlerinin başlangıcı olarak gösterdiği rüyasında Hz. Muhammed'i 10 Muharrem 1040 (20 Ağustos 1630) tarihinde bu camide görmüştür. Rüyasında Peygamberimizle konuşarak 'Seyahat ya Resulallah' demesi üzerine dünya gezgini olacağı müjdelenmiştir. Bu olay, Evliya Çelebi'nin ünlü Seyahatname'sini yazmasına ilham kaynağı olmuştur. Cami, Evliya Çelebi'nin anılarıyla sıkı sıkıya bağlı önemli bir tarihi mekandır.",
-  "address": "Sarıdemir, Ragıp Gümüşpala Cd. No:36, 34134 Fatih/İstanbul",
-  "lat": 41.0195,
-  "lng": 28.9663,
-  "place": "Cami",
-  "source": "https://repository.bilkent.edu.tr/server/api/core/bitstreams/2ff343f9-5302-4980-a52a-b239e0534026/content",
-  "contributor": "istanbulin",
-  "image": "ahicelebicamii.avif"
-}
+[
+  {
+    "id": "1",
+    "slug": "ahi-celebi-camii",
+    "title": "Ahi Çelebi Camii",
+    "description": "Evliya Çelebi'nin ünlü rüyasına sahne olan, Unkapanı Yemiş İskelesi'nde bulunan tarihi cami.",
+    "long_description": "Evliya Çelebi, seyahatlerinin başlangıcı olarak gösterdiği rüyasında Hz. Muhammed'i 10 Muharrem 1040 (20 Ağustos 1630) tarihinde bu camide görmüştür. Rüyasında Peygamberimizle konuşarak 'Seyahat ya Resulallah' demesi üzerine dünya gezgini olacağı müjdelenmiştir. Bu olay, Evliya Çelebi'nin ünlü Seyahatname'sini yazmasına ilham kaynağı olmuştur. Cami, Evliya Çelebi'nin anılarıyla sıkı sıkıya bağlı önemli bir tarihi mekandır.",
+    "address": "Sarıdemir, Ragıp Gümüşpala Cd. No:36, 34134 Fatih/İstanbul",
+    "lat": 41.0195,
+    "lng": 28.9663,
+    "place": "Cami",
+    "source": "https://repository.bilkent.edu.tr/server/api/core/bitstreams/2ff343f9-5302-4980-a52a-b239e0534026/content",
+    "contributor": "istanbulin",
+    "image": "ahicelebicamii.avif"
+  }
+]
