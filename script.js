@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Harita Başlangıç Ayarları
     const map = L.map('map', {
-        attributionControl: false
+        attributionControl: false,
+        fullscreenControl: true, // YENİ: Tam Ekran kontrolünü etkinleştir
+        fullscreenControlOptions: {
+            position: 'topright' // İkonun konumu
+        }
     }).setView([41.0082, 28.9784], 13);
 
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -34,39 +37,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const markers = L.markerClusterGroup();
+    
+    // Önceki cevaptaki performanslı popup ve kaynak mantığını koruyoruz.
+    function createPopupContent(item) {
+        let imageHtml = '';
+        if (item.image) {
+            const imageUrl = item.image.startsWith('http') ? item.image : `images/${item.image}`;
+            imageHtml = `<img src="${imageUrl}" alt="${item.title}" loading="lazy">`;
+        }
+
+        let sourceHtml = '';
+        if (item.source) {
+            if (item.source.startsWith('http')) {
+                sourceHtml = `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>`;
+            } else {
+                sourceHtml = `<p><strong>Kaynak:</strong> ${item.source}</p>`;
+            }
+        }
+
+        const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
+        
+        return `
+            ${imageHtml}
+            <div class="popup-text-content">
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+                ${sourceHtml}
+                ${contributorHtml}
+            </div>
+        `;
+    }
+
+    function addMarkersInChunks(data) {
+        let index = 0;
+        const chunkSize = 50; 
+
+        function processChunk() {
+            const chunkEnd = Math.min(index + chunkSize, data.length);
+            for (; index < chunkEnd; index++) {
+                const item = data[index];
+                const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
+                marker.bindPopup(() => createPopupContent(item), {
+                    minWidth: 260
+                });
+                markers.addLayer(marker);
+            }
+
+            if (index < data.length) {
+                requestAnimationFrame(processChunk);
+            } else {
+                map.addLayer(markers);
+            }
+        }
+        requestAnimationFrame(processChunk);
+    }
 
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
-            data.forEach(item => {
-                const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
-
-                let imageUrl = '';
-                if (item.image) {
-                    if (item.image.startsWith('http')) {
-                        imageUrl = item.image;
-                    } else {
-                        imageUrl = `images/${item.image}`;
-                    }
-                }
-                const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}">` : '';
-                const sourceLink = item.source ? `<a href="${item.source}" target="_blank">Kaynak</a>` : 'Belirtilmemiş';
-                
-                const popupContent = `
-                    ${imageHtml}
-                    <div class="popup-text-content">
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                        <p><strong>Adres:</strong> ${item.address || 'Belirtilmemiş'}</p>
-                        <p><strong>Mekan:</strong> ${item.place || 'Belirtilmemiş'}</p>
-                        <p>${sourceLink}</p>
-                        <p><strong>Ekleyen:</strong> ${item.contributor || 'Anonim'}</p>
-                    </div>
-                `;
-                marker.bindPopup(popupContent);
-                markers.addLayer(marker);
-            });
-            map.addLayer(markers);
+            addMarkersInChunks(data);
         })
         .catch(error => {
             console.error('Veri çekilirken bir hata oluştu:', error);
