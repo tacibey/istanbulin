@@ -1,31 +1,19 @@
 :root {
-    /* Genel renk değişkenleri, şu anki tasarımda bazıları kullanılmıyor ancak gelecekte faydalı olabilir */
     --primary-bg-color: #f8f8f8;
     --secondary-bg-color: #ffffff;
     --text-color: #333333;
     --accent-color: #666666;
     --border-color: #e0e0e0;
-
-    /* YENİ: Tema Renkleri */
-    --dark-bg-color: #0a0908; /* Header ve footer zemin rengi */
-    --light-text-color: #ffffff; /* Logo ve yazıların rengi */
-
-    /* Mekan Tipi Renkleri */
+    --dark-bg-color: #0a0908;
+    --light-text-color: #ffffff;
     --place-cami-color: #4A90E2;
-    --place-saray-color: #FF6F61;
-    --place-konut-color: #50B498;
-    --place-carsi-color: #F7C548;
-    --place-default-color: var(--accent-color);
-
-    /* İkon Harf Rengi (Beyaz) ve Arka Plan Rengi (Siyah) */
     --icon-text-color: #ffffff;
     --icon-background-color: #000000;
 }
 
-/* Font Yüzünü Tanımla */
 @font-face {
     font-family: 'Gotico Antiqua';
-    src: url('Rusch-GoticoAntiqua100G.otf') format('opentype'); /* YOL GÜNCELLENDİ */
+    src: url('Rusch-GoticoAntiqua100G.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -35,15 +23,25 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
 }
 
 body {
-    font-family: 'Roboto', sans-serif; /* Diğer metinler için Roboto */
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
+}
+
+/* Ana sayfanın body'si için taşmayı engelle */
+body:not(.yeni-page-body) {
+    overflow: hidden;
+}
+
+/* yeni.html'nin body'si için scroll'a izin ver */
+.yeni-page-body {
+    height: auto;
+    min-height: 100%;
 }
 
 .container {
@@ -57,8 +55,8 @@ body {
     background-color: var(--dark-bg-color);
     color: var(--light-text-color);
     padding: 15px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
 }
 
@@ -69,24 +67,21 @@ body {
     flex-wrap: wrap;
 }
 
-/* Logo ve Subtitle Kapsayıcısı */
 .logo-container {
     text-align: center;
-    margin: 0; /* İçerik kaymasını engellemek için */
+    margin: 0;
 }
 
-/* YENİ: Logo linkinin varsayılan stilini sıfırlama */
 #logo-link {
-    text-decoration: none; /* Alt çizgiyi kaldır */
-    color: inherit; /* Rengi parent elementinden (yani header'ın beyaz renginden) al */
+    text-decoration: none;
+    color: inherit;
 }
 
 .main-header h1 {
-    font-family: 'Gotico Antiqua', serif; /* Gotico Antiqua fontu */
+    font-family: 'Gotico Antiqua', serif;
     margin: 0;
     font-size: 3.5em;
     font-weight: normal;
-    color: var(--light-text-color);
     line-height: 0.9;
     letter-spacing: -4px;
 }
@@ -94,9 +89,7 @@ body {
 .main-header .subtitle {
     margin: 0;
     font-size: 0.85em;
-    color: var(--light-text-color);
     opacity: 0.7;
-    font-family: 'Roboto', sans-serif;
 }
 
 .main-header nav ul {
@@ -104,7 +97,6 @@ body {
     padding: 0;
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
 }
 
 .main-header nav ul li {
@@ -119,15 +111,14 @@ body {
 }
 
 .main-header nav ul li a:hover {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 
-/* Map Container */
+/* Map Container (Ana Sayfa) */
 .map-container {
     flex-grow: 1;
     display: flex;
     overflow: hidden;
-    position: relative; /* Buton ve formun konumlanabilmesi için eklendi */
 }
 
 #map {
@@ -141,9 +132,10 @@ body {
     color: var(--light-text-color);
     padding: 20px 0;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+    margin-top: auto;
 }
 
 .main-footer p {
@@ -152,7 +144,7 @@ body {
     opacity: 0.8;
 }
 
-/* Leaflet Custom Marker (i harfi) */
+/* === Leaflet Stilleri (Ortak) === */
 .leaflet-marker-icon {
     background-image: none !important;
 }
@@ -164,7 +156,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.65em; /* Daha büyük i harfi */
+    font-size: 1.65em;
     color: var(--icon-text-color);
     font-weight: normal;
     background-color: var(--icon-background-color);
@@ -174,253 +166,116 @@ body {
     font-family: 'Gotico Antiqua', serif !important;
 }
 
-/* Kategoriye Özel Arka Plan Renkleri (Şu an kullanılmıyor ama durabilir) */
-.custom-marker-icon.place-cami {}
-.custom-marker-icon.place-saray {}
-.custom-marker-icon.place-konut {}
-.custom-marker-icon.place-carsi {}
-.custom-marker-icon.place-default {}
-
-
-/* === Leaflet Popup Stil Düzenlemeleri === */
-
 .leaflet-popup-content-wrapper {
-    border-radius: 8px; /* Popup köşelerini yumuşat */
+    border-radius: 8px;
     background-color: var(--secondary-bg-color);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .leaflet-popup-content {
-    margin: 0 !important; /* Leaflet'in varsayılan margin'ini sıfırla */
-    padding: 0 !important; /* Leaflet'in varsayılan padding'ini sıfırla */
-    width: 300px !important; /* Popup genişliğini sabitle */
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 300px !important;
     line-height: 1.5;
 }
 
 .leaflet-popup-content img {
-    width: 100%; /* Resim, popup genişliğine tam otursun */
+    width: 100%;
     height: auto;
-    display: block; /* Altında oluşabilecek boşluğu engeller */
-    border-top-left-radius: 8px; /* Resmin üst köşelerini popup ile uyumlu yap */
+    display: block;
+    border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
-/* Metin içeriğini saran div için stiller */
-.popup-text-content {
-    padding: 15px; /* Metinler için iç boşluk */
-}
+.popup-text-content { padding: 15px; }
+.popup-text-content h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; color: var(--text-color); font-weight: 700; }
+.popup-text-content p { margin: 0 0 8px 0; font-size: 0.95em; color: #555; }
+.popup-text-content p:last-child { margin-bottom: 0; }
+.popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
+.popup-text-content a:hover { text-decoration: underline; }
 
-.popup-text-content h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    color: var(--text-color);
-    font-weight: 700;
-}
-
-.popup-text-content p {
-    margin: 0 0 8px 0;
-    font-size: 0.95em;
-    color: #555;
-}
-
-.popup-text-content p:last-child {
-    margin-bottom: 0; /* Son paragrafın alt boşluğunu kaldır */
-}
-
-.popup-text-content a {
-    color: var(--place-cami-color); /* Linkler için dikkat çekici bir renk */
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.popup-text-content a:hover {
-    text-decoration: underline;
-}
-
-/* Kapatma (X) butonu için daha belirgin stil */
 .leaflet-popup-close-button {
     padding: 8px 8px 0 0;
-    color: white !important; /* Buton rengi beyaz */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.7); /* Okunabilirlik için gölge */
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
     font-size: 20px !important;
 }
+.leaflet-popup-close-button:hover { color: #ddd !important; }
 
-.leaflet-popup-close-button:hover {
-    color: #ddd !important;
-}
-
-
-/* === Yer Ekleme Özellikleri Stilleri === */
-
-/* Genel "Gizli" sınıfı */
-.hidden {
-    display: none !important;
-}
-
-/* Yer Ekle Butonu (+) */
-#add-place-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000; /* Harita kontrollerinin üzerinde olması için */
-    width: 40px;
-    height: 40px;
-    background-color: var(--dark-bg-color);
-    color: var(--light-text-color);
-    border: 2px solid var(--light-text-color);
-    border-radius: 50%;
-    font-size: 28px;
-    line-height: 36px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    transition: all 0.2s ease-in-out;
-}
-
-#add-place-btn:hover {
-    transform: scale(1.1);
-    background-color: #333;
-}
-
-/* Yer seçimi için bilgilendirme mesajı */
-#add-place-info {
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Form Konteyneri (Tüm ekranı kaplayan overlay) */
-#form-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* === YENİ: yeni.html Sayfası Stilleri === */
+.yeni-container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box;
+    flex-grow: 1;
 }
+.yeni-content h2 { font-size: 2em; margin-bottom: 5px; }
+.yeni-content .instruction { font-size: 1.1em; color: var(--accent-color); margin-top: 0; margin-bottom: 20px; }
 
-/* Formun kendisi */
-#place-form {
-    background-color: var(--secondary-bg-color);
-    padding: 25px 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+#yeni-map {
+    height: 400px;
     width: 100%;
-    max-width: 450px;
-    position: relative;
-    max-height: 90vh; /* Ekran yüksekliğinin %90'ını geçmesin */
-    overflow-y: auto; /* Gerekirse dikey scroll bar çıksın */
-}
-
-#place-form h2 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: var(--text-color);
-}
-
-#place-form p {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 0.9em;
-    color: var(--accent-color);
-}
-
-#place-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-#place-form input[type="text"],
-#place-form input[type="url"],
-#place-form textarea {
-    width: 100%;
-    padding: 10px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
-    margin-bottom: 15px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.yeni-form .form-group {
+    margin-bottom: 20px;
+}
+.yeni-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+}
+.yeni-form input[type="text"],
+.yeni-form input[type="url"],
+.yeni-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    font-size: 1em;
 }
-
-#place-form textarea {
+.yeni-form textarea {
     resize: vertical;
 }
 
-#place-form button[type="submit"] {
+.yeni-form button[type="submit"] {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background-color: var(--place-cami-color);
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 1.1em;
+    border-radius: 5px;
+    font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, opacity 0.2s;
 }
-
-#place-form button[type="submit"]:hover {
+.yeni-form button[type="submit"]:hover:not(:disabled) {
     background-color: #3a7ac2;
 }
-
-/* Kapatma Butonu (X) */
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #999;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
+.yeni-form button[type="submit"]:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
-.close-btn:hover {
-    color: #333;
+.submit-warning {
+    text-align: center;
+    color: #c0392b;
+    font-size: 0.9em;
+    margin-top: 10px;
 }
-
 
 /* Mobil Uyumluluk */
 @media (max-width: 768px) {
-    .main-header .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .main-header h1 {
-        margin-bottom: 5px;
-        font-size: 2.5em;
-        letter-spacing: -2px;
-    }
-
-    .main-header .subtitle {
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-
-    .main-header nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .main-header nav ul li {
-        margin: 5px 0;
-    }
+    .main-header .container { flex-direction: column; text-align: center; }
+    .main-header h1 { margin-bottom: 5px; font-size: 2.5em; letter-spacing: -2px; }
+    .main-header .subtitle { margin-top: 0; margin-bottom: 10px; }
+    .main-header nav ul { flex-direction: column; align-items: center; }
+    .main-header nav ul li { margin: 5px 0; }
 }
