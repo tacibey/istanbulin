@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: 'Leaflet | Esri'
     }).addTo(map);
 
+    // YENİ: Haritanın boyutunu yeniden hesaplaması için komut
+    // Bu, haritanın düzgün bir şekilde görünmesini sağlar.
+    setTimeout(function() {
+        map.invalidateSize();
+    }, 100); // 100 milisaniye gecikme, tarayıcıya zaman tanımak için fazlasıyla yeterli.
+
     // 4. Form Elemanlarını Seç
     const form = document.querySelector('.yeni-form');
     const latInput = document.getElementById('lat');
@@ -38,25 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
         map.flyTo([lat, lng], 15);
     });
 
-    // 6. Form Gönderimini JavaScript ile Yönet
+    // 6. Form Gönderimini JavaScript ile Yönet (Değişiklik yok)
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Tarayıcının formu normal şekilde göndermesini engelle
+        e.preventDefault(); 
 
-        // Kullanıcıya işlemde olduğunu bildir
         const originalButtonText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Gönderiliyor...';
 
-        // Botpoison'dan challenge çözümünü al
         botpoison.challenge()
             .then(({ solution }) => {
-                // Form verilerini al
                 const formData = new FormData(form);
-
-                // Botpoison çözümünü form verilerine ekle
                 formData.append('_botpoison', solution);
-
-                // Formu fetch API kullanarak Formspark'a gönder
+                
                 fetch(form.action, {
                     method: 'POST',
                     body: formData,
@@ -66,23 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Başarılı olursa anasayfaya yönlendir
-                        // NOT: Formspark'ın kendi _redirect'i yerine JS ile yönlendirme daha garantilidir.
                         window.location.href = '/'; 
                     } else {
-                        // Eğer Formspark bir hata dönerse (örn: limit aşıldı)
                         throw new Error('Form gönderimi başarısız oldu.');
                     }
                 })
                 .catch(error => {
-                    // Ağ hatası veya Formspark hatası durumunda kullanıcıyı bilgilendir
                     alert('Bir hata oluştu. Lütfen tekrar deneyin. Hata: ' + error.message);
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalButtonText;
                 });
             })
             .catch(error => {
-                // Botpoison challenge'ı başarısız olursa
                 alert('Spam doğrulaması başarısız oldu. Lütfen sayfayı yenileyip tekrar deneyin.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalButtonText;
