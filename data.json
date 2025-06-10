@@ -21,5 +21,17 @@
     "source": "https://www.asperahotel.com/tr/kamondo-apartmani/",
     "contributor": "istanbulin",
     "image": "abidindino.avif"
+  },
+  {
+    "id": "3",
+    "title": "Masumlar Apartmanı",
+    "description": "İstanbul'da aynı evde yaşayan dört kardeşin psikolojik durumunu ve etraflarındaki hayatı konu alan Masumlar Apartmanı dizisinin çekildiği apartman.",
+    "address": "",
+    "lat": 41.02961, 
+    "lng": 28.97385,
+    "place": "",
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "masumlar.avif"
   }
 ]
