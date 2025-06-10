@@ -8,16 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body class="yeni-page-body">
-
     <header class="main-header">
         <div class="container">
             <div class="logo-container">
                 <a href="/" id="logo-link"><h1>istanbulin</h1></a>
                 <p class="subtitle">İstanbul İnteraktif Kültür Atlası</p>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="/">Ana Sayfa</a></li>
+            <nav class="main-nav">
+                <button class="hamburger-menu" id="hamburger-menu" aria-label="Menüyü aç">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="nav-links">
+                    <li><a href="/yeni.html">Yer Ekle</a></li> 
+                    <li><a href="#">İletişim</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,8 +35,7 @@
             <p class="helper-text">Google Haritalar → Lokasyon → Paylaş → Bağlantıyı Kopyala</p>
 
             <form class="yeni-form" action="https://submit-form.com/XbOQK08Qf" method="POST">
-                <!-- Sadece anasayfaya yönlendirme için gizli alan -->
-                <input type="hidden" name="_redirect" value="https://istanbulin.netlify.app/"> <!-- SİTE ADRESİNİ KONTROL ET -->
+                <input type="hidden" name="_redirect" value="https://istanbulin.netlify.app/">
                 
                 <div class="form-group">
                     <label for="baslik">Başlık</label>
@@ -49,23 +53,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="kaynak">Kaynak</label>
-                    <input type="url" id="kaynak" name="kaynak" placeholder="https://..." required>
-                </div>
-
-                <div class="form-group">
-                    <label for="mekan">Mekan (Cami, Saray, Çarşı vb.) (Opsiyonel)</label>
-                    <input type="text" id="mekan" name="mekan">
+                    <label for="kaynak">Kaynak (Link veya Metin)</label>
+                    <input type="text" id="kaynak" name="kaynak" placeholder="https://... veya Kitap Adı" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="gorsel">Görsel Linki (Opsiyonel)</label>
                     <input type="url" id="gorsel" name="gorsel" placeholder="https://ornek.com/resim.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="adres">Adres (Opsiyonel)</label>
-                    <input type="text" id="adres" name="adres">
                 </div>
                 
                 <div class="form-group">
@@ -82,6 +76,6 @@
        <div class="container"><p>© 2025 istanbulin. Tüm Hakları Saklıdır.</p></div>
     </footer>
     
-    <!-- TÜM SCRIPTLER KALDIRILDI -->
+    <script src="main-script.js"></script>
 </body>
 </html>
