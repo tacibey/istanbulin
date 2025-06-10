@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map', {
-        attributionControl: false,
-        fullscreenControl: true, // YENİ: Tam Ekran kontrolünü etkinleştir
-        fullscreenControlOptions: {
-            position: 'topright' // İkonun konumu
-        }
+        attributionControl: false
     }).setView([41.0082, 28.9784], 13);
 
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -13,20 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         noWrap: true
     }).addTo(map);
 
-    L.control.attribution({
-        position: 'bottomright',
-        prefix: 'Leaflet | Esri'
-    }).addTo(map);
-
-    L.control.locate({
-        position: 'topleft',
-        setView: 'once',
-        flyTo: true,
-        strings: {
-            title: "Mevcut Konumumu Göster",
-            popup: "Buradasınız!"
-        }
-    }).addTo(map);
+    L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | Esri' }).addTo(map);
+    L.control.locate({ position: 'topleft', setView: 'once', flyTo: true, strings: { title: "Mevcut Konumumu Göster", popup: "Buradasınız!" } }).addTo(map);
 
     const customMarkerIcon = L.divIcon({
         className: 'custom-marker-icon',
@@ -37,24 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const markers = L.markerClusterGroup();
-    
-    // Önceki cevaptaki performanslı popup ve kaynak mantığını koruyoruz.
+
     function createPopupContent(item) {
+        // Görsel mantığı
         let imageHtml = '';
         if (item.image) {
             const imageUrl = item.image.startsWith('http') ? item.image : `images/${item.image}`;
             imageHtml = `<img src="${imageUrl}" alt="${item.title}" loading="lazy">`;
         }
 
+        // YENİ: Kaynak mantığı
         let sourceHtml = '';
         if (item.source) {
+            // Eğer kaynak bir link ise tıklanabilir yap
             if (item.source.startsWith('http')) {
                 sourceHtml = `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>`;
-            } else {
+            } 
+            // Değilse, düz metin olarak göster
+            else {
                 sourceHtml = `<p><strong>Kaynak:</strong> ${item.source}</p>`;
             }
         }
 
+        // YENİ: "Ekleyen" mantığı
         const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
         
         return `
@@ -70,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addMarkersInChunks(data) {
         let index = 0;
-        const chunkSize = 50; 
+        const chunkSize = 50; // Her seferinde 50 marker ekle
 
         function processChunk() {
             const chunkEnd = Math.min(index + chunkSize, data.length);
