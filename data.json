@@ -3,10 +3,8 @@
     "id": "1",
     "title": "Ahi Çelebi Camii",
     "description": "Evliya Çelebi'nin rüyasında Hz. Muhammed'i görerek, 'Şefaat ya Resulallah' diyecek yerde heyecandan 'Seyahat ya Resulallah' dediği cami.",
-    "address": "Sarıdemir, Ragıp Gümüşpala Cd. No:36, 34134 Fatih/İstanbul",
     "lat": 41.01894,
     "lng": 28.96839,
-    "place": "Cami",
     "source": "https://tr.wikipedia.org/wiki/Ahi_%C3%87elebi_Camii",
     "contributor": "istanbulin",
     "image": "ahicelebicamii.avif"
@@ -17,8 +15,7 @@
     "description": "Ressam Abidin Dino, bu binanın çatı katını atölye ve ev olarak kullanmıştı. Orhan Veli Kanık, Oktay Rifat, Melih Cevdet, Sait Faik, Yaşar Kemal gibi ünlü sanatçıların uğrak yeriydi.",
     "lat": 41.02675, 
     "lng": 28.97542,
-    "place": "Kamondo Apartmanı",
-    "source": "https://www.asperahotel.com/tr/kamondo-apartmani/",
+    "source": "İstanbul'un 100 Binası, İBB Kültür A.Ş. Yayınları",
     "contributor": "istanbulin",
     "image": "abidindino.avif"
   },
@@ -26,10 +23,8 @@
     "id": "3",
     "title": "Masumlar Apartmanı",
     "description": "İstanbul'da aynı evde yaşayan dört kardeşin psikolojik durumunu ve etraflarındaki hayatı konu alan Masumlar Apartmanı dizisinin çekildiği apartman.",
-    "address": "",
     "lat": 41.02961, 
     "lng": 28.97385,
-    "place": "",
     "source": "",
     "contributor": "istanbulin",
     "image": "masumlar.avif"
