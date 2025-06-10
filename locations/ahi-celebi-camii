@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahi Çelebi Camii - istanbulin</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="location-page">
+
+    <div class="page-controls">
+        <a href="/" class="control-btn" title="Ana Sayfaya Dön">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <button id="theme-toggle" class="control-btn" title="Temayı Değiştir">
+            <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+    </div>
+
+    <article class="location-content">
+        <header class="location-header">
+            <img src="../images/ahicelebicamii.jpg" alt="Ahi Çelebi Camii" class="location-image">
+            <h1 class="location-title">Ahi Çelebi Camii</h1>
+            <p class="location-subtitle">Evliya Çelebi'nin Rüyasındaki Cami</p>
+        </header>
+        
+        <div class="content-body">
+            <p>Evliya Çelebi, seyahatlerinin sebebi olarak gösterdiği ünlü rüyasında Hz. Muhammed'i Unkapanı Yemiş İskelesi'nde bulunan Ahi Çelebi Camii'nde görür. 10 Muharrem 1040'ta (20 Ağustos 1630) gördüğünü yazdığı bu rüyasında camiye önce aşere-i mübeşşere (hayattayken kendilerine Peygamber tarafından cennetin müjdelendiği on kişi), ardından da Hz. Muhammed gelir.</p>
+            <p>Rüyasını şöyle anlatır: "Baktım, cami kapısından bir parlak ışık çakıp caminin içi zaten ışıklarla doluyken daha da parlak ışıklarla dolunca bütün Sahabe-i kiram, peygamberlerin ve evliyaların ruhları ayağa kalkıp saygıyla hazır durdular. Tanrı elçisi, saadetle yeşil sancağının altında, yüzünde peçesiyle, elinde asasıyla, belinde kılıcıyla, sağında İmam Hasan, solunda İmam Hüseyin ile göründüğünde mübarek sağ ayağını aydınlık caminin içine Allah'ın adını anarak koyup kutlu yüzünden peçesini açıp 'Esenlikler üzerinize olsun ey benim ümmetim' buyurdular. Orada hazır bulunanların hepsi 'Esenlikler üzerinize olsun ey Tanrının elçisi ve ümmetlerin efendisi' diyerek selam aldılar."</p>
+            <p>"Hz. Peygamber, hemen mihraba çıkıp iki rekat sünnet olan tan vakti namazı kıldığı sırada ben aciz kul bir korkuya kapıldım, vücudumu bir titreme kapladı. Yine de Hz. Peygamber'in her tarafına baktım. Hakani'nin 'Hilye' başlıklı eserinde anlatıldığı gibiydi. Yüzündeki peçesi al Keşmir yünündendi. Mübarek sarığı on iki dilimliydi, beyaz tülbenttendi. Mübarek hırkası sarıya çalar deve yünündendi. Boynunda sarı renkli yün atkısı vardı ve uğurlu ayaklarında sarı çizmeleri vardı. Mübarek başındaki sarığın üzerine bir misvak sokulmuştu."</p>
+            <p>"Namazı bitirince sağ tarafında bulunan ben aciz kula bakıp mübarek sağ eliyle mübarek dizine vurup bana seslenip 'Kamet eyle' dediler. Ben aciz kul hemen Sa'd-ı Vakkas'ın bana öğrettiğine göre segah makamında 'Allahümme salli ala seyyidina Muhammedin ve ala al-i Muhammed ve sellim aleyh' diye kamet edip tekbir getirdim."</p>
+            <p>"Hazret mihrapta ayakta dururken hemen Sa'd-ı Vakkas hazretleri elimden yapışıp Peygamber'in huzuruna götürüp; 'Sadık aşıkın, seni şiddetle özleyen Evliya kulun şefaatini rica ediyor' deyip 'Mübarek, değerli elini öp' deyince gözyaşlarıyla mübarek eline haddim olmaksızın dudaklarımı değdirip onun heybetli görünümünden 'Şefaat ya Resulallah' diyecek yerde o anda 'Seyahat ya Resulallah' demişim. O anda Hazret gülümseyip: 'Şefaati ve seyahati ve ziyareti, Allah'ım sağlık ve selametle kolaylaştır' deyip 'Fatiha!' dediler. Bütün ulu sahabeler Fatiha okudular, ben orada hazır bulunanların hepsinin mübarek ellerini öpüyordum."</p>
+            <p>Sa'd-ı Vakkas belinden sadağını çıkarıp Evliya Çelebi'nin beline bağlar ve şöyle der: "Yürü, ok ve yay ile gaza eyle, Allah seni korusun, güvenlik içinde tutsun ve müjde olsun sana, bu mecliste ne kadar ruhlarla görüşüp onların mübarek ellerini öptünse, onların hepsini ziyaret etmek sana müyesser olacak, dünya gezgini, benzersiz insan olacaksın. Gezip dolaştığın büyük ülkeleri, şehirlerin kalelerini, tuhaf ve şaşılacak eserleri, her diyarın beğenilen şeylerini, oralarda üretilen şeyleri, yiyecek ve içeceklerini, enlem ve boylamlarını yazıp olağanüstü bir eser meydana getir. Benim silahımı kullanıp dünya ahret oğlum ol. Hak yolunu elden bırakma, kinden, hileden uzak dur, tuz ekmek hakkını gözet, sadık dost ol, kötülerle arkadaş olma, iyilerden iyilik öğren." Bu öğütleri verip alnından öperek Ahi Çelebi Camii'nden dışarı çıkar.</p>
+            <p>Evliya, uykusundan uyanınca büyük bir hayretle Kasımpaşa'ya rüya tabircisi İbrahim Efendi'ye gider. İbrahim Efendi rüyasını, "Cihanı dolaşan bir dünya gezgini olup son nefeste kelime-i şahadet getirip Peygamber'in şefaati ile cennete girersin" diye müjdeler. Ardından Kasımpaşa Mevlevihanesi şeyhi Abdullah Dede'ye gider. Abdullah Dede de rüyasını, "Dünyada başarılı olacaksın, cennetlere gireceksin, bütün padişahların sohbetine katılacaksın ve her iki dünyanın mutluluğuna ulaşacaksın. Sa'd-ı Vakkas'ın öğüdünü tutarak ilk önce güzelce bizim 'İslamı bol' İstanbulcuğumuzu yazmaya giriş, elinden gelen her şeyi yap. Sana takdir edilmiş olan nasibin elbette gelir" diyerek yorumlar ve ona yedi ciltlik bir tarih kitabı hediye eder.</p>
+            <p>Evliya Çelebi bu olaydan sonra şöyle der: "Sonra ben yoksul, aciz kul, sıkıntısız yaşayıp ibadet ettiğimiz evimizin köşesinde böylece bir kitap hazinesine sahip olup kimi tarihleri inceleyerek doğduğumuz yer olan, hükümdarların sahip olmayı hayal ettikleri, felekler denizinin limanı olan Makedonya ülkesinin sağlam kalesi ve sağlam suru İstanbul'u anlatmaya giriştik."</p>
+        </div>
+        
+        <footer class="meta-data">
+            <h3>Detaylar</h3>
+            <p><strong>Adres:</strong> Sarıdemir, Ragıp Gümüşpala Cd. No:36, 34134 Fatih/İstanbul</p>
+            <p><strong>Mekan Tipi:</strong> Cami</p>
+            <p><strong>Ekleyen:</strong> istanbulin</p>
+            <p><strong>Kaynak:</strong> <a href="https://repository.bilkent.edu.tr/server/api/core/bitstreams/2ff343f9-5302-4980-a52a-b239e0534026/content" target="_blank">Bilkent Repository - Nuran Tezcan</a></p>
+        </footer>
+    </article>
+
+    <script src="../location-script.js"></script>
+</body>
+</html>
