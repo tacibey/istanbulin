@@ -33,12 +33,10 @@ body {
     flex-direction: column;
 }
 
-/* Ana sayfanın body'si için taşmayı engelle */
 body:not(.yeni-page-body) {
     overflow: hidden;
 }
 
-/* yeni.html'nin body'si için scroll'a izin ver */
 .yeni-page-body {
     height: auto;
     min-height: 100%;
@@ -50,236 +48,63 @@ body:not(.yeni-page-body) {
     padding: 0 20px;
 }
 
-/* Header */
-.main-header {
-    background-color: var(--dark-bg-color);
-    color: var(--light-text-color);
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    flex-shrink: 0;
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.logo-container {
-    text-align: center;
-    margin: 0;
-}
-
-#logo-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.main-header h1 {
-    font-family: 'Gotico Antiqua', serif;
-    margin: 0;
-    font-size: 3.5em;
-    font-weight: normal;
-    line-height: 0.9;
-    letter-spacing: -4px;
-}
-
-.main-header .subtitle {
-    margin: 0;
-    font-size: 0.85em;
-    opacity: 0.7;
-}
-
-.main-header nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-}
-
-.main-header nav ul li {
-    margin-left: 25px;
-}
-
-.main-header nav ul li a {
-    color: var(--light-text-color);
-    text-decoration: none;
-    font-weight: 400;
-    transition: color 0.3s ease;
-}
-
-.main-header nav ul li a:hover {
-    color: rgba(255, 255, 255, 0.7);
-}
+/* Header (Değişiklik yok) */
+.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; }
+.main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.logo-container { text-align: center; margin: 0; }
+#logo-link { text-decoration: none; color: inherit; }
+.main-header h1 { font-family: 'Gotico Antiqua', serif; margin: 0; font-size: 3.5em; font-weight: normal; line-height: 0.9; letter-spacing: -4px; }
+.main-header .subtitle { margin: 0; font-size: 0.85em; opacity: 0.7; }
+.main-header nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+.main-header nav ul li { margin-left: 25px; }
+.main-header nav ul li a { color: var(--light-text-color); text-decoration: none; font-weight: 400; transition: color 0.3s ease; }
+.main-header nav ul li a:hover { color: rgba(255, 255, 255, 0.7); }
 
 /* Map Container (Ana Sayfa) */
-.map-container {
-    flex-grow: 1;
-    display: flex;
-    overflow: hidden;
-}
-
-#map {
-    height: 100%;
-    width: 100%;
-}
+.map-container { flex-grow: 1; display: flex; overflow: hidden; }
+#map { height: 100%; width: 100%; }
 
 /* Footer */
-.main-footer {
-    background-color: var(--dark-bg-color);
-    color: var(--light-text-color);
-    padding: 20px 0;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-    margin-top: auto;
-}
+.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; }
+.main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
 
-.main-footer p {
-    margin: 0;
-    font-size: 0.9em;
-    opacity: 0.8;
-}
-
-/* === Leaflet Stilleri (Ortak) === */
-.leaflet-marker-icon {
-    background-image: none !important;
-}
-
-.custom-marker-icon {
-    border-radius: 50%;
-    width: 26px !important;
-    height: 26px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.65em;
-    color: var(--icon-text-color);
-    font-weight: normal;
-    background-color: var(--icon-background-color);
-    border: 2px solid var(--secondary-bg-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    cursor: pointer;
-    font-family: 'Gotico Antiqua', serif !important;
-}
-
-.leaflet-popup-content-wrapper {
-    border-radius: 8px;
-    background-color: var(--secondary-bg-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.leaflet-popup-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 300px !important;
-    line-height: 1.5;
-}
-
-.leaflet-popup-content img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
+/* Leaflet Stilleri (Sadece ana sayfada kullanılıyor artık) */
+.leaflet-marker-icon { background-image: none !important; }
+.custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; }
+.leaflet-popup-content-wrapper { border-radius: 8px; background-color: var(--secondary-bg-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.leaflet-popup-content { margin: 0 !important; padding: 0 !important; width: 300px !important; line-height: 1.5; }
+.leaflet-popup-content img { width: 100%; height: auto; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px; }
 .popup-text-content { padding: 15px; }
 .popup-text-content h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; color: var(--text-color); font-weight: 700; }
 .popup-text-content p { margin: 0 0 8px 0; font-size: 0.95em; color: #555; }
 .popup-text-content p:last-child { margin-bottom: 0; }
 .popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
 .popup-text-content a:hover { text-decoration: underline; }
-
-.leaflet-popup-close-button {
-    padding: 8px 8px 0 0;
-    color: white !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-    font-size: 20px !important;
-}
+.leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
 .leaflet-popup-close-button:hover { color: #ddd !important; }
 
-/* === YENİ: yeni.html Sayfası Stilleri === */
-.yeni-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    flex-grow: 1;
-}
+/* === yeni.html Sayfası Stilleri (Güncellendi ve Temizlendi) === */
+.yeni-container { max-width: 800px; margin: 0 auto; padding: 20px; flex-grow: 1; }
 .yeni-content h2 { font-size: 2em; margin-bottom: 5px; }
-.yeni-content .instruction { font-size: 1.1em; color: var(--accent-color); margin-top: 0; margin-bottom: 20px; }
+.yeni-content .instruction { font-size: 1.1em; color: var(--accent-color); margin-top: 0; margin-bottom: 5px; }
+.yeni-content .helper-text { font-size: 0.9em; color: #888; margin-top: 0; margin-bottom: 30px; background-color: #f9f9f9; padding: 10px; border-radius: 5px; }
 
-#yeni-map {
-    height: 400px;
-    width: 100%;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
+/* KALDIRILDI: #yeni-map stili kaldırıldı. */
 
-.yeni-form .form-group {
-    margin-bottom: 20px;
-}
-.yeni-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #444;
-}
-.yeni-form input[type="text"],
-.yeni-form input[type="url"],
-.yeni-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1em;
-}
-.yeni-form textarea {
-    resize: vertical;
-}
+.yeni-form .form-group { margin-bottom: 20px; }
+.yeni-form label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+.yeni-form input[type="text"], .yeni-form input[type="url"], .yeni-form textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-family: 'Roboto', sans-serif; font-size: 1em; }
+.yeni-form textarea { resize: vertical; }
+.yeni-form button[type="submit"] { width: 100%; padding: 15px; background-color: var(--place-cami-color); color: white; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
+.yeni-form button[type="submit"]:hover { background-color: #3a7ac2; }
 
-.yeni-form button[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--place-cami-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
-}
-.yeni-form button[type="submit"]:hover:not(:disabled) {
-    background-color: #3a7ac2;
-}
-.yeni-form button[type="submit"]:disabled {
-    background-color: #a0a0a0;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-.submit-warning {
-    text-align: center;
-    color: #c0392b;
-    font-size: 0.9em;
-    margin-top: 10px;
-}
+/* KALDIRILDI: disabled buton ve uyarı stilleri kaldırıldı. */
 
-/* Mobil Uyumluluk */
+/* Mobil Uyumluluk (Değişiklik yok) */
 @media (max-width: 768px) {
     .main-header .container { flex-direction: column; text-align: center; }
     .main-header h1 { margin-bottom: 5px; font-size: 2.5em; letter-spacing: -2px; }
     .main-header .subtitle { margin-top: 0; margin-bottom: 10px; }
     .main-header nav ul { flex-direction: column; align-items: center; }
     .main-header nav ul li { margin: 5px 0; }
-}
-/* Botpoison challenge div'ini gizle */
-#botpoison-challenge {
-    display: none;
 }
