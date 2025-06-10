@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yeni Yer Ekle - istanbulin</title>
-    <!-- Gerekli kütüphaneler ve stiller -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <!-- KALDIRILDI: Leaflet CSS'e artık ihtiyaç yok -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/@botpoison/browser" defer></script>
+    <!-- KALDIRILDI: Botpoison JS'e artık ihtiyaç yok -->
 </head>
 <body class="yeni-page-body">
 
@@ -29,29 +27,64 @@
 
     <main class="yeni-container">
         <div class="yeni-content">
+            <!-- DEĞİŞTİ: Talimatlar güncellendi -->
             <h2>Yeni Yer Önerisi</h2>
-            <p class="instruction">Lütfen eklemek istediğiniz yeri harita üzerinde işaretleyin ve ardından aşağıdaki formu doldurun.</p>
-            
-            <!-- DEĞİŞİKLİK BURADA: Harita div'ine doğrudan stil ekledik. -->
-            <div id="yeni-map" style="height: 400px; width: 100%; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 30px;"></div>
+            <p class="instruction">Lütfen eklemek istediğiniz yerin Google Haritalar linkiyle birlikte aşağıdaki formu doldurun.</p>
+            <p class="helper-text">Google Haritalar → Lokasyon → Paylaş → Bağlantıyı Kopyala</p>
+
+            <!-- KALDIRILDI: Harita div'i buradan kaldırıldı -->
 
             <form class="yeni-form" action="https://submit-form.com/XbOQK08Qf" method="POST">
-                <!-- Gizli alanlar -->
-                <input type="hidden" name="lat" id="lat" required>
-                <input type="hidden" name="lng" id="lng" required>
-                <div id="botpoison-challenge"></div>
+                <!-- Formspark ve Botpoison için gizli alanlar -->
+                <input type="hidden" name="_redirect" value="https://istanbulin.netlify.app/"> <!-- KENDİ SİTE ADRESİNİ KONTROL ET -->
+                <input type="checkbox" name="_botpoison" tabindex="-1" autocomplete="off" style="display: none;">
 
-                <!-- Form grupları (değişiklik yok) -->
-                <div class="form-group"><label for="baslik">Başlık</label><input type="text" id="baslik" name="baslik" required></div>
-                <div class="form-group"><label for="aciklama">Açıklama</label><textarea id="aciklama" name="aciklama" rows="4" required></textarea></div>
-                <div class="form-group"><label for="kaynak">Kaynak</label><input type="url" id="kaynak" name="kaynak" placeholder="https://..." required></div>
-                <div class="form-group"><label for="mekan">Mekan (Opsiyonel)</label><input type="text" id="mekan" name="mekan"></div>
-                <div class="form-group"><label for="gorsel">Görsel Linki (Opsiyonel)</label><input type="url" id="gorsel" name="gorsel" placeholder="https://ornek.com/resim.jpg"></div>
-                <div class="form-group"><label for="adres">Adres (Opsiyonel)</label><input type="text" id="adres" name="adres"></div>
-                <div class="form-group"><label for="rumuz">Adınız / Rumuzunuz (Opsiyonel)</label><input type="text" id="rumuz" name="rumuz"></div>
+                <!-- KALDIRILDI: lat, lng ve botpoison-challenge div'i kaldırıldı -->
 
-                <button type="submit" id="submit-btn" disabled>Öneriyi Gönder</button>
-                <p id="submit-warning" class="submit-warning">Lütfen önce haritadan bir yer seçin.</p>
+                <div class="form-group">
+                    <label for="baslik">Başlık</label>
+                    <input type="text" id="baslik" name="baslik" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="aciklama">Açıklama</label>
+                    <textarea id="aciklama" name="aciklama" rows="4" required></textarea>
+                </div>
+
+                <!-- YENİ: Lokasyon Linki alanı eklendi -->
+                <div class="form-group">
+                    <label for="lokasyon">Lokasyon Linki (Google Haritalar)</label>
+                    <input type="url" id="lokasyon" name="lokasyon" placeholder="https://www.google.com/maps/place/..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="kaynak">Kaynak</label>
+                    <input type="url" id="kaynak" name="kaynak" placeholder="https://..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mekan">Mekan (Cami, Saray, Çarşı vb.) (Opsiyonel)</label>
+                    <input type="text" id="mekan" name="mekan">
+                </div>
+                
+                <div class="form-group">
+                    <label for="gorsel">Görsel Linki (Opsiyonel)</label>
+                    <input type="url" id="gorsel" name="gorsel" placeholder="https://ornek.com/resim.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="adres">Adres (Opsiyonel)</label>
+                    <input type="text" id="adres" name="adres">
+                </div>
+                
+                <div class="form-group">
+                    <label for="rumuz">Adınız / Rumuzunuz (Opsiyonel)</label>
+                    <input type="text" id="rumuz" name="rumuz">
+                </div>
+
+                <!-- DEĞİŞTİ: Buton artık başlangıçta aktif -->
+                <button type="submit">Öneriyi Gönder</button>
+                <!-- KALDIRILDI: Buton uyarısı kaldırıldı -->
             </form>
         </div>
     </main>
@@ -60,7 +93,6 @@
        <div class="container"><p>© 2025 istanbulin. Tüm Hakları Saklıdır.</p></div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="yeni-script.js"></script>
+    <!-- KALDIRILDI: Leaflet ve yeni-script.js script'leri kaldırıldı -->
 </body>
 </html>
