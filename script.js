@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Harita Başlangıç Ayarları
+    // Harita ayarları ve diğer kontroller aynı kalıyor...
     const map = L.map('map', {
         attributionControl: false
     }).setView([41.0082, 28.9784], 13);
@@ -10,20 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         noWrap: true
     }).addTo(map);
 
-    L.control.attribution({
-        position: 'bottomright',
-        prefix: 'Leaflet | Esri'
-    }).addTo(map);
-
-    L.control.locate({
-        position: 'topleft',
-        setView: 'once',
-        flyTo: true,
-        strings: {
-            title: "Mevcut Konumumu Göster",
-            popup: "Buradasınız!"
-        }
-    }).addTo(map);
+    L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | Esri' }).addTo(map);
+    L.control.locate({ position: 'topleft', setView: 'once', flyTo: true, strings: { title: "Mevcut Konumumu Göster" } }).addTo(map);
 
     const customMarkerIcon = L.divIcon({
         className: 'custom-marker-icon',
@@ -39,31 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             data.forEach(item => {
+                if (!item.lat || !item.lng) return; // Koordinatı olmayan veriyi atla
+
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
-                let imageUrl = '';
-                if (item.image) {
-                    if (item.image.startsWith('http')) {
-                        imageUrl = item.image;
-                    } else {
-                        imageUrl = `images/${item.image}`;
-                    }
-                }
-                const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}">` : '';
-                const sourceLink = item.source ? `<a href="${item.source}" target="_blank">Kaynak</a>` : 'Belirtilmemiş';
-                
+                // YENİ: Popup içeriği güncellendi
+                // "Tamamını Oku" butonu için link oluşturuluyor
+                const detailPageUrl = `locations/${item.slug}.html`;
+
                 const popupContent = `
-                    ${imageHtml}
-                    <div class="popup-text-content">
+                    <div class="mini-popup">
                         <h3>${item.title}</h3>
                         <p>${item.description}</p>
-                        <p><strong>Adres:</strong> ${item.address || 'Belirtilmemiş'}</p>
-                        <p><strong>Mekan:</strong> ${item.place || 'Belirtilmemiş'}</p>
-                        <p>${sourceLink}</p>
-                        <p><strong>Ekleyen:</strong> ${item.contributor || 'Anonim'}</p>
+                        <a href="${detailPageUrl}" class="read-more-btn">Tamamını Oku</a>
                     </div>
                 `;
-                marker.bindPopup(popupContent);
+                
+                marker.bindPopup(popupContent, {
+                    minWidth: 250 // Popup'ın minimum genişliği
+                });
+
                 markers.addLayer(marker);
             });
             map.addLayer(markers);
