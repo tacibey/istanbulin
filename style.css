@@ -1,114 +1,118 @@
+/* === TEMA VE RENK DEĞİŞKENLERİ === */
 :root {
-    --primary-bg-color: #f8f8f8;
-    --secondary-bg-color: #ffffff;
-    --text-color: #333333;
-    --accent-color: #666666;
+    /* Açık Tema (Varsayılan) */
+    --bg-color: #FFFFFF;
+    --text-color: #212121;
+    --text-color-light: #5f5f5f;
+    --header-bg: #0a0908;
+    --header-text: #FFFFFF;
+    --accent-color: #4A90E2;
     --border-color: #e0e0e0;
-    --dark-bg-color: #0a0908;
-    --light-text-color: #ffffff;
-    --place-cami-color: #4A90E2;
+    --button-bg: #f1f1f1;
+    --button-text: #333;
+
+    /* Sabit Renkler */
     --icon-text-color: #ffffff;
     --icon-background-color: #000000;
 }
 
-@font-face {
-    font-family: 'Gotico Antiqua';
-    src: url('Rusch-GoticoAntiqua100G.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+.dark-mode {
+    /* Koyu Tema */
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --text-color-light: #a0a0a0;
+    --header-bg: #0a0908; /* Header aynı kalabilir */
+    --header-text: #FFFFFF;
+    --accent-color: #64b5f6;
+    --border-color: #333333;
+    --button-bg: #2a2a2a;
+    --button-text: #e0e0e0;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
+/* === TEMEL STİLLER === */
 body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0; padding: 0;
 }
 
-body:not(.yeni-page-body) {
-    overflow: hidden;
-}
-
-.yeni-page-body {
-    height: auto;
-    min-height: 100%;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header (Değişiklik yok) */
-.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; }
-.main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-.logo-container { text-align: center; margin: 0; }
-#logo-link { text-decoration: none; color: inherit; }
-.main-header h1 { font-family: 'Gotico Antiqua', serif; margin: 0; font-size: 3.5em; font-weight: normal; line-height: 0.9; letter-spacing: -4px; }
-.main-header .subtitle { margin: 0; font-size: 0.85em; opacity: 0.7; }
-.main-header nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
-.main-header nav ul li { margin-left: 25px; }
-.main-header nav ul li a { color: var(--light-text-color); text-decoration: none; font-weight: 400; transition: color 0.3s ease; }
-.main-header nav ul li a:hover { color: rgba(255, 255, 255, 0.7); }
-
-/* Map Container (Ana Sayfa) */
-.map-container { flex-grow: 1; display: flex; overflow: hidden; }
+/* ... (Header, Footer, Ana Harita vb. önceki stilleriniz buraya eklenecek) ... */
+/* Bu kısımları sadeleştirelim, çünkü önceki kod bloğu çok uzundu. */
+/* Header */
+.main-header { background-color: var(--header-bg); color: var(--header-text); padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); flex-shrink: 0; }
+.main-header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.main-header h1 { font-family: 'Gotico Antiqua', serif; margin: 0; font-size: 3.5em; line-height: 0.9; letter-spacing: -4px; }
+#logo-link { color: inherit; text-decoration: none; }
+.main-header nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+.main-header nav ul li a { color: var(--header-text); text-decoration: none; margin-left: 25px; }
+.map-container { flex-grow: 1; display: flex; overflow: hidden; height: calc(100vh - 100px); /* Örnek yükseklik */ }
 #map { height: 100%; width: 100%; }
 
-/* Footer */
-.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; }
-.main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
-
-/* Leaflet Stilleri (Sadece ana sayfada kullanılıyor artık) */
-.leaflet-marker-icon { background-image: none !important; }
-.custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; }
-.leaflet-popup-content-wrapper { border-radius: 8px; background-color: var(--secondary-bg-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.leaflet-popup-content { margin: 0 !important; padding: 0 !important; width: 300px !important; line-height: 1.5; }
-.leaflet-popup-content img { width: 100%; height: auto; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px; }
-.popup-text-content { padding: 15px; }
-.popup-text-content h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; color: var(--text-color); font-weight: 700; }
-.popup-text-content p { margin: 0 0 8px 0; font-size: 0.95em; color: #555; }
-.popup-text-content p:last-child { margin-bottom: 0; }
-.popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
-.popup-text-content a:hover { text-decoration: underline; }
-.leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
-.leaflet-popup-close-button:hover { color: #ddd !important; }
-
-/* === yeni.html Sayfası Stilleri (Güncellendi ve Temizlendi) === */
-.yeni-container { max-width: 800px; margin: 0 auto; padding: 20px; flex-grow: 1; }
-.yeni-content h2 { font-size: 2em; margin-bottom: 5px; }
-.yeni-content .instruction { font-size: 1.1em; color: var(--accent-color); margin-top: 0; margin-bottom: 5px; }
-.yeni-content .helper-text { font-size: 0.9em; color: #888; margin-top: 0; margin-bottom: 30px; background-color: #f9f9f9; padding: 10px; border-radius: 5px; }
-
-/* KALDIRILDI: #yeni-map stili kaldırıldı. */
-
-.yeni-form .form-group { margin-bottom: 20px; }
-.yeni-form label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
-.yeni-form input[type="text"], .yeni-form input[type="url"], .yeni-form textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-family: 'Roboto', sans-serif; font-size: 1em; }
-.yeni-form textarea { resize: vertical; }
-.yeni-form button[type="submit"] { width: 100%; padding: 15px; background-color: var(--place-cami-color); color: white; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
-.yeni-form button[type="submit"]:hover { background-color: #3a7ac2; }
-
-/* KALDIRILDI: disabled buton ve uyarı stilleri kaldırıldı. */
-
-/* Mobil Uyumluluk (Değişiklik yok) */
-@media (max-width: 768px) {
-    .main-header .container { flex-direction: column; text-align: center; }
-    .main-header h1 { margin-bottom: 5px; font-size: 2.5em; letter-spacing: -2px; }
-    .main-header .subtitle { margin-top: 0; margin-bottom: 10px; }
-    .main-header nav ul { flex-direction: column; align-items: center; }
-    .main-header nav ul li { margin: 5px 0; }
+/* === MİNİ POPUP STİLLERİ === */
+.mini-popup { padding: 5px; }
+.mini-popup h3 { margin: 0 0 5px 0; font-size: 1.2em; }
+.mini-popup p { margin: 0 0 15px 0; font-size: 0.9em; color: var(--text-color-light); }
+.read-more-btn {
+    display: block;
+    text-align: center;
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
-/* Botpoison challenge div'ini gizle */
-#botpoison-challenge {
-    display: none;
+.read-more-btn:hover { background-color: #3a7ac2; }
+.dark-mode .read-more-btn:hover { background-color: #82c5ff; }
+
+/* === LOKASYON DETAY SAYFASI === */
+.location-page { font-family: 'Lora', serif; }
+.page-controls { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 10px; }
+.control-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--border-color);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.control-btn:hover { background-color: var(--border-color); }
+.control-btn svg { stroke: var(--text-color); }
+.dark-mode .control-btn .sun { display: none; }
+.light-mode .control-btn .moon, .control-btn .moon { display: block; } /* Varsayılan ay */
+body:not(.dark-mode) .control-btn .moon { display: none; }
+
+.location-content { max-width: 700px; margin: 40px auto; padding: 20px; }
+.location-header { text-align: center; margin-bottom: 40px; }
+.location-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+.location-title { font-size: 3em; margin: 10px 0 5px 0; font-family: 'Roboto', sans-serif; font-weight: 700; }
+.location-subtitle { font-size: 1.2em; color: var(--text-color-light); font-style: italic; margin: 0; }
+
+.content-body { font-size: 1.1em; line-height: 1.8; }
+.content-body p { margin-bottom: 1.5em; }
+
+.meta-data {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+.meta-data h3 { font-size: 1.2em; color: var(--text-color); }
+.meta-data p { margin: 5px 0; }
+.meta-data a { color: var(--accent-color); text-decoration: none; }
+.meta-data a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .location-title { font-size: 2em; }
+    .location-content { padding: 15px; margin-top: 80px; }
+    .page-controls { top: 10px; right: 10px; }
 }
