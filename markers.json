@@ -1,32 +1,52 @@
 [
   {
     "id": "1",
+    "title": "Ahi Çelebi Camii",
+    "description": "Evliya Çelebi'nin rüyasında Hz. Muhammed'i görerek, 'Şefaat ya Resulallah' diyecek yerde heyecandan 'Seyahat ya Resulallah' dediği cami.",
     "lat": 41.01894,
     "lng": 28.96839,
-    "title": "Ahi Çelebi Camii"
+    "source": "https://tr.wikipedia.org/wiki/Ahi_%C3%87elebi_Camii",
+    "contributor": "istanbulin",
+    "image": "ahicelebicamii.avif"
   },
   {
     "id": "2",
-    "lat": 41.02675,
+    "title": "Abidin Dino'nun Evi",
+    "description": "Ressam Abidin Dino, bu binanın çatı katını atölye ve ev olarak kullanmıştı. Orhan Veli Kanık, Oktay Rifat, Melih Cevdet, Sait Faik, Yaşar Kemal gibi ünlü sanatçıların uğrak yeriydi.",
+    "lat": 41.02675, 
     "lng": 28.97542,
-    "title": "Abidin Dino'nun Evi"
+    "source": "İstanbul'un 100 Binası, İBB Kültür A.Ş. Yayınları",
+    "contributor": "istanbulin",
+    "image": "abidindino.avif"
   },
   {
     "id": "3",
-    "lat": 41.03221,
+    "title": "Kapıcılar Kralı",
+    "description": "Kemal Sunal'ın başrolde olduğu Kapıcılar Kralı, Güneşli sokakta çekilmiştir. Filmin ana mekanı olan Selahattin Zeren apartmanı buradadır.",
+    "lat": 41.03221, 
     "lng": 28.98509,
-    "title": "Kapıcılar Kralı"
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "kapicilar.webp"
   },
-  {
+    {
     "id": "4",
-    "lat": 41.02516,
+    "title": "Üsküdar'da Bir Attar Dükkânı",
+    "description": "Ahmed Yüksel Özemre merhumun aynı adlı otobiyografik kitabında bahsettiği, Sâim ve Bekir Düzgünman kardeşlere ait aktar dükkanı bu civardaydı. Bu Attâr Dükkânı za­ma­nın bâzı meşhûr san'atkârlarının, âriflerinin, sır­lı sôfîlerinin ve meşâyihinin soh­bet ve mu­hab­bet et­mek üze­re sü­rek­li uğ­ra­dık­la­rı, âdetâ Aka­de­mi mesâbesinde, bir mekândı.",
+    "lat": 41.02516, 
     "lng": 29.01585,
-    "title": "Üsküdar'da Bir Attar Dükkânı"
+    "source": "https://www.facebook.com/photo.php?fbid=1297129133685470&id=115097101888685&set=a.627724457292611",
+    "contributor": "istanbulin",
+    "image": "attar.avif"
   },
   {
     "id": "5",
-    "lat": 41.02961,
+    "title": "Masumlar Apartmanı",
+    "description": "İstanbul'da aynı evde yaşayan dört kardeşin psikolojik durumunu ve etraflarındaki hayatı konu alan Masumlar Apartmanı dizisinin çekildiği apartman.",
+    "lat": 41.02961, 
     "lng": 28.97385,
-    "title": "Masumlar Apartmanı"
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "masumlar.avif"
   }
 ]
