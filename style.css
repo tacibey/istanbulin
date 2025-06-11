@@ -48,7 +48,7 @@ body:not(.yeni-page-body) {
     padding: 0 20px;
 }
 
-.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; }
+.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; transition: transform 0.3s ease; }
 .main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .logo-container { text-align: center; margin: 0; }
 #logo-link { text-decoration: none; color: inherit; }
@@ -62,8 +62,26 @@ body:not(.yeni-page-body) {
 .map-container { flex-grow: 1; display: flex; overflow: hidden; position: relative; }
 #map { height: 100%; width: 100%; }
 
-.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; }
+.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; transition: transform 0.3s ease; }
 .main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
+
+/* YENİ: Harita Odak/Tam Ekran Modu Stilleri */
+body.map-is-fullscreen .main-header {
+    transform: translateY(-100%);
+}
+body.map-is-fullscreen .main-footer {
+    transform: translateY(100%);
+}
+body.map-is-fullscreen .map-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+/* BİTTİ: Harita Odak/Tam Ekran Modu Stilleri */
+
 
 .leaflet-marker-icon { background-image: none !important; }
 .custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; }
@@ -79,64 +97,19 @@ body:not(.yeni-page-body) {
 .leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
 .leaflet-popup-close-button:hover { color: #ddd !important; }
 
-.leaflet-control-custom a {
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    display: block;
-}
-
-.leaflet-control-search .search-icon {
-    font-size: 1.4em;
-    line-height: 26px;
-    text-align: center;
-}
-.leaflet-control-search-expanded {
-    padding: 6px 10px 6px 6px;
-    background: white;
-    border-radius: 4px;
-}
-/* DEĞİŞİKLİK: Başlangıçta gizli olmasını sağlıyoruz */
-.leaflet-control-search-expanded.leaflet-hidden {
-    display: none;
-}
-.leaflet-control-search-expanded .search-input {
-    height: 28px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    padding: 0 10px;
-    outline: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9em;
-    width: 200px;
-}
-.search-results {
-    background-color: var(--secondary-bg-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    max-height: 300px;
-    overflow-y: auto;
-    margin-top: 5px;
-    border-radius: 4px;
-}
-.search-results .result-item {
-    padding: 10px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.9em;
-}
+.leaflet-control-custom a { background-position: 50% 50%; background-repeat: no-repeat; display: block; }
+.leaflet-control-search .search-icon { font-size: 1.4em; line-height: 26px; text-align: center; }
+.leaflet-control-search-expanded { padding: 6px 10px 6px 6px; background: white; border-radius: 4px; }
+.leaflet-control-search-expanded.leaflet-hidden { display: none; }
+.leaflet-control-search-expanded .search-input { height: 28px; border: 1px solid #ccc; border-radius: 2px; padding: 0 10px; outline: none; font-family: 'Roboto', sans-serif; font-size: 0.9em; width: 200px; }
+.search-results { background-color: var(--secondary-bg-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 300px; overflow-y: auto; margin-top: 5px; border-radius: 4px; }
+.search-results .result-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.9em; }
 .search-results .result-item:last-child { border-bottom: none; }
 .search-results .result-item:hover { background-color: var(--primary-bg-color); }
 
-.leaflet-control-fullscreen .fullscreen-icon {
-    width: 26px;
-    height: 26px;
-    background-size: 16px 16px;
-}
-.leaflet-control-fullscreen a.fullscreen-enter {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>');
-}
-.leaflet-control-fullscreen a.fullscreen-exit {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>');
-}
+.leaflet-control-fullscreen .fullscreen-icon { width: 26px; height: 26px; background-size: 16px 16px; }
+.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>'); }
 
 .share-link-container a { text-decoration: none; cursor: pointer; font-size: 1.1em; vertical-align: middle; }
 .share-link-container a:hover { opacity: 0.7; }
