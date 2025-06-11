@@ -15,7 +15,7 @@ function showCopyNotification() {
 
 function copyShareLink(event, id) {
     event.preventDefault();
-    event.stopPropagation(); // ÖNEMLİ: Popup'ın kapanmasını engelle
+    event.stopPropagation();
     const urlToCopy = `${window.location.origin}${window.location.pathname.replace('index.html', '')}#/${id}`;
     navigator.clipboard.writeText(urlToCopy).then(showCopyNotification).catch(err => {
         console.error('URL kopyalanamadı: ', err);
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     const markersLayer = L.markerClusterGroup();
-    const allMarkers = {}; // Tüm marker objelerini saklamak için
+    const allMarkers = {};
 
     // --- Arama Motoru Kurulumu ---
     let fuse;
@@ -64,11 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
             minMatchCharLength: 1
         };
         fuse = new Fuse(data, options);
-
         searchInput.addEventListener('input', handleSearch);
         searchToggleBtn.addEventListener('click', toggleSearch);
         searchClearBtn.addEventListener('click', clearSearch);
-        document.addEventListener('click', (e) => { // Dışarı tıklayınca arama kutusunu kapat
+        document.addEventListener('click', (e) => {
             if (!searchContainer.contains(e.target) && !searchToggleBtn.contains(e.target)) {
                 hideSearch();
             }
@@ -77,12 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleSearch(e) {
         const query = e.target.value;
-        if (query.length > 0) {
-            searchClearBtn.style.display = 'block';
-        } else {
-            searchClearBtn.style.display = 'none';
-        }
-
+        searchClearBtn.style.display = query.length > 0 ? 'block' : 'none';
         const results = fuse.search(query);
         displayResults(results);
     }
@@ -91,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResultsContainer.innerHTML = '';
         if (results.length > 0) {
             searchResultsContainer.style.display = 'block';
-            results.slice(0, 10).forEach(result => { // En iyi 10 sonucu göster
+            results.slice(0, 10).forEach(result => {
                 const item = result.item;
                 const resultElement = document.createElement('div');
                 resultElement.className = 'result-item';
@@ -110,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function goToMarker(id) {
         const marker = allMarkers[id];
         if (marker) {
-            map.setView(marker.getLatLng(), 17); // Daha yakın bir zoom seviyesi
+            map.setView(marker.getLatLng(), 17);
             marker.openPopup();
         }
     }
@@ -119,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchContainer.classList.toggle('active');
         if (searchContainer.classList.contains('active')) {
             searchInput.focus();
-            searchToggleBtn.innerHTML = '×'; // Kapatma ikonu
+            searchToggleBtn.innerHTML = '×';
         } else {
-            hideSearch(); // Hem gizler hem de içeriği temizler
+            hideSearch();
         }
     }
 
@@ -138,16 +132,28 @@ document.addEventListener('DOMContentLoaded', () => {
         searchClearBtn.style.display = 'none';
     }
 
-
     // --- Veri Yükleme ve Haritayı Doldurma ---
+    // DEĞİŞEN FONKSİYON: createPopupContent'e yol tarifi linki eklendi
     function createPopupContent(item) {
         const imageUrl = item.image && (item.image.startsWith('http') ? item.image : `images/${item.image}`);
         const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}" loading="lazy">` : '';
-        const sourceHtml = item.source ? (item.source.startsWith('http') ? `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${item.source}</p>`) : '';
-        const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
-        const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${item.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
         
-        return `${imageHtml}<div class="popup-text-content"><h3>${item.title}</h3><p>${item.description}</p>${sourceHtml}${contributorHtml}${shareHtml}</div>`;
+        const sourceHtml = item.source ? (item.source.startsWith('http') ? `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${item.source}</p>`) : '';
+        
+        const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
+
+        const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${item.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
+
+        // YENİ: Yol tarifi linki HTML'i
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}`;
+        const directionsHtml = `
+            <p class="share-link-container">
+                <strong>Yol Tarifi: 
+                    <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a>
+                </strong>
+            </p>`;
+
+        return `${imageHtml}<div class="popup-text-content"><h3>${item.title}</h3><p>${item.description}</p>${sourceHtml}${contributorHtml}${shareHtml}${directionsHtml}</div>`;
     }
 
     function addMarkers(data) {
@@ -159,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             allMarkers[item.id] = marker;
         });
         map.addLayer(markersLayer);
-        openMarkerFromUrl(); // URL'deki ID'ye göre marker aç
+        openMarkerFromUrl();
     }
 
     function openMarkerFromUrl() {
