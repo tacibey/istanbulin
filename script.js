@@ -1,134 +1,109 @@
 // Kopyalama ve bildirim için fonksiyonlar
-function showCopyNotification() {
-    const existingNotification = document.getElementById('copy-notification');
-    if (existingNotification) existingNotification.remove();
-    const notification = document.createElement('div');
-    notification.id = 'copy-notification';
-    notification.textContent = 'URL Kopyalandı!';
-    document.body.appendChild(notification);
-    setTimeout(() => notification.classList.add('show'), 10);
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
-    }, 2000);
-}
+function showCopyNotification() { /* ... kod aynı ... */ }
+function copyShareLink(event, id) { /* ... kod aynı ... */ }
 
-function copyShareLink(event, id) {
-    event.preventDefault();
-    event.stopPropagation();
-    const urlToCopy = `${window.location.origin}${window.location.pathname.replace('index.html', '')}#/${id}`;
-    navigator.clipboard.writeText(urlToCopy).then(showCopyNotification).catch(err => console.error('URL kopyalanamadı: ', err));
-}
+// Bu fonksiyonları küçülttüm, çünkü içlerinde değişiklik yok.
+function showCopyNotification(){const e=document.getElementById("copy-notification");e&&e.remove();const t=document.createElement("div");t.id="copy-notification",t.textContent="URL Kopyalandı!",document.body.appendChild(t),setTimeout(()=>{t.classList.add("show")},10),setTimeout(()=>{t.classList.remove("show"),setTimeout(()=>{t.remove()},300)},2e3)}
+function copyShareLink(e,t){e.preventDefault(),e.stopPropagation();const o=`${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;navigator.clipboard.writeText(o).then(showCopyNotification).catch(e=>{console.error("URL kopyalanamadı: ",e)})}
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- YENİ BÖLÜM: PWA ve Bildirim Mantığı ---
+    // --- YENİ ve GÜÇLENDİRİLMİŞ: PWA ve Bildirim Mantığı ---
     function setupPWA() {
-        if (!('serviceWorker' in navigator)) return; // Tarayıcı desteklemiyorsa hiçbir şey yapma
+        if (!('serviceWorker' in navigator)) return;
 
         // 1. Service Worker'ı Kaydet
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('ServiceWorker kaydedildi:', reg))
-                .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
-        });
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('ServiceWorker kaydedildi:', reg))
+            .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
 
+        // Buton ve olay referansları
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
         let deferredPrompt;
 
-        // 2. Kurulum (Install) Butonu Mantığı
+        // --- MERKEZİ ARAYÜZ GÜNCELLEME FONKSİYONU ---
+        function updateUI() {
+            // Kurulum Butonu Durumu
+            if (deferredPrompt) {
+                installButton.classList.add('visible');
+            } else {
+                installButton.classList.remove('visible');
+            }
+
+            // Bildirim Butonu Durumu (Sadece destekleyen tarayıcılarda)
+            if ('Notification' in window && 'PushManager' in window) {
+                switch (Notification.permission) {
+                    case 'granted':
+                        // İzin verilmiş, butonu gösterme.
+                        notifyButton.classList.remove('visible');
+                        break;
+                    case 'denied':
+                        // Engellenmiş, butonu gösterme.
+                        notifyButton.classList.remove('visible');
+                        break;
+                    default: // 'default' durumu (henüz sorulmamış)
+                        notifyButton.textContent = 'Bildirimleri Aç 🔔';
+                        notifyButton.disabled = false;
+                        notifyButton.classList.add('visible');
+                        break;
+                }
+            } else {
+                // Tarayıcı desteklemiyorsa butonu hiç gösterme.
+                notifyButton.classList.remove('visible');
+            }
+        }
+
+        // --- OLAY DİNLEYİCİLER ---
+        // Kurulum istemi hazır olduğunda
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installButton.style.display = 'block'; // Kurulum butonunu göster
+            updateUI(); // Arayüzü güncelle
         });
 
+        // Kurulum butonuna tıklandığında
         installButton.addEventListener('click', async () => {
             if (!deferredPrompt) return;
-            installButton.style.display = 'none';
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             console.log(`Kullanıcı kurulum istemine yanıt verdi: ${outcome}`);
             deferredPrompt = null;
+            updateUI(); // Arayüzü güncelle
         });
-
+        
+        // Uygulama başarıyla kurulduğunda
         window.addEventListener('appinstalled', () => {
-            installButton.style.display = 'none';
             deferredPrompt = null;
+            updateUI(); // Arayüzü güncelle
         });
 
-        // 3. Bildirim (Notification) Butonu Mantığı
-        if ('Notification' in window && 'PushManager' in window) {
-            notifyButton.addEventListener('click', handleNotificationClick);
-            updateNotificationButton();
-        }
-
-        async function handleNotificationClick() {
-            if (Notification.permission === 'granted') {
-                console.log('Bildirim izni zaten verilmiş.');
-                // İleride burada abonelikten çıkma mantığı olabilir.
-            } else if (Notification.permission === 'denied') {
-                alert('Bildirim izni engellenmiş. Tarayıcı ayarlarından değiştirmeniz gerekiyor.');
+        // Bildirim butonuna tıklandığında
+        notifyButton.addEventListener('click', async () => {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                console.log('Bildirim izni verildi!');
+                // TODO: VAPID key eklenince bu kısmı tamamlayacağız.
+                // Şimdilik sadece konsola yazdırıyoruz.
+                // const subscription = await getSubscription(); 
+                // console.log('Abonelik nesnesi:', subscription);
             } else {
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    console.log('Bildirim izni verildi!');
-                    // İzin verildikten sonra abonelik oluştur.
-                    // Şimdilik sadece konsola yazdırıyoruz.
-                    const subscription = await getSubscription();
-                    console.log('Abonelik nesnesi:', subscription);
-                    // TODO: Bu aboneliği backend'e gönder.
-                } else {
-                    console.log('Bildirim izni verilmedi.');
-                }
-                updateNotificationButton();
+                console.log('Bildirim izni verilmedi.');
             }
-        }
+            updateUI(); // Her durumda arayüzü güncelle
+        });
 
-        function updateNotificationButton() {
-            if (!('Notification' in window)) {
-                notifyButton.style.display = 'none';
-                return;
-            }
-
-            if (Notification.permission === 'granted') {
-                notifyButton.textContent = 'Bildirimler Açık ✅';
-                notifyButton.disabled = true; // Şimdilik tekrar tıklanmasın
-            } else if (Notification.permission === 'denied') {
-                notifyButton.textContent = 'Bildirimler Engelli 🚫';
-                notifyButton.disabled = true;
-            } else {
-                notifyButton.textContent = 'Bildirimleri Aç 🔔';
-                notifyButton.disabled = false;
-            }
-            notifyButton.style.display = 'block';
-        }
-
-        async function getSubscription() {
-            const registration = await navigator.serviceWorker.ready;
-            let subscription = await registration.pushManager.getSubscription();
-            if (subscription === null) {
-                // Henüz abonelik yok, yeni bir tane oluştur.
-                // TODO: VAPID public key'i buraya ekleyeceğiz.
-                const VAPID_PUBLIC_KEY = 'HENÜZ_YOK'; 
-                subscription = await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: VAPID_PUBLIC_KEY
-                });
-            }
-            return subscription;
-        }
+        // Sayfa yüklendiğinde durumu kontrol et
+        updateUI();
     }
     
     // PWA kurulumunu başlat
     setupPWA();
 
 
-    // --- Diğer tüm kodlar... ---
+    // --- Diğer tüm kodlar... (Değişiklik yok) ---
     const copyrightElement = document.getElementById('copyright-text');
-    if (copyrightElement) {
-        copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`;
-    }
+    if (copyrightElement) { copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`; }
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
     const storage = { get: (key) => { try { const item = localStorage.getItem(key); return item ? JSON.parse(item) : []; } catch (e) { console.error("LocalStorage okunamadı:", e); return []; } }, set: (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { console.error("LocalStorage'a yazılamadı:", e); } } };
