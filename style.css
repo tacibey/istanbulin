@@ -9,7 +9,6 @@
     --place-cami-color: #4A90E2;
     --icon-text-color: #ffffff;
     --icon-background-color: #000000;
-    /* YENİ: Yeni yerler için yeşil renk */
     --new-item-color: #2ecc71; 
 }
 
@@ -73,11 +72,7 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
 
 .leaflet-marker-icon { background-image: none !important; }
 .custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; transition: background-color 0.3s ease; }
-
-/* YENİ: Okunmamış/Yeni yerler için yeşil ikon stili */
-.custom-marker-icon.new-marker {
-    background-color: var(--new-item-color);
-}
+.custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
 .leaflet-popup-content-wrapper { border-radius: 8px; background-color: var(--secondary-bg-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 .leaflet-popup-content { margin: 0 !important; padding: 0 !important; width: 300px !important; line-height: 1.5; }
@@ -110,26 +105,17 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
 #copy-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 12px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); z-index: 10000; font-size: 1em; font-weight: 500; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease; }
 #copy-notification.show { opacity: 1; visibility: visible; bottom: 50px; }
 
-@media (max-width: 768px) {
-    .main-header .container { flex-direction: column; text-align: center; }
-    .main-header h1 { margin-bottom: 5px; font-size: 2.5em; letter-spacing: -2px; }
-    .main-header .subtitle { margin-top: 0; margin-bottom: 10px; }
-    .main-header nav ul { flex-direction: column; align-items: center; }
-    .main-header nav ul li { margin: 5px 0; }
-    .popup-text-content { max-height: 180px; overflow-y: auto; }
-}
-
-#botpoison-challenge { display: none; }
-/* PWA Kurulum Butonu Stilleri */
-.install-container {
-    display: none; /* Başlangıçta gizli */
+/* YENİ: PWA Butonları Stilleri */
+.pwa-actions-container {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10001; /* Kopyalama bildiriminin bile üzerinde */
+    z-index: 10001;
+    display: flex;
+    gap: 10px;
 }
-.install-button {
+.action-button {
     background-color: var(--new-item-color);
     color: white;
     border: none;
@@ -141,8 +127,33 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.2s ease, background-color 0.2s ease;
+    display: none; /* Butonlar başlangıçta gizli */
 }
-.install-button:hover {
+.action-button:hover {
     transform: translateY(-2px);
     background-color: #27ae60;
 }
+#notify-button {
+    background-color: var(--place-cami-color);
+}
+#notify-button:hover {
+    background-color: #3a7ac2;
+}
+#notify-button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+}
+/* BİTTİ: PWA Butonları Stilleri */
+
+
+@media (max-width: 768px) {
+    .main-header .container { flex-direction: column; text-align: center; }
+    .main-header h1 { margin-bottom: 5px; font-size: 2.5em; letter-spacing: -2px; }
+    .main-header .subtitle { margin-top: 0; margin-bottom: 10px; }
+    .main-header nav ul { flex-direction: column; align-items: center; }
+    .main-header nav ul li { margin: 5px 0; }
+    .popup-text-content { max-height: 180px; overflow-y: auto; }
+}
+
+#botpoison-challenge { display: none; }
