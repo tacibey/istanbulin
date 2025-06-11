@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         attributionControl: false
     }).setView([41.0082, 28.9784], 13);
 
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
         maxNativeZoom: 19,
         noWrap: true
@@ -23,29 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const markers = L.markerClusterGroup();
 
     function createPopupContent(item) {
-        // Görsel mantığı
         let imageHtml = '';
+        // Resim yolu için images/ klasörünü varsayıyoruz.
+        // Eğer resim URL'i http ile başlıyorsa direkt kullanılıyor.
         if (item.image) {
             const imageUrl = item.image.startsWith('http') ? item.image : `images/${item.image}`;
             imageHtml = `<img src="${imageUrl}" alt="${item.title}" loading="lazy">`;
         }
 
-        // YENİ: Kaynak mantığı
         let sourceHtml = '';
         if (item.source) {
-            // Eğer kaynak bir link ise tıklanabilir yap
             if (item.source.startsWith('http')) {
                 sourceHtml = `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>`;
             } 
-            // Değilse, düz metin olarak göster
             else {
                 sourceHtml = `<p><strong>Kaynak:</strong> ${item.source}</p>`;
             }
         }
 
-        // YENİ: "Ekleyen" mantığı
         const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
-        
         return `
             ${imageHtml}
             <div class="popup-text-content">
@@ -59,16 +55,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addMarkersInChunks(data) {
         let index = 0;
-        const chunkSize = 50; // Her seferinde 50 marker ekle
+        const chunkSize = 50; 
 
         function processChunk() {
             const chunkEnd = Math.min(index + chunkSize, data.length);
             for (; index < chunkEnd; index++) {
                 const item = data[index];
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
-                marker.bindPopup(() => createPopupContent(item), {
-                    minWidth: 260
+
+                // Popup içeriğini, tıklandığında ilgili ID'nin JSON'unu çekerek oluştur
+                marker.bindPopup(() => {
+                    const popupElement = document.createElement('div');
+                    popupElement.className = 'popup-text-content';
+                    popupElement.innerHTML = '<p>Yükleniyor...</p>';
+
+                    fetch(`data/${item.id}.json`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(detailData => {
+                            // createPopupContent fonksiyonu tam HTML'i döndürdüğü için,
+                            // popup'ın doğrudan innerHTML'ini set ediyoruz.
+                            marker.getPopup().setContent(createPopupContent(detailData));
+                        })
+                        .catch(error => {
+                            console.error('Detay verisi çekilirken hata:', error);
+                            popupElement.innerHTML = '<p>İçerik yüklenirken bir sorun oluştu.</p>';
+                        });
+
+                    return popupElement;
+                }, {
+                    minWidth: 300 // Popup'ı açarken genişliği ayarla
                 });
+                
                 markers.addLayer(marker);
             }
 
@@ -81,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(processChunk);
     }
 
-    fetch('data.json')
+    // Artık 'data.json' yerine 'markers.json' dosyasını çekiyoruz
+    fetch('markers.json')
         .then(response => response.json())
         .then(data => {
             addMarkersInChunks(data);
