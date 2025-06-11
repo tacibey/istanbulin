@@ -1,4 +1,4 @@
-// Kopyalama ve bildirim için fonksiyonlar
+// Kopyalama ve bildirim için fonksiyonlar (Değişiklik yok)
 function showCopyNotification() {
     const existingNotification = document.getElementById('copy-notification');
     if (existingNotification) existingNotification.remove();
@@ -17,9 +17,7 @@ function copyShareLink(event, id) {
     event.preventDefault();
     event.stopPropagation();
     const urlToCopy = `${window.location.origin}${window.location.pathname.replace('index.html', '')}#/${id}`;
-    navigator.clipboard.writeText(urlToCopy).then(showCopyNotification).catch(err => {
-        console.error('URL kopyalanamadı: ', err);
-    });
+    navigator.clipboard.writeText(urlToCopy).then(showCopyNotification).catch(err => console.error('URL kopyalanamadı: ', err));
 }
 
 
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (copyrightElement) {
         copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`;
     }
-
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
 
@@ -47,60 +44,115 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const markersLayer = L.markerClusterGroup();
     const allMarkers = {};
+    let allData = []; // Tüm veriyi burada saklayacağız
 
-    // --- Arama Motoru Kurulumu ---
-    let fuse;
-    const searchInput = document.getElementById('search-input');
-    const searchResultsContainer = document.getElementById('search-results');
-    const searchContainer = document.getElementById('search-container');
-    const searchToggleBtn = document.getElementById('search-toggle-btn');
-    const searchClearBtn = document.getElementById('search-clear-btn');
+    // --- YENİ: Direkt Arama Fonksiyonu ---
+    function directSearch(query) {
+        const lowerCaseQuery = query.toLowerCase().trim();
+        if (!lowerCaseQuery) return [];
 
-    function setupSearch(data) {
-        const options = {
-            keys: ['title', 'description', 'id'],
-            includeScore: true,
-            threshold: 0.5,
-            minMatchCharLength: 1
-        };
-        fuse = new Fuse(data, options);
-        searchInput.addEventListener('input', handleSearch);
-        searchToggleBtn.addEventListener('click', toggleSearch);
-        searchClearBtn.addEventListener('click', clearSearch);
-        document.addEventListener('click', (e) => {
-            if (!searchContainer.contains(e.target) && !searchToggleBtn.contains(e.target)) {
-                hideSearch();
-            }
+        return allData.filter(item => {
+            const titleMatch = item.title.toLowerCase().includes(lowerCaseQuery);
+            const descMatch = item.description.toLowerCase().includes(lowerCaseQuery);
+            const idMatch = item.id.toString() === lowerCaseQuery;
+            return titleMatch || descMatch || idMatch;
         });
     }
 
-    function handleSearch(e) {
-        const query = e.target.value;
-        searchClearBtn.style.display = query.length > 0 ? 'block' : 'none';
-        const results = fuse.search(query);
-        displayResults(results);
-    }
+    // --- YENİ: Tam Ekran Kontrolü ---
+    L.Control.Fullscreen = L.Control.extend({
+        onAdd: function(map) {
+            const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen');
+            const link = L.DomUtil.create('a', 'fullscreen-icon fullscreen-enter', container);
+            link.href = '#';
+            link.title = 'Tam Ekran';
 
-    function displayResults(results) {
-        searchResultsContainer.innerHTML = '';
-        if (results.length > 0) {
-            searchResultsContainer.style.display = 'block';
-            results.slice(0, 10).forEach(result => {
-                const item = result.item;
-                const resultElement = document.createElement('div');
-                resultElement.className = 'result-item';
-                resultElement.innerHTML = `<strong>${item.title}</strong><span>${item.description}</span>`;
-                resultElement.addEventListener('click', () => {
-                    goToMarker(item.id);
-                    hideSearch();
-                });
-                searchResultsContainer.appendChild(resultElement);
-            });
-        } else {
-            searchResultsContainer.style.display = 'none';
+            L.DomEvent.on(link, 'click', L.DomEvent.stop)
+                      .on(link, 'click', this._toggleFullscreen, this);
+            
+            document.addEventListener('fullscreenchange', () => this._updateIcon(link));
+            return container;
+        },
+        _toggleFullscreen: function() {
+            if (!document.fullscreenElement) {
+                map.getContainer().requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        },
+        _updateIcon: function(link) {
+            if (!document.fullscreenElement) {
+                link.classList.remove('fullscreen-exit');
+                link.classList.add('fullscreen-enter');
+                link.title = 'Tam Ekran';
+            } else {
+                link.classList.remove('fullscreen-enter');
+                link.classList.add('fullscreen-exit');
+                link.title = 'Tam Ekrandan Çık';
+            }
         }
-    }
-    
+    });
+    L.control.fullscreen = (opts) => new L.Control.Fullscreen(opts);
+    L.control.fullscreen({ position: 'topright' }).addTo(map);
+
+    // --- YENİ: Haritaya Entegre Arama Kontrolü ---
+    L.Control.Search = L.Control.extend({
+        onAdd: function(map) {
+            this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+            this._button = L.DomUtil.create('a', 'leaflet-control-search', this._container);
+            this._button.innerHTML = '<span class="search-icon">🔍</span>';
+            this._button.href = '#';
+            this._button.title = 'Ara';
+            
+            this._form = L.DomUtil.create('div', 'leaflet-control-search-expanded', this._container);
+            this._input = L.DomUtil.create('input', 'search-input', this._form);
+            this._input.type = 'text';
+            this._input.placeholder = 'Ara...';
+            this._results = L.DomUtil.create('div', 'search-results', this._form);
+
+            L.DomEvent.on(this._button, 'click', L.DomEvent.stop).on(this._button, 'click', this._toggle, this);
+            L.DomEvent.on(this._input, 'input', this._search, this);
+            L.DomEvent.on(this._form, 'click', L.DomEvent.stop);
+
+            L.DomUtil.addClass(this._form, 'leaflet-hidden');
+            return this._container;
+        },
+        _toggle: function() {
+            if (L.DomUtil.hasClass(this._form, 'leaflet-hidden')) {
+                L.DomUtil.removeClass(this._form, 'leaflet-hidden');
+                this._input.focus();
+            } else {
+                this._hide();
+            }
+        },
+        _hide: function() {
+            this._input.value = '';
+            this._results.innerHTML = '';
+            L.DomUtil.addClass(this._form, 'leaflet-hidden');
+        },
+        _search: function() {
+            const query = this._input.value;
+            const results = directSearch(query);
+            this._displayResults(results);
+        },
+        _displayResults: function(results) {
+            this._results.innerHTML = '';
+            if (results.length > 0) {
+                results.slice(0, 10).forEach(item => {
+                    const el = L.DomUtil.create('div', 'result-item', this._results);
+                    el.innerHTML = `<strong>${item.title}</strong><span>${item.description}</span>`;
+                    L.DomEvent.on(el, 'click', () => {
+                        goToMarker(item.id);
+                        this._hide();
+                    });
+                });
+            }
+        }
+    });
+    L.control.search = (opts) => new L.Control.Search(opts);
+    L.control.search({ position: 'topright' }).addTo(map);
+
+    // --- Genel Fonksiyonlar (Marker vb.) ---
     function goToMarker(id) {
         const marker = allMarkers[id];
         if (marker) {
@@ -109,50 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function toggleSearch() {
-        searchContainer.classList.toggle('active');
-        if (searchContainer.classList.contains('active')) {
-            searchInput.focus();
-            searchToggleBtn.innerHTML = '×';
-        } else {
-            hideSearch();
-        }
-    }
-
-    function hideSearch() {
-        searchContainer.classList.remove('active');
-        searchToggleBtn.innerHTML = '🔍';
-        clearSearch();
-    }
-    
-    function clearSearch() {
-        searchInput.value = '';
-        searchResultsContainer.innerHTML = '';
-        searchResultsContainer.style.display = 'none';
-        searchClearBtn.style.display = 'none';
-    }
-
-    // --- Veri Yükleme ve Haritayı Doldurma ---
-    // DEĞİŞEN FONKSİYON: createPopupContent'e yol tarifi linki eklendi
     function createPopupContent(item) {
         const imageUrl = item.image && (item.image.startsWith('http') ? item.image : `images/${item.image}`);
         const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}" loading="lazy">` : '';
-        
         const sourceHtml = item.source ? (item.source.startsWith('http') ? `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${item.source}</p>`) : '';
-        
         const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
-
         const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${item.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
-
-        // YENİ: Yol tarifi linki HTML'i
         const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}`;
-        const directionsHtml = `
-            <p class="share-link-container">
-                <strong>Yol Tarifi: 
-                    <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a>
-                </strong>
-            </p>`;
-
+        const directionsHtml = `<p class="share-link-container"><strong>Yol Tarifi: <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></strong></p>`;
         return `${imageHtml}<div class="popup-text-content"><h3>${item.title}</h3><p>${item.description}</p>${sourceHtml}${contributorHtml}${shareHtml}${directionsHtml}</div>`;
     }
 
@@ -172,20 +188,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash;
         if (hash && hash.startsWith('#/')) {
             const idToOpen = hash.substring(2);
-            const markerToOpen = allMarkers[idToOpen];
-            if (markerToOpen) {
-                map.whenReady(() => {
-                    markersLayer.zoomToShowLayer(markerToOpen, () => markerToOpen.openPopup());
-                });
-            }
+            goToMarker(idToOpen);
         }
     }
 
     fetch('markers.json')
         .then(response => response.json())
         .then(data => {
+            allData = data; // Veriyi global değişkene ata
             addMarkers(data);
-            setupSearch(data);
         })
         .catch(error => {
             console.error('Veri çekilirken bir hata oluştu:', error);
