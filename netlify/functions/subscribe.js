@@ -1,5 +1,4 @@
 import { getStore } from "@netlify/blobs";
-// Yeni netlify.toml ayarı sayesinde bu artık çalışmalı.
 import { createHash } from "node:crypto"; 
 
 // Netlify'ın beklediği standart handler formatı
@@ -13,10 +12,8 @@ export const handler = async (event) => {
   }
 
   try {
-    // Gelen isteğin gövdesini (body) al
     const subscription = JSON.parse(event.body);
 
-    // Abonelik nesnesini doğrula
     if (!subscription || !subscription.endpoint) {
       return {
         statusCode: 400,
@@ -24,19 +21,18 @@ export const handler = async (event) => {
       };
     }
 
-    // Netlify Blobs'a bağlan
-    const store = getStore("subscriptions");
+    // YENİ DEĞİŞİKLİK: Netlify'a hangi siteye ait olduğumuzu manuel olarak söylüyoruz.
+    // 'process.env.SITE_ID' Netlify'ın build sırasında otomatik olarak sağladığı bir değişkendir.
+    // Bu, fonksiyonun doğru siteyle eşleşmesini garanti altına alır.
+    const store = getStore("subscriptions", { siteID: process.env.SITE_ID });
     
-    // Güvenilir crypto modülü ile benzersiz anahtar oluştur
     const hash = createHash('sha256').update(JSON.stringify(subscription)).digest('hex');
     const key = `sub-${hash}`;
 
-    // Aboneliği veritabanına kaydet
     await store.setJSON(key, subscription);
 
     console.log(`Abonelik kaydedildi: ${key}`);
 
-    // Başarılı cevabı döndür
     return {
       statusCode: 201,
       headers: { "Content-Type": "application/json" },
