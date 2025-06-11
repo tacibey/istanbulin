@@ -9,6 +9,8 @@
     --place-cami-color: #4A90E2;
     --icon-text-color: #ffffff;
     --icon-background-color: #000000;
+    /* YENİ: Yeni yerler için yeşil renk */
+    --new-item-color: #2ecc71; 
 }
 
 @font-face {
@@ -65,26 +67,18 @@ body:not(.yeni-page-body) {
 .main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; transition: transform 0.3s ease; }
 .main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
 
-/* YENİ: Harita Odak/Tam Ekran Modu Stilleri */
-body.map-is-fullscreen .main-header {
-    transform: translateY(-100%);
-}
-body.map-is-fullscreen .main-footer {
-    transform: translateY(100%);
-}
-body.map-is-fullscreen .map-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-}
-/* BİTTİ: Harita Odak/Tam Ekran Modu Stilleri */
-
+body.map-is-fullscreen .main-header { transform: translateY(-100%); }
+body.map-is-fullscreen .main-footer { transform: translateY(100%); }
+body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 
 .leaflet-marker-icon { background-image: none !important; }
-.custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; }
+.custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; transition: background-color 0.3s ease; }
+
+/* YENİ: Okunmamış/Yeni yerler için yeşil ikon stili */
+.custom-marker-icon.new-marker {
+    background-color: var(--new-item-color);
+}
+
 .leaflet-popup-content-wrapper { border-radius: 8px; background-color: var(--secondary-bg-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 .leaflet-popup-content { margin: 0 !important; padding: 0 !important; width: 300px !important; line-height: 1.5; }
 .leaflet-popup-content img { width: 100%; height: auto; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px; }
