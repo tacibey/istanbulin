@@ -1,7 +1,5 @@
 import { getStore } from "@netlify/blobs";
 
-// Bu fonksiyon, bir string'i base64'e çevirir. Tarayıcıdaki btoa() fonksiyonunun
-// Node.js/Deno ortamındaki karşılığıdır ve daha güvenilirdir.
 const toBase64 = (str) => Buffer.from(str).toString('base64url');
 
 export const handler = async (event) => {
@@ -18,18 +16,11 @@ export const handler = async (event) => {
         body: JSON.stringify({ error: "Invalid subscription object" }),
       };
     }
-
-    // Netlify'a hiçbir ek bilgi vermeden, en basit haliyle store'u çağırıyoruz.
-    // Bu, Netlify'ın tüm kimlik doğrulama işini kendisinin yapmasını tetikler.
-    const store = getStore("subscriptions");
     
-    // Herhangi bir crypto modülüne ihtiyaç duymadan, endpoint'i base64'e çevirerek
-    // tamamen benzersiz ve güvenli bir anahtar oluşturuyoruz.
+    const store = getStore("subscriptions");
     const key = toBase64(subscription.endpoint);
 
     await store.setJSON(key, subscription);
-
-    console.log(`Abonelik başarıyla kaydedildi. Anahtar: ${key}`);
 
     return {
       statusCode: 201,
