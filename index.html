@@ -24,8 +24,7 @@
             <nav>
                 <ul>
                     <li><a href="/yeni.html">Yer Ekle</a></li> 
-                    <!-- DEĞİŞİKLİK: İletişim linki aktif hale getirildi -->
-                    <li><a href="mailto:bilgi@istanbulin.org">İletişim</a></li>
+                    <li><a href="mailto:senin-mailin@adresin.com">İletişim</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,11 +32,19 @@
 
     <main class="map-container">
         <div id="map"></div>
+        <!-- YENİ: Arama Arayüzü Elemanları -->
+        <div id="search-container">
+            <div id="search-wrapper">
+                <input type="text" id="search-input" placeholder="Yer, kişi veya olay ara...">
+                <button id="search-clear-btn" title="Temizle">×</button>
+            </div>
+            <div id="search-results"></div>
+        </div>
+        <button id="search-toggle-btn" title="Ara">🔍</button>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <!-- DEĞİŞİKLİK: Yılın dinamik olarak eklenmesi için id verildi ve içerik boşaltıldı -->
             <p id="copyright-text"></p>
         </div>
     </footer>
@@ -46,6 +53,8 @@
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <!-- YENİ: Fuse.js Arama Kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
