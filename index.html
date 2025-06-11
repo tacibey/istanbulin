@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>istanbulin - İstanbul İnteraktif Kültür Atlası</title>
+    
+    <!-- YENİ: PWA için Manifest ve Tema Ayarları -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a0908">
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
@@ -31,7 +37,6 @@
     </header>
 
     <main class="map-container">
-        <!-- DEĞİŞİKLİK: Arama ile ilgili tüm HTML buradan kaldırıldı. -->
         <div id="map"></div>
     </main>
 
@@ -45,7 +50,6 @@
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <!-- DEĞİŞİKLİK: Fuse.js kütüphanesi kaldırıldı. -->
     <script src="script.js"></script>
 </body>
 </html>
