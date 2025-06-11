@@ -10,6 +10,7 @@ function showCopyNotification() {
         }, 300)
     }, 2e3)
 }
+
 function copyShareLink(e, t) {
     e.preventDefault(), e.stopPropagation();
     const o = `${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;
@@ -17,6 +18,7 @@ function copyShareLink(e, t) {
         console.error("URL kopyalanamadı: ", e)
     })
 }
+
 function urlBase64ToUint8Array(t) {
     const e = "=".repeat((4 - t.length % 4) % 4),
         r = (t + e).replace(/-/g, "+").replace(/_/g, "/"),
@@ -32,55 +34,64 @@ document.addEventListener('DOMContentLoaded', () => {
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
         let deferredPrompt;
-        navigator.serviceWorker.register('/sw.js').then(e => {
-            console.log("ServiceWorker kaydedildi."), e.pushManager.getSubscription().then(() => {
-                updateUI(e)
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log("ServiceWorker kaydedildi.");
+            return registration.pushManager.getSubscription().then(() => {
+                updateUI(registration)
             })
-        }).catch(e => {
-            console.log("ServiceWorker hatası:", e)
+        }).catch(err => {
+            console.log("ServiceWorker hatası:", err)
         });
-        async function updateUI(e) {
-            if (!e) return;
+        async function updateUI(registration) {
+            if (!registration) return;
             installButton.classList.remove("visible"), notifyButton.classList.remove("visible");
-            const t = window.matchMedia("(display-mode: standalone)").matches,
-                o = deferredPrompt && !t,
-                n = e.pushManager,
-                i = await n.getSubscription(),
-                a = Notification.permission;
-            o ? installButton.classList.add("visible") : !t && "default" === a ? notifyButton.classList.add("visible") : t && "default" === a && !i && notifyButton.classList.add("visible")
+            const isStandalone = window.matchMedia("(display-mode: standalone)").matches,
+                canInstall = deferredPrompt && !isStandalone,
+                pushManager = registration.pushManager,
+                currentSubscription = await pushManager.getSubscription(),
+                notificationPermission = Notification.permission;
+            canInstall ? installButton.classList.add("visible") : !isStandalone && "default" === notificationPermission ? notifyButton.classList.add("visible") : isStandalone && "default" === notificationPermission && !currentSubscription && notifyButton.classList.add("visible")
         }
         window.addEventListener("beforeinstallprompt", e => {
             e.preventDefault(), deferredPrompt = e, navigator.serviceWorker.ready.then(updateUI)
-        }), installButton.addEventListener("click", async () => {
+        });
+        installButton.addEventListener("click", async () => {
             if (!deferredPrompt) return;
             deferredPrompt.prompt(), await deferredPrompt.userChoice, deferredPrompt = null, navigator.serviceWorker.ready.then(updateUI)
-        }), window.addEventListener("appinstalled", () => {
+        });
+        window.addEventListener("appinstalled", () => {
             deferredPrompt = null, navigator.serviceWorker.ready.then(updateUI)
-        }), notifyButton.addEventListener("click", async () => {
-            const e = await Notification.requestPermission(),
-                t = await navigator.serviceWorker.ready;
-            if ("granted" === e) {
+        });
+        notifyButton.addEventListener("click", async () => {
+            const permission = await Notification.requestPermission();
+            const registration = await navigator.serviceWorker.ready;
+            if ("granted" === permission) {
                 console.log("Bildirim izni verildi! Abonelik oluşturulup backend'e gönderiliyor...");
                 try {
-                    const e = await t.pushManager.subscribe({
-                        userVisibleOnly: !0,
+                    const subscription = await registration.pushManager.subscribe({
+                        userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
                     });
-                    if (!(await fetch("/.netlify/functions/subscribe", {
-                            method: "POST",
-                            body: JSON.stringify(e),
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        })).ok) {
-                        const e = await response.text();
-                        throw new Error(`Backend'e abonelik kaydedilemedi. Sunucu yanıtı: ${response.status} ${e}`)
+                    // HATA BURADAYDI, DEĞİŞKEN ADI DÜZELTİLDİ
+                    const fetchResponse = await fetch("/.netlify/functions/subscribe", {
+                        method: "POST",
+                        body: JSON.stringify(subscription),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+                    if (!fetchResponse.ok) {
+                        const errorData = await fetchResponse.text();
+                        // HATA BURADAYDI, 'response' yerine 'fetchResponse' kullanılmalıydı
+                        throw new Error(`Backend'e abonelik kaydedilemedi. Sunucu yanıtı: ${fetchResponse.status} ${errorData}`)
                     }
                     console.log("Abonelik başarıyla backend'e kaydedildi.")
-                } catch (e) {
-                    console.error("Abonelik işlemi başarısız oldu:", e)
+                } catch (error) {
+                    console.error("Abonelik işlemi başarısız oldu:", error)
                 }
-            } else console.log("Bildirim izni verilmedi.");
+            } else {
+                console.log("Bildirim izni verilmedi.");
+            }
             navigator.serviceWorker.ready.then(updateUI)
         })
     }
@@ -114,12 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
         readMarkers.has(e.toString()) || (readMarkers.add(e.toString()), storage.set('readMarkers', Array.from(readMarkers)))
     }
     const map = L.map('map', {
-        attributionControl: !1
+        attributionControl: false
     }).setView([41.0082, 28.9784], 13);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
         maxNativeZoom: 19,
-        noWrap: !0
+        noWrap: true
     }).addTo(map);
     L.control.attribution({
         position: 'bottomright',
@@ -128,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     L.control.locate({
         position: 'topleft',
         setView: 'once',
-        flyTo: !0,
+        flyTo: true,
         strings: {
             title: "Mevcut Konumumu Göster"
         }
@@ -190,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const t = allMarkers[e];
         t && (map.setView(t.getLatLng(), 17), t.openPopup())
     }
+
     function createPopupContent(e) {
         const t = e.image && (e.image.startsWith('http') ? e.image : `images/${e.image}`),
             o = t ? `<img src="${t}" alt="${e.title}" loading="lazy">` : '',
@@ -200,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             r = `<p class="share-link-container"><strong>Yol Tarifi: <a href="${s}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></strong></p>`;
         return `${o}<div class="popup-text-content"><h3>${e.title}</h3><p>${e.description}</p>${n}${i}${a}${r}</div>`
     }
+
     function addMarkers(e) {
         const t = new Set(storage.get('lastSeenMarkers'));
         e.forEach(e => {
@@ -229,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const o = e.map(e => e.id);
         storage.set('lastSeenMarkers', o)
     }
+
     function openMarkerFromUrl() {
         const e = window.location.hash;
         e && e.startsWith('#/') && goToMarker(e.substring(2))
