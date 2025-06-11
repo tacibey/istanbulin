@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupPWA() {
         if (!('serviceWorker' in navigator)) return;
 
-        const VAPID_PUBLIC_KEY = 'BURAYA_PUBLIC_KEY_GELECEK'; // Public Key'ini buraya yapıştır
+        const VAPID_PUBLIC_KEY = 'BBV9_v6BfCNTQofFSClXZrotX1nI__KFDfF1Z-K6A246oGxuQbRPLunhctdGIm3J-uXeL6CtXMPnMYi2cXZrTU4'; // Public Key'ini buraya yapıştır
 
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
