@@ -8,56 +8,46 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupPWA() {
         if (!('serviceWorker' in navigator)) return;
 
+        // YENİ: VAPID Public Key'i buraya ekleyeceğiz.
+        // Bu anahtarın kodda görünmesinde bir sakınca yoktur, gizli değildir.
+        const VAPID_PUBLIC_KEY = 'BURAYA_PUBLIC_KEY_GELECEK';
+
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
         let deferredPrompt;
 
-        // 1. Service Worker'ı Kaydet ve ardından UI'ı güncelle
         navigator.serviceWorker.register('/sw.js')
             .then(registration => {
                 console.log('ServiceWorker kaydedildi.');
-                // PushManager hazır olduğunda UI'ı ilk kez güncelle
                 registration.pushManager.getSubscription().then(() => {
                     updateUI(registration);
                 });
             })
             .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
 
-        // --- MERKEZİ ARAYÜZ GÜNCELLEME FONKSİYONU ---
         async function updateUI(registration) {
             if (!registration) return;
-
-            // Önce tüm butonları gizleyerek temiz bir başlangıç yap
             installButton.classList.remove('visible');
             notifyButton.classList.remove('visible');
-
-            // --- Durumları kontrol et ---
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
             const canInstall = deferredPrompt && !isStandalone;
             const pushManager = registration.pushManager;
             const currentSubscription = await pushManager.getSubscription();
             const notificationPermission = Notification.permission;
 
-            // --- Kuralları uygula ---
             if (canInstall) {
-                // KURAL 1: Uygulama kurulabiliyorsa, SADECE kurulum butonunu göster.
                 installButton.classList.add('visible');
             } else if (!isStandalone) {
-                // KURAL 2: Uygulama kurulamaz (veya zaten kuruldu) VE tarayıcıda çalışıyorsa
-                // VE bildirim izni henüz sorulmadıysa, bildirim butonunu göster.
                 if (notificationPermission === 'default') {
                     notifyButton.classList.add('visible');
                 }
             } else if (isStandalone) {
-                // KURAL 3: Uygulama PWA olarak çalışıyorsa (standalone)
-                // VE bildirim izni henüz sorulmadıysa, bildirim butonunu göster.
                 if (notificationPermission === 'default' && !currentSubscription) {
                     notifyButton.classList.add('visible');
                 }
             }
         }
 
-        // --- OLAY DİNLEYİCİLER ---
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -81,15 +71,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const permission = await Notification.requestPermission();
             
             if (permission === 'granted') {
-                console.log('Bildirim izni verildi! Abonelik oluşturulacak.');
-                // TODO: VAPID key eklenince bu kısmı tamamlayacağız.
-                // Bu adım bir sonraki aşamada yapılacak.
+                console.log('Bildirim izni verildi! Abonelik oluşturuluyor...');
+                try {
+                    const registration = await navigator.serviceWorker.ready;
+                    const subscription = await registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                    });
+                    console.log("Abonelik başarıyla oluşturuldu:", subscription);
+                    // TODO: Bu 'subscription' nesnesini backend'e gönder.
+                } catch (error) {
+                    console.error('Abonelik oluşturulamadı:', error);
+                }
             } else {
                 console.log('Bildirim izni verilmedi.');
             }
-            // Her durumda UI'ı en son duruma göre güncelle.
             navigator.serviceWorker.ready.then(updateUI);
         });
+    }
+
+    // YENİ: VAPID Key'i pushManager'ın anlayacağı formata çeviren yardımcı fonksiyon
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
     }
     
     // PWA kurulumunu başlat
