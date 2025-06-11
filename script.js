@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const options = {
             keys: ['title', 'description', 'id'],
             includeScore: true,
-            threshold: 0.4,
+            threshold: 0.5,
             minMatchCharLength: 1
         };
         fuse = new Fuse(data, options);
