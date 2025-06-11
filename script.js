@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const markers = L.markerClusterGroup();
+    // YENİ: Oluşturulan tüm marker'ları ID'leriyle birlikte saklamak için bir nesne
+    const createdMarkers = {}; 
 
     function createPopupContent(item) {
         let imageHtml = '';
-        // Resim yolu için images/ klasörünü varsayıyoruz.
-        // Eğer resim URL'i http ile başlıyorsa direkt kullanılıyor.
         if (item.image) {
             const imageUrl = item.image.startsWith('http') ? item.image : `images/${item.image}`;
             imageHtml = `<img src="${imageUrl}" alt="${item.title}" loading="lazy">`;
@@ -53,6 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    // YENİ FONKSİYON: URL'deki ID'ye göre marker'ı bulup açar
+    function openMarkerFromUrl() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#/')) {
+            const idToOpen = hash.substring(2); // '#/' kısmını atıp ID'yi alıyoruz
+            const markerToOpen = createdMarkers[idToOpen];
+
+            if (markerToOpen) {
+                // Haritanın hazır olduğundan emin ol ve marker'a zoom yapıp popup'ını aç
+                map.whenReady(() => {
+                    markers.zoomToShowLayer(markerToOpen, () => {
+                        markerToOpen.openPopup();
+                    });
+                });
+            }
+        }
+    }
+
     function addMarkersInChunks(data) {
         let index = 0;
         const chunkSize = 50; 
@@ -63,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = data[index];
                 const marker = L.marker([item.lat, item.lng], { icon: customMarkerIcon });
 
-                // Popup içeriğini, tıklandığında ilgili ID'nin JSON'unu çekerek oluştur
                 marker.bindPopup(() => {
                     const popupElement = document.createElement('div');
                     popupElement.className = 'popup-text-content';
@@ -71,14 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     fetch(`data/${item.id}.json`)
                         .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
+                            if (!response.ok) { throw new Error('Network response was not ok'); }
                             return response.json();
                         })
                         .then(detailData => {
-                            // createPopupContent fonksiyonu tam HTML'i döndürdüğü için,
-                            // popup'ın doğrudan innerHTML'ini set ediyoruz.
                             marker.getPopup().setContent(createPopupContent(detailData));
                         })
                         .catch(error => {
@@ -88,22 +101,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     return popupElement;
                 }, {
-                    minWidth: 300 // Popup'ı açarken genişliği ayarla
+                    minWidth: 300
+                });
+
+                // YENİ: Marker'a tıklandığında URL hash'ini güncelle
+                marker.on('click', () => {
+                    window.location.hash = `/${item.id}`;
                 });
                 
                 markers.addLayer(marker);
+
+                // YENİ: Oluşturulan marker'ı ID'si ile birlikte sakla
+                createdMarkers[item.id] = marker;
             }
 
             if (index < data.length) {
                 requestAnimationFrame(processChunk);
             } else {
                 map.addLayer(markers);
+                // DEĞİŞEN: Tüm marker'lar eklendikten sonra URL'i kontrol et
+                openMarkerFromUrl();
             }
         }
         requestAnimationFrame(processChunk);
     }
 
-    // Artık 'data.json' yerine 'markers.json' dosyasını çekiyoruz
     fetch('markers.json')
         .then(response => response.json())
         .then(data => {
