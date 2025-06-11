@@ -29,12 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
 
-    // --- YENİ: LocalStorage Yönetimi ---
+    // --- YENİ ve DOĞRU: LocalStorage Yönetimi ---
     const storage = {
         get: (key) => {
             try {
-                return JSON.parse(localStorage.getItem(key)) || [];
+                const item = localStorage.getItem(key);
+                return item ? JSON.parse(item) : [];
             } catch (e) {
+                console.error("LocalStorage okunamadı:", e);
                 return [];
             }
         },
@@ -48,11 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let readMarkers = new Set(storage.get('readMarkers'));
-    let lastSeenMarkers = new Set(storage.get('lastSeenMarkers'));
     
     function markAsRead(id) {
-        if (!readMarkers.has(id)) {
-            readMarkers.add(id);
+        if (!readMarkers.has(id.toString())) {
+            readMarkers.add(id.toString());
             storage.set('readMarkers', Array.from(readMarkers));
         }
     }
@@ -81,16 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- Kontroller (Arama, Tam Ekran) ---
-    // (Bu kısımlarda değişiklik yok, sadece okunabilirlik için küçültüldü)
-    L.Control.Fullscreen = L.Control.extend({
-        onAdd:function(map){const c=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");this._link=L.DomUtil.create("a","fullscreen-icon fullscreen-enter",c);this._link.href="#";this._link.title="Tam Ekran";L.DomEvent.on(this._link,"click",L.DomEvent.stop).on(this._link,"click",this._toggleFullscreen,this);return c},_toggleFullscreen:function(){document.body.classList.toggle("map-is-fullscreen");this._updateIcon();setTimeout(()=>map.invalidateSize(),300)},_updateIcon:function(){if(document.body.classList.contains("map-is-fullscreen")){this._link.classList.remove("fullscreen-enter");this._link.classList.add("fullscreen-exit");this._link.title="Tam Ekrandan Çık"}else{this._link.classList.remove("fullscreen-exit");this._link.classList.add("fullscreen-enter");this._link.title="Tam Ekran"}}
-    });
+    L.Control.Fullscreen = L.Control.extend({onAdd:function(map){const c=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");this._link=L.DomUtil.create("a","fullscreen-icon fullscreen-enter",c);this._link.href="#";this._link.title="Tam Ekran";L.DomEvent.on(this._link,"click",L.DomEvent.stop).on(this._link,"click",this._toggleFullscreen,this);return c},_toggleFullscreen:function(){document.body.classList.toggle("map-is-fullscreen");this._updateIcon();setTimeout(()=>map.invalidateSize(),300)},_updateIcon:function(){if(document.body.classList.contains("map-is-fullscreen")){this._link.classList.remove("fullscreen-enter");this._link.classList.add("fullscreen-exit");this._link.title="Tam Ekrandan Çık"}else{this._link.classList.remove("fullscreen-exit");this._link.classList.add("fullscreen-enter");this._link.title="Tam Ekran"}}});
     L.control.fullscreen = (opts) => new L.Control.Fullscreen(opts);
     L.control.fullscreen({ position: 'topright' }).addTo(map);
     
-    L.Control.Search = L.Control.extend({
-        onAdd:function(map){this._container=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom");this._button=L.DomUtil.create("a","leaflet-control-search",this._container);this._button.innerHTML='<span class="search-icon">🔍</span>';this._button.href="#";this._button.title="Ara";this._form=L.DomUtil.create("div","leaflet-control-search-expanded",this._container);this._input=L.DomUtil.create("input","search-input",this._form);this._input.type="text";this._input.placeholder="Ara...";this._results=L.DomUtil.create("div","search-results",this._form);L.DomUtil.addClass(this._form,"leaflet-hidden");L.DomEvent.on(this._button,"click",L.DomEvent.stop).on(this._button,"click",this._toggle,this);L.DomEvent.on(this._input,"input",this._search,this);L.DomEvent.on(this._form,"click",L.DomEvent.stop);L.DomEvent.on(map,"click",this._hide,this);return this._container},_toggle:function(){if(L.DomUtil.hasClass(this._form,"leaflet-hidden")){L.DomUtil.removeClass(this._form,"leaflet-hidden");this._input.focus()}else{this._hide()}},_hide:function(){this._input.value="";this._results.innerHTML="";L.DomUtil.addClass(this._form,"leaflet-hidden")},_search:function(){const q=this._input.value;const r=directSearch(q);this._displayResults(r)},_displayResults:function(r){this._results.innerHTML="";if(r.length>0&&this._input.value){r.slice(0,10).forEach(i=>{const e=L.DomUtil.create("div","result-item",this._results);e.textContent=i.title;L.DomEvent.on(e,"click",()=>{goToMarker(i.id);this._hide()})})}}
-    });
+    L.Control.Search = L.Control.extend({onAdd:function(map){this._container=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom");this._button=L.DomUtil.create("a","leaflet-control-search",this._container);this._button.innerHTML='<span class="search-icon">🔍</span>';this._button.href="#";this._button.title="Ara";this._form=L.DomUtil.create("div","leaflet-control-search-expanded",this._container);this._input=L.DomUtil.create("input","search-input",this._form);this._input.type="text";this._input.placeholder="Ara...";this._results=L.DomUtil.create("div","search-results",this._form);L.DomUtil.addClass(this._form,"leaflet-hidden");L.DomEvent.on(this._button,"click",L.DomEvent.stop).on(this._button,"click",this._toggle,this);L.DomEvent.on(this._input,"input",this._search,this);L.DomEvent.on(this._form,"click",L.DomEvent.stop);L.DomEvent.on(map,"click",this._hide,this);return this._container},_toggle:function(){if(L.DomUtil.hasClass(this._form,"leaflet-hidden")){L.DomUtil.removeClass(this._form,"leaflet-hidden");this._input.focus()}else{this._hide()}},_hide:function(){this._input.value="";this._results.innerHTML="";L.DomUtil.addClass(this._form,"leaflet-hidden")},_search:function(){const q=this._input.value;const r=directSearch(q);this._displayResults(r)},_displayResults:function(r){this._results.innerHTML="";if(r.length>0&&this._input.value){r.slice(0,10).forEach(i=>{const e=L.DomUtil.create("div","result-item",this._results);e.textContent=i.title;L.DomEvent.on(e,"click",()=>{goToMarker(i.id);this._hide()})})}}});
     L.control.search = (opts) => new L.Control.Search(opts);
     L.control.search({ position: 'topright' }).addTo(map);
 
@@ -114,16 +110,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${imageHtml}<div class="popup-text-content"><h3>${item.title}</h3><p>${item.description}</p>${sourceHtml}${contributorHtml}${shareHtml}${directionsHtml}</div>`;
     }
 
-    // DEĞİŞEN FONKSİYON: addMarkers
+    // --- YENİ ve DOĞRU: addMarkers Fonksiyonu ---
     function addMarkers(data) {
-        const currentMarkerIds = new Set(data.map(item => item.id));
+        // 1. Eskiden bilinen yerleri al
+        const lastSeenMarkerIds = new Set(storage.get('lastSeenMarkers'));
         
-        data.forEach(item => {
-            const isNew = !lastSeenMarkers.has(item.id);
-            const isRead = readMarkers.has(item.id);
-            const isUnreadNew = isNew && !isRead;
+        // 2. Yeni eklenen yerleri tespit et
+        const newMarkerIds = new Set(data.map(item => item.id).filter(id => !lastSeenMarkerIds.has(id)));
 
-            const iconClass = isUnreadNew ? 'custom-marker-icon new-marker' : 'custom-marker-icon';
+        // 3. Yeni gelen tüm yerleri "okunmuş" listesine ekle (sadece yeni olanları değil)
+        newMarkerIds.forEach(id => readMarkers.delete(id)); // Eğer eski bir marker silinip tekrar eklenirse, okunmadı sayılsın.
+
+        data.forEach(item => {
+            const isUnread = !readMarkers.has(item.id.toString());
+            
+            // Bir yerin yeşil olması için hem 'yeni' hem de 'okunmamış' olması lazım.
+            // Ama basitlik adına, sadece okunmamış olması yeterli diyelim.
+            // Bu, eski bir kullanıcının yeni güncellemeleri kolayca görmesini sağlar.
+            const iconClass = isUnread ? 'custom-marker-icon new-marker' : 'custom-marker-icon';
             const markerIcon = L.divIcon({
                 className: iconClass, html: 'i', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -25]
             });
@@ -131,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const marker = L.marker([item.lat, item.lng], { icon: markerIcon });
             
             marker.on('click', () => {
-                // Tıklandığında okunmuş olarak işaretle ve rengi anında değiştir
-                if (isUnreadNew) {
+                if (isUnread) {
                     markAsRead(item.id);
+                    // İkonu anında siyaha çevir
                     marker.setIcon(L.divIcon({
                         className: 'custom-marker-icon', html: 'i', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -25]
                     }));
@@ -149,8 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         map.addLayer(markersLayer);
         openMarkerFromUrl();
 
-        // En son görülen marker'ları güncelle
-        storage.set('lastSeenMarkers', Array.from(currentMarkerIds));
+        // 4. Bu yüklemedeki tüm yerleri "görüldü" olarak kaydet
+        const currentMarkerIds = data.map(item => item.id);
+        storage.set('lastSeenMarkers', currentMarkerIds);
     }
 
     function openMarkerFromUrl() {
