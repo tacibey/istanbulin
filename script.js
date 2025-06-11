@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    // --- Tam Ekran Kontrolü ---
+    // --- DEĞİŞEN KONTROL: CSS Tabanlı Tam Ekran Kontrolü ---
     L.Control.Fullscreen = L.Control.extend({
         onAdd: function(map) {
             const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen');
@@ -64,31 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
             this._link.href = '#';
             this._link.title = 'Tam Ekran';
             L.DomEvent.on(this._link, 'click', L.DomEvent.stop).on(this._link, 'click', this._toggleFullscreen, this);
-            document.addEventListener('fullscreenchange', this._updateIcon.bind(this));
             return container;
         },
         _toggleFullscreen: function() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
-            }
+            document.body.classList.toggle('map-is-fullscreen');
+            this._updateIcon();
+            // Haritanın yeni boyutunu algılaması için gecikmeli olarak invalidateSize çağır
+            setTimeout(() => map.invalidateSize(), 300); // CSS transition süresiyle uyumlu
         },
         _updateIcon: function() {
-            if (!document.fullscreenElement) {
-                this._link.classList.remove('fullscreen-exit');
-                this._link.classList.add('fullscreen-enter');
-                this._link.title = 'Tam Ekran';
-            } else {
+            if (document.body.classList.contains('map-is-fullscreen')) {
                 this._link.classList.remove('fullscreen-enter');
                 this._link.classList.add('fullscreen-exit');
                 this._link.title = 'Tam Ekrandan Çık';
+            } else {
+                this._link.classList.remove('fullscreen-exit');
+                this._link.classList.add('fullscreen-enter');
+                this._link.title = 'Tam Ekran';
             }
         }
     });
     L.control.fullscreen = (opts) => new L.Control.Fullscreen(opts);
     L.control.fullscreen({ position: 'topright' }).addTo(map);
-
+    
     // --- Haritaya Entegre Arama Kontrolü ---
     L.Control.Search = L.Control.extend({
         onAdd: function(map) {
@@ -104,13 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this._input.placeholder = 'Ara...';
             this._results = L.DomUtil.create('div', 'search-results', this._form);
 
-            // DEĞİŞİKLİK: Başlangıçta formu gizle
             L.DomUtil.addClass(this._form, 'leaflet-hidden');
-
             L.DomEvent.on(this._button, 'click', L.DomEvent.stop).on(this._button, 'click', this._toggle, this);
             L.DomEvent.on(this._input, 'input', this._search, this);
             L.DomEvent.on(this._form, 'click', L.DomEvent.stop);
-            // Haritaya tıklanınca arama kutusunu kapat
             L.DomEvent.on(map, 'click', this._hide, this);
 
             return this._container;
@@ -138,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (results.length > 0 && this._input.value) {
                 results.slice(0, 10).forEach(item => {
                     const el = L.DomUtil.create('div', 'result-item', this._results);
-                    // DEĞİŞİKLİK: Sadece başlık gösteriliyor
                     el.textContent = item.title; 
                     L.DomEvent.on(el, 'click', () => {
                         goToMarker(item.id);
