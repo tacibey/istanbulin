@@ -1,5 +1,6 @@
 import { getStore } from "@netlify/blobs";
-import crypto from "crypto";
+
+// crypto import'u kaldırıldı.
 
 export default async (req) => {
   if (req.method !== "POST") {
@@ -9,20 +10,17 @@ export default async (req) => {
   try {
     const subscription = await req.json();
 
-    // Abonelik nesnesinin temel doğruluğunu kontrol et
     if (!subscription || !subscription.endpoint) {
       return new Response("Invalid subscription object", { status: 400 });
     }
 
-    // Netlify Blobs'da abonelikler için bir "store" aç
     const store = getStore("subscriptions");
     
-    // Her abonelik için benzersiz ve tahmin edilemez bir anahtar oluştur.
-    // Sadece endpoint'i kullanmak yerine, içeriğinin hash'ini alalım.
-    const hash = crypto.createHash('sha256').update(JSON.stringify(subscription)).digest('hex');
-    const key = `sub_${hash}`;
+    // YENİ ve DAHA BASİT ANAHTAR OLUŞTURMA YÖNTEMİ
+    // Her aboneliğin benzersiz olan endpoint'ini base64'e kodlayarak
+    // dosya sistemiyle uyumlu, güvenli bir anahtar elde ediyoruz.
+    const key = btoa(subscription.endpoint);
 
-    // Bu anahtarla aboneliği Netlify Blobs'a kaydet
     await store.setJSON(key, subscription);
 
     console.log(`Abonelik kaydedildi: ${key}`);
@@ -34,7 +32,8 @@ export default async (req) => {
 
   } catch (error) {
     console.error("Abonelik hatası:", error);
-    return new Response(JSON.stringify({ success: false, error: "Internal Server Error" }), {
+    // Hata detayını frontend'e daha iyi göndermek için güncellendi
+    return new Response(JSON.stringify({ success: false, error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
