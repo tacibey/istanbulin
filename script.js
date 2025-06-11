@@ -1,100 +1,101 @@
-// Kopyalama ve bildirim için fonksiyonlar
-function showCopyNotification() { /* ... kod aynı ... */ }
-function copyShareLink(event, id) { /* ... kod aynı ... */ }
-
-// Bu fonksiyonları küçülttüm, çünkü içlerinde değişiklik yok.
+// Kopyalama ve bildirim için fonksiyonlar (Değişiklik yok, küçültüldü)
 function showCopyNotification(){const e=document.getElementById("copy-notification");e&&e.remove();const t=document.createElement("div");t.id="copy-notification",t.textContent="URL Kopyalandı!",document.body.appendChild(t),setTimeout(()=>{t.classList.add("show")},10),setTimeout(()=>{t.classList.remove("show"),setTimeout(()=>{t.remove()},300)},2e3)}
 function copyShareLink(e,t){e.preventDefault(),e.stopPropagation();const o=`${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;navigator.clipboard.writeText(o).then(showCopyNotification).catch(e=>{console.error("URL kopyalanamadı: ",e)})}
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- YENİ ve GÜÇLENDİRİLMİŞ: PWA ve Bildirim Mantığı ---
+    // --- YENİ ve SON SÜRÜM: PWA ve Bildirim Mantığı ---
     function setupPWA() {
         if (!('serviceWorker' in navigator)) return;
 
-        // 1. Service Worker'ı Kaydet
-        navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('ServiceWorker kaydedildi:', reg))
-            .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
-
-        // Buton ve olay referansları
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
         let deferredPrompt;
 
+        // 1. Service Worker'ı Kaydet
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('ServiceWorker kaydedildi. Kapsam:', registration.scope);
+                // SW kaydedildikten sonra UI'ı güncelle, çünkü PushManager artık hazır.
+                updateUI(registration); 
+            })
+            .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
+
         // --- MERKEZİ ARAYÜZ GÜNCELLEME FONKSİYONU ---
-        function updateUI() {
-            // Kurulum Butonu Durumu
+        async function updateUI(registration) {
+            // --- Kurulum Butonu Durumu ---
+            // 'deferredPrompt' varsa (yani uygulama kurulabilir ve kurulmamışsa) butonu göster.
             if (deferredPrompt) {
                 installButton.classList.add('visible');
             } else {
                 installButton.classList.remove('visible');
             }
 
-            // Bildirim Butonu Durumu (Sadece destekleyen tarayıcılarda)
-            if ('Notification' in window && 'PushManager' in window) {
-                switch (Notification.permission) {
-                    case 'granted':
-                        // İzin verilmiş, butonu gösterme.
-                        notifyButton.classList.remove('visible');
-                        break;
-                    case 'denied':
-                        // Engellenmiş, butonu gösterme.
-                        notifyButton.classList.remove('visible');
-                        break;
-                    default: // 'default' durumu (henüz sorulmamış)
-                        notifyButton.textContent = 'Bildirimleri Aç 🔔';
-                        notifyButton.disabled = false;
-                        notifyButton.classList.add('visible');
-                        break;
-                }
-            } else {
-                // Tarayıcı desteklemiyorsa butonu hiç gösterme.
+            // --- Bildirim Butonu Durumu ---
+            if (!('Notification' in window) || !('PushManager' in window)) {
+                return; // Tarayıcı desteklemiyorsa hiçbir şey yapma
+            }
+            
+            const currentPermission = Notification.permission;
+            const currentSubscription = await registration.pushManager.getSubscription();
+            
+            if (currentPermission === 'granted' && currentSubscription) {
+                // İzin verilmiş VE abonelik mevcut -> Butonu GİZLE
                 notifyButton.classList.remove('visible');
+            } else if (currentPermission === 'denied') {
+                // İzin engellenmiş -> Butonu GİZLE
+                notifyButton.classList.remove('visible');
+            } else {
+                // İzin sorulmamış ('default') veya verilmiş ama abonelik yok -> Butonu GÖSTER
+                notifyButton.textContent = 'Bildirimleri Aç 🔔';
+                notifyButton.disabled = false;
+                notifyButton.classList.add('visible');
             }
         }
 
         // --- OLAY DİNLEYİCİLER ---
-        // Kurulum istemi hazır olduğunda
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            updateUI(); // Arayüzü güncelle
+            updateUI(navigator.serviceWorker.controller);
         });
 
-        // Kurulum butonuna tıklandığında
         installButton.addEventListener('click', async () => {
             if (!deferredPrompt) return;
             deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`Kullanıcı kurulum istemine yanıt verdi: ${outcome}`);
+            await deferredPrompt.userChoice;
             deferredPrompt = null;
-            updateUI(); // Arayüzü güncelle
+            updateUI(navigator.serviceWorker.controller);
         });
         
-        // Uygulama başarıyla kurulduğunda
         window.addEventListener('appinstalled', () => {
             deferredPrompt = null;
-            updateUI(); // Arayüzü güncelle
+            updateUI(navigator.serviceWorker.controller);
         });
 
-        // Bildirim butonuna tıklandığında
         notifyButton.addEventListener('click', async () => {
+            const registration = await navigator.serviceWorker.ready;
+            
+            // İzin isteme
             const permission = await Notification.requestPermission();
+
+            // Durumu tekrar kontrol et ve UI'ı güncelle
             if (permission === 'granted') {
                 console.log('Bildirim izni verildi!');
                 // TODO: VAPID key eklenince bu kısmı tamamlayacağız.
-                // Şimdilik sadece konsola yazdırıyoruz.
-                // const subscription = await getSubscription(); 
-                // console.log('Abonelik nesnesi:', subscription);
+                // const VAPID_PUBLIC_KEY = 'HENÜZ_YOK'; 
+                // const subscription = await registration.pushManager.subscribe({
+                //     userVisibleOnly: true,
+                //     applicationServerKey: VAPID_PUBLIC_KEY
+                // });
+                // console.log("Abonelik oluşturuldu:", subscription);
+                // TODO: subscription'ı backend'e gönder.
             } else {
                 console.log('Bildirim izni verilmedi.');
             }
-            updateUI(); // Her durumda arayüzü güncelle
+            // Her durumda UI'ı en son duruma göre güncelle.
+            updateUI(registration);
         });
-
-        // Sayfa yüklendiğinde durumu kontrol et
-        updateUI();
     }
     
     // PWA kurulumunu başlat
