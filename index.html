@@ -31,16 +31,8 @@
     </header>
 
     <main class="map-container">
+        <!-- DEĞİŞİKLİK: Arama ile ilgili tüm HTML buradan kaldırıldı. -->
         <div id="map"></div>
-        <!-- YENİ: Arama Arayüzü Elemanları -->
-        <div id="search-container">
-            <div id="search-wrapper">
-                <input type="text" id="search-input" placeholder="Yer, kişi veya olay ara...">
-                <button id="search-clear-btn" title="Temizle">×</button>
-            </div>
-            <div id="search-results"></div>
-        </div>
-        <button id="search-toggle-btn" title="Ara">🔍</button>
     </main>
 
     <footer class="main-footer">
@@ -53,8 +45,7 @@
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <!-- YENİ: Fuse.js Arama Kütüphanesi -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <!-- DEĞİŞİKLİK: Fuse.js kütüphanesi kaldırıldı. -->
     <script src="script.js"></script>
 </body>
 </html>
