@@ -1,113 +1,132 @@
 // Kopyalama ve bildirim için fonksiyonlar (Değişiklik yok, küçültüldü)
 function showCopyNotification(){const e=document.getElementById("copy-notification");e&&e.remove();const t=document.createElement("div");t.id="copy-notification",t.textContent="URL Kopyalandı!",document.body.appendChild(t),setTimeout(()=>{t.classList.add("show")},10),setTimeout(()=>{t.classList.remove("show"),setTimeout(()=>{t.remove()},300)},2e3)}
 function copyShareLink(e,t){e.preventDefault(),e.stopPropagation();const o=`${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;navigator.clipboard.writeText(o).then(showCopyNotification).catch(e=>{console.error("URL kopyalanamadı: ",e)})}
+function urlBase64ToUint8Array(t){const e="=".repeat((4-t.length%4)%4),r=(t+e).replace(/-/g,"+").replace(/_/g,"/"),o=window.atob(r),n=new Uint8Array(o.length);for(let e=0;e<o.length;++e)n[e]=o.charCodeAt(e);return n}
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- PWA ve Bildirim Mantığı ---
-    function setupPWA() {
-        if (!('serviceWorker' in navigator)) return;
+    // --- Genel Ayarlar ve Element Kontrolü ---
+    const copyrightElement = document.getElementById('copyright-text');
+    if (copyrightElement) {
+        copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`;
+    }
+    const mapElement = document.getElementById('map');
+    // Eğer harita elementi sayfada yoksa (örn: yeni.html), script'in geri kalanını çalıştırma.
+    if (!mapElement) return;
 
-        const VAPID_PUBLIC_KEY = 'BBV9_v6BfCNTQofFSClXZrotX1nI__KFDfF1Z-K6A246oGxuQbRPLunhctdGIm3J-uXeL6CtXMPnMYi2cXZrTU4';
+    // --- PWA Mantığı ---
+    const VAPID_PUBLIC_KEY = 'BBV9_v6BfCNTQofFSClXZrotX1nI__KFDfF1Z-K6A246oGxuQbRPLunhctdGIm3J-uXeL6CtXMPnMYi2cXZrTU4'; // Public Key'ini buraya yapıştır
+    const installButton = document.getElementById('install-button');
+    const notifyButton = document.getElementById('notify-button');
+    let deferredPrompt;
 
-        const installButton = document.getElementById('install-button');
-        const notifyButton = document.getElementById('notify-button');
-        let deferredPrompt;
-
+    if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js')
             .then(registration => {
                 console.log('ServiceWorker kaydedildi.');
-                registration.pushManager.getSubscription().then(() => {
-                    updateUI(registration);
-                });
+                return navigator.serviceWorker.ready; // SW hazır olunca devam et
             })
-            .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
-
-        async function updateUI(registration) { /* ... kod aynı ... */ }
-        
-        // Bu fonksiyonu okunabilirlik için küçülttüm, içi aynı
-        async function updateUI(registration) {if(!registration)return;installButton.classList.remove("visible"),notifyButton.classList.remove("visible");const e=window.matchMedia("(display-mode: standalone)").matches,t=deferredPrompt&&!e,o=registration.pushManager,n=await o.getSubscription(),i=Notification.permission;t?installButton.classList.add("visible"):!e?"default"===i&¬ifyButton.classList.add("visible"):e&&"default"===i&&!n&¬ifyButton.classList.add("visible")}
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            navigator.serviceWorker.ready.then(updateUI);
-        });
-
-        installButton.addEventListener('click', async () => { /* ... kod aynı ... */ });
-        installButton.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt(),await deferredPrompt.userChoice,deferredPrompt=null,navigator.serviceWorker.ready.then(updateUI)};
-        
-        window.addEventListener('appinstalled', () => { /* ... kod aynı ... */ });
-        window.onappinstalled=()=>{deferredPrompt=null,navigator.serviceWorker.ready.then(updateUI)};
-
-        notifyButton.addEventListener('click', async () => {
-            const permission = await Notification.requestPermission();
-            
-            if (permission === 'granted') {
-                console.log('Bildirim izni verildi! Abonelik oluşturulup backend\'e gönderiliyor...');
-                try {
-                    const registration = await navigator.serviceWorker.ready;
-                    const subscription = await registration.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-                    });
-                    
-                    // DEĞİŞİKLİK: Aboneliği backend'e gönder
-                    const response = await fetch('/.netlify/functions/subscribe', {
-                        method: 'POST',
-                        body: JSON.stringify(subscription),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Backend\'e abonelik kaydedilemedi.');
-                    }
-                    
-                    console.log("Abonelik başarıyla backend'e kaydedildi.");
-
-                } catch (error) {
-                    console.error('Abonelik işlemi başarısız oldu:', error);
-                }
-            } else {
-                console.log('Bildirim izni verilmedi.');
-            }
-            navigator.serviceWorker.ready.then(updateUI);
-        });
+            .then(registration => {
+                console.log('ServiceWorker aktif.');
+                updateUI(registration); // UI'ı SW hazır olunca güncelle
+            })
+            .catch(err => console.log('ServiceWorker hatası:', err));
     }
 
-    function urlBase64ToUint8Array(base64String) { /* ... kod aynı ... */ }
-    function urlBase64ToUint8Array(t){const e="=".repeat((4-t.length%4)%4),r=(t+e).replace(/-/g,"+").replace(/_/g,"/"),o=window.atob(r),n=new Uint8Array(o.length);for(let e=0;e<o.length;++e)n[e]=o.charCodeAt(e);return n}
+    async function updateUI(registration) {
+        if (!registration) return;
+        installButton.classList.remove('visible');
+        notifyButton.classList.remove('visible');
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const canInstall = deferredPrompt && !isStandalone;
+        const pushManager = registration.pushManager;
+        const currentSubscription = await pushManager.getSubscription();
+        const notificationPermission = Notification.permission;
+
+        if (canInstall) {
+            installButton.classList.add('visible');
+        } else if (!isStandalone && notificationPermission === 'default') {
+            notifyButton.classList.add('visible');
+        } else if (isStandalone && notificationPermission === 'default' && !currentSubscription) {
+            notifyButton.classList.add('visible');
+        }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        navigator.serviceWorker.ready.then(updateUI);
+    });
+
+    installButton.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        navigator.serviceWorker.ready.then(updateUI);
+    });
     
-    setupPWA();
+    window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        navigator.serviceWorker.ready.then(updateUI);
+    });
+
+    notifyButton.addEventListener('click', async () => {
+        const permission = await Notification.requestPermission();
+        const registration = await navigator.serviceWorker.ready;
+
+        if (permission === 'granted') {
+            try {
+                const subscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                });
+                
+                await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    body: JSON.stringify(subscription),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                console.log("Abonelik başarıyla backend'e kaydedildi.");
+            } catch (error) {
+                console.error('Abonelik işlemi başarısız oldu:', error);
+            }
+        }
+        updateUI(registration);
+    });
 
 
-    // --- Diğer tüm kodlar... (Değişiklik yok) ---
-    const copyrightElement = document.getElementById('copyright-text');
-    if (copyrightElement) { copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`; }
-    const mapElement = document.getElementById('map');
-    if (!mapElement) return;
+    // --- HARİTA ve DİĞER HER ŞEYİN KURULUMU (Artık doğru yerde) ---
     const storage = { get: (key) => { try { const item = localStorage.getItem(key); return item ? JSON.parse(item) : []; } catch (e) { console.error("LocalStorage okunamadı:", e); return []; } }, set: (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { console.error("LocalStorage'a yazılamadı:", e); } } };
     let readMarkers = new Set(storage.get('readMarkers'));
     function markAsRead(id) { if (!readMarkers.has(id.toString())) { readMarkers.add(id.toString()); storage.set('readMarkers', Array.from(readMarkers)); } }
+    
     const map = L.map('map', { attributionControl: false }).setView([41.0082, 28.9784], 13);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, maxNativeZoom: 19, noWrap: true }).addTo(map);
     L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | Esri' }).addTo(map);
     L.control.locate({ position: 'topleft', setView: 'once', flyTo: true, strings: { title: "Mevcut Konumumu Göster" } }).addTo(map);
+    
     const markersLayer = L.markerClusterGroup();
     const allMarkers = {};
     let allData = [];
+
     function directSearch(query) { const lowerCaseQuery = query.toLowerCase().trim(); if (!lowerCaseQuery) return []; return allData.filter(item => item.title.toLowerCase().includes(lowerCaseQuery) || item.description.toLowerCase().includes(lowerCaseQuery) || item.id.toString() === lowerCaseQuery); }
+    
     L.Control.Fullscreen = L.Control.extend({onAdd:function(map){const c=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");this._link=L.DomUtil.create("a","fullscreen-icon fullscreen-enter",c);this._link.href="#";this._link.title="Tam Ekran";L.DomEvent.on(this._link,"click",L.DomEvent.stop).on(this._link,"click",this._toggleFullscreen,this);return c},_toggleFullscreen:function(){document.body.classList.toggle("map-is-fullscreen");this._updateIcon();setTimeout(()=>map.invalidateSize(),300)},_updateIcon:function(){if(document.body.classList.contains("map-is-fullscreen")){this._link.classList.remove("fullscreen-enter");this._link.classList.add("fullscreen-exit");this._link.title="Tam Ekrandan Çık"}else{this._link.classList.remove("fullscreen-exit");this._link.classList.add("fullscreen-enter");this._link.title="Tam Ekran"}}});
     L.control.fullscreen = (opts) => new L.Control.Fullscreen(opts);
     L.control.fullscreen({ position: 'topright' }).addTo(map);
+    
     L.Control.Search = L.Control.extend({onAdd:function(map){this._container=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom");this._button=L.DomUtil.create("a","leaflet-control-search",this._container);this._button.innerHTML='<span class="search-icon">🔍</span>';this._button.href="#";this._button.title="Ara";this._form=L.DomUtil.create("div","leaflet-control-search-expanded",this._container);this._input=L.DomUtil.create("input","search-input",this._form);this._input.type="text";this._input.placeholder="Ara...";this._results=L.DomUtil.create("div","search-results",this._form);L.DomUtil.addClass(this._form,"leaflet-hidden");L.DomEvent.on(this._button,"click",L.DomEvent.stop).on(this._button,"click",this._toggle,this);L.DomEvent.on(this._input,"input",this._search,this);L.DomEvent.on(this._form,"click",L.DomEvent.stop);L.DomEvent.on(map,"click",this._hide,this);return this._container},_toggle:function(){if(L.DomUtil.hasClass(this._form,"leaflet-hidden")){L.DomUtil.removeClass(this._form,"leaflet-hidden");this._input.focus()}else{this._hide()}},_hide:function(){this._input.value="";this._results.innerHTML="";L.DomUtil.addClass(this._form,"leaflet-hidden")},_search:function(){const q=this._input.value;const r=directSearch(q);this._displayResults(r)},_displayResults:function(r){this._results.innerHTML="";if(r.length>0&&this._input.value){r.slice(0,10).forEach(i=>{const e=L.DomUtil.create("div","result-item",this._results);e.textContent=i.title;L.DomEvent.on(e,"click",()=>{goToMarker(i.id);this._hide()})})}}});
     L.control.search = (opts) => new L.Control.Search(opts);
     L.control.search({ position: 'topright' }).addTo(map);
+
     function goToMarker(id) { const marker = allMarkers[id]; if (marker) { map.setView(marker.getLatLng(), 17); marker.openPopup(); } }
+    
     function createPopupContent(item) { const imageUrl = item.image && (item.image.startsWith('http') ? item.image : `images/${item.image}`); const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${item.title}" loading="lazy">` : ''; const sourceHtml = item.source ? (item.source.startsWith('http') ? `<p><strong><a href="${item.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${item.source}</p>`) : ''; const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : ''; const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${item.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`; const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}`; const directionsHtml = `<p class="share-link-container"><strong>Yol Tarifi: <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></strong></p>`; return `${imageHtml}<div class="popup-text-content"><h3>${item.title}</h3><p>${item.description}</p>${sourceHtml}${contributorHtml}${shareHtml}${directionsHtml}</div>`; }
+    
     function addMarkers(data) { const lastSeenMarkerIds = new Set(storage.get('lastSeenMarkers')); data.forEach(item => { const isUnread = !readMarkers.has(item.id.toString()); const iconClass = isUnread ? 'custom-marker-icon new-marker' : 'custom-marker-icon'; const markerIcon = L.divIcon({ className: iconClass, html: 'i', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -25] }); const marker = L.marker([item.lat, item.lng], { icon: markerIcon }); marker.on('click', () => { if (isUnread) { markAsRead(item.id); marker.setIcon(L.divIcon({ className: 'custom-marker-icon', html: 'i', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -25] })); } window.location.hash = `/${item.id}`; }); marker.bindPopup(() => createPopupContent(item), { minWidth: 300 }); markersLayer.addLayer(marker); allMarkers[item.id] = marker; }); map.addLayer(markersLayer); openMarkerFromUrl(); const currentMarkerIds = data.map(item => item.id); storage.set('lastSeenMarkers', currentMarkerIds); }
+    
     function openMarkerFromUrl() { const hash = window.location.hash; if (hash && hash.startsWith('#/')) { const idToOpen = hash.substring(2); goToMarker(idToOpen); } }
+    
     fetch('markers.json').then(response => response.json()).then(data => { allData = data; addMarkers(data); }).catch(error => { console.error('Veri çekilirken bir hata oluştu:', error); alert('Harita verileri yüklenirken bir sorun oluştu.'); });
 });
