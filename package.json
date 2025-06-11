@@ -1,0 +1,9 @@
+{
+  "name": "istanbulin-pwa",
+  "version": "1.0.0",
+  "description": "istanbulin PWA Push Notification Backend",
+  "dependencies": {
+    "@netlify/blobs": "^7.5.1",
+    "web-push": "^3.6.7"
+  }
+}
