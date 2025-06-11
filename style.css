@@ -70,29 +70,35 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
 /* DEĞİŞEN BÖLÜM: PWA Butonları Stilleri */
 .pwa-actions-container {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom)); /* iPhone X ve sonrası için güvenli alan */
+    box-sizing: border-box;
     z-index: 10001;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    pointer-events: none; /* Konteynerin kendisi tıklanmasın */
 }
+
 .action-button {
     background-color: var(--new-item-color);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 24px;
+    border-radius: 50px; /* Tam yuvarlak kenarlar */
     font-family: 'Roboto', sans-serif;
-    font-size: 1em;
-    font-weight: 500;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.3s, visibility 0.3s;
-    /* Başlangıçta gizli ve görünmez */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    transform: translateY(20px);
+    pointer-events: auto; /* Butonların kendisi tıklanabilsin */
+    text-align: center;
 }
 .action-button.visible {
     opacity: 1;
@@ -100,9 +106,25 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     transform: translateY(0);
 }
 .action-button:hover {
-    transform: translateY(-2px);
-    background-color: #27ae60;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
+
+.action-button-main-text {
+    font-size: 1em;
+    font-weight: 500;
+    white-space: nowrap; /* Metnin aşağı kaymasını engelle */
+    display: block;
+}
+
+.action-button-subtitle {
+    font-size: 0.75em;
+    font-weight: 300;
+    opacity: 0.8;
+    display: block;
+    margin-top: 2px;
+}
+
 #notify-button {
     background-color: var(--place-cami-color);
 }
@@ -113,6 +135,7 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     background-color: #95a5a6;
     cursor: not-allowed;
     transform: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
 }
 /* BİTTİ: PWA Butonları Stilleri */
 
