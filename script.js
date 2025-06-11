@@ -1,3 +1,55 @@
+// YENİ FONKSİYONLAR: Kopyalama ve bildirim için.
+// Bunları en üste, global alana koyuyoruz ki her yerden erişilebilsin.
+
+// Kopyalama bildirimini gösteren fonksiyon
+function showCopyNotification() {
+    // Eğer ekranda zaten bir bildirim varsa, yenisini oluşturmadan önce eskisini kaldır
+    const existingNotification = document.getElementById('copy-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // Yeni bildirim elementini oluştur
+    const notification = document.createElement('div');
+    notification.id = 'copy-notification';
+    notification.textContent = 'URL Kopyalandı!';
+    document.body.appendChild(notification);
+
+    // Bildirimin görünür olmasını sağla (CSS'teki animasyonu tetikler)
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10); // 10ms gecikme tarayıcının geçişi algılamasına yardımcı olur
+
+    // 2 saniye sonra bildirimi kaldır
+    setTimeout(() => {
+        notification.classList.remove('show');
+        // Animasyonun bitmesini bekleyip elementi DOM'dan tamamen sil
+        setTimeout(() => {
+            notification.remove();
+        }, 300); // CSS transition süresiyle aynı olmalı
+    }, 2000);
+}
+
+// Paylaş linkine tıklandığında çalışan fonksiyon
+function copyShareLink(event, id) {
+    // Linkin varsayılan davranışını (sayfayı yukarı kaydırma) engelle
+    event.preventDefault();
+    
+    // Kopyalanacak URL'i oluştur (ör: https://istanbulin.org/#/3)
+    const urlToCopy = `${window.location.origin}${window.location.pathname.replace('index.html', '')}#/${id}`;
+
+    // Panoya kopyalama işlemi
+    navigator.clipboard.writeText(urlToCopy).then(() => {
+        // Kopyalama başarılıysa bildirimi göster
+        showCopyNotification();
+    }).catch(err => {
+        // Hata olursa konsola yazdır
+        console.error('URL kopyalanamadı: ', err);
+        alert("URL kopyalanamadı. Lütfen manuel olarak kopyalayın.");
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map', {
         attributionControl: false
@@ -21,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const markers = L.markerClusterGroup();
-    // YENİ: Oluşturulan tüm marker'ları ID'leriyle birlikte saklamak için bir nesne
     const createdMarkers = {}; 
 
+    // DEĞİŞEN FONKSİYON: createPopupContent'e paylaşım linki eklendi
     function createPopupContent(item) {
         let imageHtml = '';
         if (item.image) {
@@ -42,6 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const contributorHtml = item.contributor ? `<p><strong>Ekleyen:</strong> ${item.contributor}</p>` : '';
+        
+        // YENİ: Paylaşım linki HTML'i
+        const shareHtml = `
+            <p class="share-link-container">
+                <strong>Paylaş: 
+                    <a href="#" onclick="copyShareLink(event, '${item.id}')" title="Bu yerin linkini kopyala">🔗</a>
+                </strong>
+            </p>`;
+
         return `
             ${imageHtml}
             <div class="popup-text-content">
@@ -49,19 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${item.description}</p>
                 ${sourceHtml}
                 ${contributorHtml}
+                ${shareHtml}
             </div>
         `;
     }
 
-    // YENİ FONKSİYON: URL'deki ID'ye göre marker'ı bulup açar
     function openMarkerFromUrl() {
         const hash = window.location.hash;
         if (hash && hash.startsWith('#/')) {
-            const idToOpen = hash.substring(2); // '#/' kısmını atıp ID'yi alıyoruz
+            const idToOpen = hash.substring(2);
             const markerToOpen = createdMarkers[idToOpen];
 
             if (markerToOpen) {
-                // Haritanın hazır olduğundan emin ol ve marker'a zoom yapıp popup'ını aç
                 map.whenReady(() => {
                     markers.zoomToShowLayer(markerToOpen, () => {
                         markerToOpen.openPopup();
@@ -104,14 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     minWidth: 300
                 });
 
-                // YENİ: Marker'a tıklandığında URL hash'ini güncelle
                 marker.on('click', () => {
                     window.location.hash = `/${item.id}`;
                 });
                 
                 markers.addLayer(marker);
-
-                // YENİ: Oluşturulan marker'ı ID'si ile birlikte sakla
                 createdMarkers[item.id] = marker;
             }
 
@@ -119,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(processChunk);
             } else {
                 map.addLayer(markers);
-                // DEĞİŞEN: Tüm marker'lar eklendikten sonra URL'i kontrol et
                 openMarkerFromUrl();
             }
         }
