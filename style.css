@@ -120,3 +120,29 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
 }
 
 #botpoison-challenge { display: none; }
+/* PWA Kurulum Butonu Stilleri */
+.install-container {
+    display: none; /* Başlangıçta gizli */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001; /* Kopyalama bildiriminin bile üzerinde */
+}
+.install-button {
+    background-color: var(--new-item-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.install-button:hover {
+    transform: translateY(-2px);
+    background-color: #27ae60;
+}
