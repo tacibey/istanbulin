@@ -1,14 +1,12 @@
 import { getStore } from "@netlify/blobs";
-import { createHash } from "node:crypto"; 
 
-// Netlify'ın beklediği standart handler formatı
+// Bu fonksiyon, bir string'i base64'e çevirir. Tarayıcıdaki btoa() fonksiyonunun
+// Node.js/Deno ortamındaki karşılığıdır ve daha güvenilirdir.
+const toBase64 = (str) => Buffer.from(str).toString('base64url');
+
 export const handler = async (event) => {
-  // Sadece POST isteklerini kabul et
   if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: "Method Not Allowed",
-    };
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
@@ -21,17 +19,17 @@ export const handler = async (event) => {
       };
     }
 
-    // YENİ DEĞİŞİKLİK: Netlify'a hangi siteye ait olduğumuzu manuel olarak söylüyoruz.
-    // 'process.env.SITE_ID' Netlify'ın build sırasında otomatik olarak sağladığı bir değişkendir.
-    // Bu, fonksiyonun doğru siteyle eşleşmesini garanti altına alır.
-    const store = getStore("subscriptions", { siteID: process.env.SITE_ID });
+    // Netlify'a hiçbir ek bilgi vermeden, en basit haliyle store'u çağırıyoruz.
+    // Bu, Netlify'ın tüm kimlik doğrulama işini kendisinin yapmasını tetikler.
+    const store = getStore("subscriptions");
     
-    const hash = createHash('sha256').update(JSON.stringify(subscription)).digest('hex');
-    const key = `sub-${hash}`;
+    // Herhangi bir crypto modülüne ihtiyaç duymadan, endpoint'i base64'e çevirerek
+    // tamamen benzersiz ve güvenli bir anahtar oluşturuyoruz.
+    const key = toBase64(subscription.endpoint);
 
     await store.setJSON(key, subscription);
 
-    console.log(`Abonelik kaydedildi: ${key}`);
+    console.log(`Abonelik başarıyla kaydedildi. Anahtar: ${key}`);
 
     return {
       statusCode: 201,
@@ -40,7 +38,7 @@ export const handler = async (event) => {
     };
 
   } catch (error) {
-    console.error("Abonelik fonksiyonunda hata:", error);
+    console.error("Abonelik fonksiyonunda kritik hata:", error);
     return {
       statusCode: 500,
       headers: { "Content-Type": "application/json" },
