@@ -13,7 +13,7 @@
     "id": "2",
     "title": "Abidin Dino'nun Evi",
     "description": "Ressam Abidin Dino, bu binanın çatı katını atölye ve ev olarak kullanmıştı. Orhan Veli Kanık, Oktay Rifat, Melih Cevdet, Sait Faik, Yaşar Kemal gibi ünlü sanatçıların uğrak yeriydi.",
-    "lat": 41.02675, 
+    "lat": 41.02675,
     "lng": 28.97542,
     "source": "",
     "contributor": "istanbulin",
@@ -23,17 +23,17 @@
     "id": "3",
     "title": "Kapıcılar Kralı",
     "description": "Kemal Sunal'ın başrolde olduğu Kapıcılar Kralı, Güneşli sokakta çekilmiştir. Filmin ana mekanı olan Selahattin Zeren apartmanı buradadır.",
-    "lat": 41.03221, 
+    "lat": 41.03221,
     "lng": 28.98509,
     "source": "",
     "contributor": "istanbulin",
     "image": "kapicilar.webp"
   },
-    {
+  {
     "id": "4",
     "title": "Üsküdar'da Bir Attar Dükkânı",
     "description": "Ahmed Yüksel Özemre merhumun aynı adlı otobiyografik kitabında bahsettiği, Sâim ve Bekir Düzgünman kardeşlere ait aktar dükkanı bu civardaydı. Bu Attâr Dükkânı za­ma­nın bâzı meşhûr san'atkârlarının, âriflerinin, sır­lı sôfîlerinin ve meşâyihinin soh­bet ve mu­hab­bet et­mek üze­re sü­rek­li uğ­ra­dık­la­rı, âdetâ Aka­de­mi mesâbesinde, bir mekândı.",
-    "lat": 41.02516, 
+    "lat": 41.02516,
     "lng": 29.01585,
     "source": "https://www.facebook.com/photo.php?fbid=1297129133685470&id=115097101888685&set=a.627724457292611",
     "contributor": "istanbulin",
@@ -43,10 +43,90 @@
     "id": "5",
     "title": "Masumlar Apartmanı",
     "description": "İstanbul'da aynı evde yaşayan dört kardeşin psikolojik durumunu ve etraflarındaki hayatı konu alan Masumlar Apartmanı dizisinin çekildiği apartman.",
-    "lat": 41.02961, 
+    "lat": 41.02961,
     "lng": 28.97385,
     "source": "",
     "contributor": "istanbulin",
     "image": "masumlar.avif"
+  },
+  {
+    "id": "6",
+    "title": "Mehmet Emin Ersoy",
+    "description": "İstiklal şairimiz Mehmed Akif Ersoy'un oğlu M. Emin Ersoy, burada vefat etti.",
+    "lat": 41.02720599067616,
+    "lng": 28.97750405546286,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "mehmeteminersoy.avif"
+  },
+  {
+    "id": "7",
+    "title": "Lüleci Hendek Caddesi",
+    "description": "Cadde, adını 17. yüzyıldan itibaren bu sokakta faaliyet gösteren lüle ustalarından (lüleciler) almıştır. Cadde, Galata surlarının hendeklerinin doldurulmasıyla oluşan üç ana yoldan biriydi (diğerleri Büyük Hendek ve Küçük Hendek). Lülecilik, Osmanlı döneminde önemli bir meslekti ve bu cadde, İstanbul'un tütün kültürü için kritik üretim merkezlerinden biriydi.",
+    "lat": 41.02616078275667,
+    "lng": 28.977161059539124,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "lulecihendekcaddesi.avif"
+  },
+  {
+    "id": "8",
+    "title": "André Chénier",
+    "description": "Fransız İhtilali'nin önemli figürlerinden André Chénier burada, St. Pierre Han'ın yerinde doğdu. Bir rivayete göre giyotine giderken ellerini kafasına vurarak bunun içinde daha çok şey vardı dediği belirtilir",
+    "lat": 41.024679924273514,
+    "lng": 28.972487901965007,
+    "source": "https://tr.wikipedia.org/wiki/Andr%C3%A9_Ch%C3%A9nie",
+    "contributor": "istanbulin",
+    "image": "andrechenier.avif"
+  },
+  {
+    "id": "9",
+    "title": "Muhteşem Kot",
+    "description": "Türkiye'de kot pantolonu ilk kez burada, St. Pierre Han'da, pantolona \"kot\" ismini de veren Muhteşem Kot tarafından üretilmeye başlandı.",
+    "lat": 41.024693251565516,
+    "lng": 28.97247655864257,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "muhtesemkot.avif"
+  },
+  {
+    "id": "10",
+    "title": "Yafes Çelebi'nin Evi",
+    "description": "İhsan Oktay Anar'ın Kitab-ül Hiyel isimli kitabının başkarakteri Yafes Çelebi'nin Galata Mevlevihanesi karşısındaki -kurgusal- evi. Avlusunda İskender'in kaybettiği mitolojik \"iktidar taşı\"nın bulunduğu kör kuyunun yer aldığı bir mekândır.",
+    "lat": 41.02816184254356,
+    "lng": 28.974362566126114,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "yafescelebi.avif"
+  },
+  {
+    "id": "11",
+    "title": "Ayaspaşa Rus Lokantası",
+    "description": "Halen yaşayan devrinin önemli mekanlarından biri. Bülent Ecevit, Rahşan Ecevit'e evlenme teklifini burada etmiş.",
+    "lat": 41.03662518334357,
+    "lng": 28.989981136458596,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "ruslokantasi.avif"
+  },
+  {
+    "id": "12",
+    "title": "Maksim Gazinosu",
+    "description": "İtalyan mimar Giulio Mongeri tarafından tasarlanan 1914 tarihli binada Fahrettin Aslan tarafından bir dönem işletilen efsane gazino. Zeki Müren'den Müslüm Gürses'e bir zamanlar yıldızlar geçidiydi.",
+    "lat": 41.03612920861093,
+    "lng": 28.98500268220936,
+    "source": "https://tr.wikipedia.org/wiki/Maksim_Gazinosu",
+    "contributor": "istanbulin",
+    "image": "maksimgazinosu.avif"
+  },
+  {
+    "id": "13",
+    "title": "Nisan'ın Evi - Eşref Rüya",
+    "description": "Başrollerinde Çağatay Ulusoy ve Demet Özdemir'in oynadığı Eşref Rüya dizisinde, Nisan (Demet Özdemir) karakterinin evi.",
+    "lat": 41.02656307440044,
+    "lng": 28.97347799294218,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "nisan.avif"
   }
 ]
