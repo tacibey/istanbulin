@@ -79,23 +79,25 @@ body:not(.yeni-page-body) {
 .leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
 .leaflet-popup-close-button:hover { color: #ddd !important; }
 
-/* YENİ: Leaflet Kontrolleri için Genel Stiller */
 .leaflet-control-custom a {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     display: block;
 }
 
-/* YENİ: Arama Kontrolü Stilleri */
 .leaflet-control-search .search-icon {
     font-size: 1.4em;
-    line-height: 26px; /* Leaflet'in varsayılan kontrol boyutuyla uyumlu */
+    line-height: 26px;
     text-align: center;
 }
 .leaflet-control-search-expanded {
     padding: 6px 10px 6px 6px;
     background: white;
     border-radius: 4px;
+}
+/* DEĞİŞİKLİK: Başlangıçta gizli olmasını sağlıyoruz */
+.leaflet-control-search-expanded.leaflet-hidden {
+    display: none;
 }
 .leaflet-control-search-expanded .search-input {
     height: 28px;
@@ -116,20 +118,18 @@ body:not(.yeni-page-body) {
     border-radius: 4px;
 }
 .search-results .result-item {
-    padding: 8px 12px;
+    padding: 10px 12px;
     cursor: pointer;
     border-bottom: 1px solid var(--border-color);
+    font-size: 0.9em;
 }
 .search-results .result-item:last-child { border-bottom: none; }
 .search-results .result-item:hover { background-color: var(--primary-bg-color); }
-.search-results .result-item strong { display: block; color: var(--text-color); font-size: 0.9em; }
-.search-results .result-item span { font-size: 0.8em; color: var(--accent-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 
-/* YENİ: Tam Ekran Kontrolü Stilleri */
 .leaflet-control-fullscreen .fullscreen-icon {
     width: 26px;
     height: 26px;
-    background-size: 16px 16px; /* İkon boyutu */
+    background-size: 16px 16px;
 }
 .leaflet-control-fullscreen a.fullscreen-enter {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>');
@@ -138,7 +138,6 @@ body:not(.yeni-page-body) {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>');
 }
 
-/* Diğer Stiller */
 .share-link-container a { text-decoration: none; cursor: pointer; font-size: 1.1em; vertical-align: middle; }
 .share-link-container a:hover { opacity: 0.7; }
 #copy-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 12px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); z-index: 10000; font-size: 1em; font-weight: 500; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease; }
