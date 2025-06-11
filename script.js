@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // YENİ: VAPID Public Key'i buraya ekleyeceğiz.
         // Bu anahtarın kodda görünmesinde bir sakınca yoktur, gizli değildir.
-        const VAPID_PUBLIC_KEY = 'BURAYA_PUBLIC_KEY_GELECEK';
+        const VAPID_PUBLIC_KEY = 'BBV9_v6BfCNTQofFSClXZrotX1nI__KFDfF1Z-K6A246oGxuQbRPLunhctdGIm3J-uXeL6CtXMPnMYi2cXZrTU4';
 
         const installButton = document.getElementById('install-button');
         const notifyButton = document.getElementById('notify-button');
