@@ -1,4 +1,4 @@
-// Kopyalama ve bildirim için fonksiyonlar (Değişiklik yok)
+// Kopyalama ve bildirim için fonksiyonlar
 function showCopyNotification() {
     const existingNotification = document.getElementById('copy-notification');
     if (existingNotification) existingNotification.remove();
@@ -19,7 +19,6 @@ function copyShareLink(event, id) {
     const urlToCopy = `${window.location.origin}${window.location.pathname.replace('index.html', '')}#/${id}`;
     navigator.clipboard.writeText(urlToCopy).then(showCopyNotification).catch(err => console.error('URL kopyalanamadı: ', err));
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Genel Ayarlar ---
@@ -44,58 +43,53 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const markersLayer = L.markerClusterGroup();
     const allMarkers = {};
-    let allData = []; // Tüm veriyi burada saklayacağız
+    let allData = [];
 
-    // --- YENİ: Direkt Arama Fonksiyonu ---
+    // --- Direkt Arama Fonksiyonu ---
     function directSearch(query) {
         const lowerCaseQuery = query.toLowerCase().trim();
         if (!lowerCaseQuery) return [];
-
-        return allData.filter(item => {
-            const titleMatch = item.title.toLowerCase().includes(lowerCaseQuery);
-            const descMatch = item.description.toLowerCase().includes(lowerCaseQuery);
-            const idMatch = item.id.toString() === lowerCaseQuery;
-            return titleMatch || descMatch || idMatch;
-        });
+        return allData.filter(item => 
+            item.title.toLowerCase().includes(lowerCaseQuery) ||
+            item.description.toLowerCase().includes(lowerCaseQuery) ||
+            item.id.toString() === lowerCaseQuery
+        );
     }
 
-    // --- YENİ: Tam Ekran Kontrolü ---
+    // --- Tam Ekran Kontrolü ---
     L.Control.Fullscreen = L.Control.extend({
         onAdd: function(map) {
             const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen');
-            const link = L.DomUtil.create('a', 'fullscreen-icon fullscreen-enter', container);
-            link.href = '#';
-            link.title = 'Tam Ekran';
-
-            L.DomEvent.on(link, 'click', L.DomEvent.stop)
-                      .on(link, 'click', this._toggleFullscreen, this);
-            
-            document.addEventListener('fullscreenchange', () => this._updateIcon(link));
+            this._link = L.DomUtil.create('a', 'fullscreen-icon fullscreen-enter', container);
+            this._link.href = '#';
+            this._link.title = 'Tam Ekran';
+            L.DomEvent.on(this._link, 'click', L.DomEvent.stop).on(this._link, 'click', this._toggleFullscreen, this);
+            document.addEventListener('fullscreenchange', this._updateIcon.bind(this));
             return container;
         },
         _toggleFullscreen: function() {
             if (!document.fullscreenElement) {
-                map.getContainer().requestFullscreen();
+                document.documentElement.requestFullscreen();
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         },
-        _updateIcon: function(link) {
+        _updateIcon: function() {
             if (!document.fullscreenElement) {
-                link.classList.remove('fullscreen-exit');
-                link.classList.add('fullscreen-enter');
-                link.title = 'Tam Ekran';
+                this._link.classList.remove('fullscreen-exit');
+                this._link.classList.add('fullscreen-enter');
+                this._link.title = 'Tam Ekran';
             } else {
-                link.classList.remove('fullscreen-enter');
-                link.classList.add('fullscreen-exit');
-                link.title = 'Tam Ekrandan Çık';
+                this._link.classList.remove('fullscreen-enter');
+                this._link.classList.add('fullscreen-exit');
+                this._link.title = 'Tam Ekrandan Çık';
             }
         }
     });
     L.control.fullscreen = (opts) => new L.Control.Fullscreen(opts);
     L.control.fullscreen({ position: 'topright' }).addTo(map);
 
-    // --- YENİ: Haritaya Entegre Arama Kontrolü ---
+    // --- Haritaya Entegre Arama Kontrolü ---
     L.Control.Search = L.Control.extend({
         onAdd: function(map) {
             this._container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
@@ -110,11 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
             this._input.placeholder = 'Ara...';
             this._results = L.DomUtil.create('div', 'search-results', this._form);
 
+            // DEĞİŞİKLİK: Başlangıçta formu gizle
+            L.DomUtil.addClass(this._form, 'leaflet-hidden');
+
             L.DomEvent.on(this._button, 'click', L.DomEvent.stop).on(this._button, 'click', this._toggle, this);
             L.DomEvent.on(this._input, 'input', this._search, this);
             L.DomEvent.on(this._form, 'click', L.DomEvent.stop);
+            // Haritaya tıklanınca arama kutusunu kapat
+            L.DomEvent.on(map, 'click', this._hide, this);
 
-            L.DomUtil.addClass(this._form, 'leaflet-hidden');
             return this._container;
         },
         _toggle: function() {
@@ -137,10 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         _displayResults: function(results) {
             this._results.innerHTML = '';
-            if (results.length > 0) {
+            if (results.length > 0 && this._input.value) {
                 results.slice(0, 10).forEach(item => {
                     const el = L.DomUtil.create('div', 'result-item', this._results);
-                    el.innerHTML = `<strong>${item.title}</strong><span>${item.description}</span>`;
+                    // DEĞİŞİKLİK: Sadece başlık gösteriliyor
+                    el.textContent = item.title; 
                     L.DomEvent.on(el, 'click', () => {
                         goToMarker(item.id);
                         this._hide();
@@ -152,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     L.control.search = (opts) => new L.Control.Search(opts);
     L.control.search({ position: 'topright' }).addTo(map);
 
-    // --- Genel Fonksiyonlar (Marker vb.) ---
+    // --- Genel Fonksiyonlar ---
     function goToMarker(id) {
         const marker = allMarkers[id];
         if (marker) {
@@ -195,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('markers.json')
         .then(response => response.json())
         .then(data => {
-            allData = data; // Veriyi global değişkene ata
+            allData = data;
             addMarkers(data);
         })
         .catch(error => {
