@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "lat": 41.01894,
+    "lng": 28.96839,
+    "title": "Ahi Çelebi Camii"
+  },
+  {
+    "id": "2",
+    "lat": 41.02675,
+    "lng": 28.97542,
+    "title": "Abidin Dino'nun Evi"
+  },
+  {
+    "id": "3",
+    "lat": 41.03221,
+    "lng": 28.98509,
+    "title": "Kapıcılar Kralı"
+  },
+  {
+    "id": "4",
+    "lat": 41.02516,
+    "lng": 29.01585,
+    "title": "Üsküdar'da Bir Attar Dükkânı"
+  },
+  {
+    "id": "5",
+    "lat": 41.02961,
+    "lng": 28.97385,
+    "title": "Masumlar Apartmanı"
+  }
+]
