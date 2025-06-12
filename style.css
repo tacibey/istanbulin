@@ -24,33 +24,30 @@ body:not(.yeni-page-body) { overflow: hidden; }
 .main-header h1 { font-family: 'Gotico Antiqua', serif; margin: 0; font-size: 3.5em; font-weight: normal; line-height: 0.9; letter-spacing: -4px; }
 .main-header .subtitle { margin: 0; font-size: 0.85em; opacity: 0.7; }
 
-/* YENİ: Header'daki Aksiyon İkonu */
+/* DEĞİŞEN BÖLÜM: Header'daki Aksiyon İkonu */
 .header-action-icon {
-    font-family: 'Gotico Antiqua', serif;
-    font-size: 1.65em;
-    color: var(--icon-text-color);
-    background-color: var(--icon-background-color);
-    border: 2px solid var(--secondary-bg-color);
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Roboto', sans-serif; /* Daha standart bir + için fontu değiştirdik */
+    font-size: 2.2em; /* Boyutu artırdık */
+    font-weight: 300; /* Daha zarif bir + için incelttik */
+    color: var(--light-text-color);
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     flex-shrink: 0;
+    padding: 0 10px; /* Tıklama alanını genişletmek için */
+    opacity: 0.8;
+    line-height: 1; /* Dikey hizalamayı iyileştirmek için */
 }
 .header-action-icon:hover {
     transform: scale(1.1);
+    opacity: 1;
 }
+/* Gotico fontuyla '+' yapmak istersek bu stil kullanılabilir */
+/* .header-action-icon.gotico-plus { font-family: 'Gotico Antiqua', serif; font-size: 1.8em; } */
 
 .map-container { flex-grow: 1; display: flex; overflow: hidden; position: relative; }
 #map { height: 100%; width: 100%; }
 .main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; }
 .main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
-
-/* YENİ: Footer'daki İletişim Linki */
 .footer-contact-link {
     text-decoration: none;
     font-size: 1.2em;
