@@ -52,7 +52,7 @@
   {
     "id": "6",
     "title": "Mehmet Emin Ersoy",
-    "description": "İstiklal şairimiz Mehmed Akif Ersoy'un oğlu M. Emin Ersoy, burada vefat etti.",
+    "description": "İstiklal şairimiz Mehmed Akif Ersoy'un oğlu M. Emin Ersoy, burada bir kamyon kasasında yalnız başına vefat etmiş bulundu.",
     "lat": 41.02720599067616,
     "lng": 28.97750405546286,
     "source": "",
@@ -72,7 +72,7 @@
   {
     "id": "8",
     "title": "André Chénier",
-    "description": "Fransız İhtilali'nin önemli figürlerinden André Chénier burada, St. Pierre Han'ın yerinde doğdu. Bir rivayete göre giyotine giderken ellerini kafasına vurarak bunun içinde daha çok şey vardı dediği belirtilir",
+    "description": "Fransız İhtilali'nin önemli figürlerinden André Chénier burada, St. Pierre Han'ın yerinde doğdu. Bir rivayete göre giyotine giderken ellerini kafasına vurarak bunun içinde daha çok şey vardı dediği belirtilir.",
     "lat": 41.024679924273514,
     "lng": 28.972487901965007,
     "source": "https://tr.wikipedia.org/wiki/Andr%C3%A9_Ch%C3%A9nie",
@@ -113,8 +113,8 @@
     "id": "12",
     "title": "Maksim Gazinosu",
     "description": "İtalyan mimar Giulio Mongeri tarafından tasarlanan 1914 tarihli binada Fahrettin Aslan tarafından bir dönem işletilen efsane gazino. Zeki Müren'den Müslüm Gürses'e bir zamanlar yıldızlar geçidiydi.",
-    "lat": 41.03612920861093,
-    "lng": 28.98500268220936,
+    "lat": 41.035909058085984,
+    "lng": 28.984984339894268,
     "source": "https://tr.wikipedia.org/wiki/Maksim_Gazinosu",
     "contributor": "istanbulin",
     "image": "maksimgazinosu.avif"
@@ -128,5 +128,285 @@
     "source": "",
     "contributor": "istanbulin",
     "image": "nisan.avif"
+  },
+  {
+    "id": "14",
+    "title": "Tokatlıyan Oteli",
+    "description": "1909 yılında açılan otel, döneminde Avrupa ve Ortadoğu'nun en lükslerinden biriydi. Otelin balo salonları meşhurdu. Lev Troçki, Arabistanlı Lawrence, M. Kemal Atatürk, Tokatlıyan'da konaklayan ünlülerdendir.",
+    "lat": 41.03413621908517,
+    "lng": 28.978295305064417,
+    "source": "https://tr.wikipedia.org/wiki/Tokatl%C4%B1yan_Oteli",
+    "contributor": "istanbulin",
+    "image": "tokatliyan.avif"
+  },
+  {
+    "id": "15",
+    "title": "Majik Sineması",
+    "description": "1914 yılında mimar Giulio Mongeri tarafından inşa edilen Türkiye'nin ilk sinema binasıdır.",
+    "lat": 41.03599388115791,
+    "lng": 28.985049859804832,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "majik-sinemasi.avif"
+  },
+  {
+    "id": "16",
+    "title": "Bon Marché",
+    "description": "Bortoli Biraderler'in açtığı meşhur mağaza. Sermet Muhtar anlatır: En şık ve kibarlardan tutunuz da mektep talebelerine ve terzi, şapkacı çırağı kızlara varıncaya kadar herkes mutlaka buranın bir kapısından girip ötekinden çıkardı. Parfümeri dairesindeki pür tuvalet Rum ne ömürdü bilseniz!.. Her dem yüzünde pudra, bıyıklarında kozmetik, bütün madam ve matmazellerle öyle bir hususiyet ki, sorma gitsin!..”",
+    "lat": 41.03177492952986,
+    "lng": 28.97604587100174,
+    "source": "https://manifold.press/istiklal-caddesi-310",
+    "contributor": "istanbulin",
+    "image": "bon-marche.avif"
+  },
+  {
+    "id": "17",
+    "title": "Karlman Pasajı",
+    "description": "1926 yılında Karlman, kapalı olan Bon Marché’yi satın aldı. “Gayet elverişli fiyatlarla satılan binlerce çeşit malların büyük ve daimi sergisi”. AVM'lerin ilk örneği.",
+    "lat": 41.031849799688494,
+    "lng": 28.9758357812958,
+    "source": "https://manifold.press/istiklal-caddesi-310",
+    "contributor": "istanbulin",
+    "image": "karlman-pasaji.avif"
+  },
+  {
+    "id": "18",
+    "title": "Hrant Dink",
+    "description": "Agos gazetesi genel yayın yönetmeni Hrant Dink, 19 Ocak 2007'de burada Sebat apt. önünde suikaste uğrayarak hayatını kaybetti.",
+    "lat": 41.05268386828294,
+    "lng": 28.98750451677419,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "hrant-dink.avif"
+  },
+  {
+    "id": "19",
+    "title": "Şeyh Galip",
+    "description": "Caddeye adını veren, Galata Mevlevîhânesi şeyhi, Hüsn ü Aşk'ın yazarı. Tasavvufu sembolizmle birleştiren eşsiz bir üslubu vardır. Cenazesinin yıkanması sırasında babası Mustafa Reşid Efendi’nin ağlayarak, “Ah oğul! Bu tahtaya o kara sakal yakışmıyor” dediği nakledilir. Buradaki türbede medfundur.",
+    "lat": 41.02815199236795,
+    "lng": 28.974466844994826,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "20",
+    "title": "Gezi Parkı",
+    "description": "28 Mayıs 2013 tarihinde başlayan ve 3 aydan fazla süren demokratik eylemlerin ve toplumsal olayların ikonik merkezi.",
+    "lat": 41.038855673677574,
+    "lng": 28.986970244360347,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "gezi-parki.avif"
+  },
+  {
+    "id": "21",
+    "title": "Taksim Kışlası",
+    "description": "Topçu birliklerinin kullandığı kışladır. \"Topçular Kışlası\" ya da \"Taksim Kışlası\" olarak bilinir. Askeri işlevlerinin yanı sıra cambaz gösterileri, at yarışları, Rum hacıların konaklaması gibi amaçlarla da kullanıldı. (1806 - 1940)",
+    "lat": 41.03835043712748,
+    "lng": 28.98694951129529,
+    "source": "https://tr.wikipedia.org/wiki/Taksim_K%C4%B1%C5%9Flas%C4%B1",
+    "contributor": "istanbulin",
+    "image": "taksim-kislasi.avif"
+  },
+  {
+    "id": "22",
+    "title": "Sıraselviler",
+    "description": "17. yy'a değin Taksim meydanı ve çevresi büyük mezarlıktı. Mezarlığın bu güzergahındaki sıra sıra serviler, buraya adını vermiştir. \"Bir yalnız bir yorgun. Bir yandan kendini Taksim'e vererek yaşar. Dünyanın en güzel çıkmazlarını kapmıştır. Düşe ayıracak vakti yoktur. - İlhan Berk\"",
+    "lat": 41.03384804952352,
+    "lng": 28.984386102671948,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "siraselviler.avif"
+  },
+  {
+    "id": "23",
+    "title": "Surp Agop Mezarlığı",
+    "description": "Osmanlı'nın son yıllarına değin Ermeni Mezarlığı olarak kullanılıyordu. Ermenice bazı kaynakların kaydettiğine göre bu alan, Kanuni Sultan Süleyman'ı Budin Seferi sırasında zehirlenmekten kurtaran Vanlı aşçısı Manuk Karaseferyan vasıtasıyla Ermeni cemaatine verilmişti.",
+    "lat": 41.041157899764656,
+    "lng": 28.988009898848347,
+    "source": "https://www.mimarizm.com/gezi-mekan/sehrin-en-buyuk-mezarligindan-ulkenin-en-onemli-merkezine-taksim_115990",
+    "contributor": "istanbulin",
+    "image": "surp-agop-mezarligi.avif"
+  },
+  {
+    "id": "24",
+    "title": "Şinasi",
+    "description": "Türk toplumunda Tanzimat'ın ilanı ile başlayan Batılılaşma sürecinin ilk ve en önemli yazarlarından. 5 Ağustos 1826'da burada doğdu. \nİlk Türkçe özel gazete Tercüman-ı Ahvâl'in kurucusudur.",
+    "lat": 41.008447,
+    "lng": 28.971239,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "sinasi.avif"
+  },
+  {
+    "id": "25",
+    "title": "Orhan Kemal'in Evi",
+    "description": "Yazar, 1966'ya kadar burada oturdu. Eskiden burası Cibali Fırın Sk. No: 20 imiş.",
+    "lat": 41.02447092003227,
+    "lng": 28.958280579311662,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "orhan-kemalin-evi.avif"
+  },
+  {
+    "id": "26",
+    "title": "Özdemir Asaf'ın Evi (Çocukluğu)",
+    "description": "Kızı Seda Arun: Babam, Acıbadem'deki Dörtyol Mustafa Bey Çıkmazı'ndaki dedesinin köşkünde yaşadı. Bu sokak, ismini babamın dedesinden alır. Çünkü bu yolu dedesi konak yaptırmak için açtırmış.",
+    "lat": 40.997865918417965,
+    "lng": 29.03550330591139,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "27",
+    "title": "Özdemir Asaf'ın Evi (Vefatı)",
+    "description": "Kızı Seda Arun: Acıbadem'deki ev yıkılıp yerine apartman yapılacağı için babam ve kardeşlerim Küçük Bebek Caddesi'ndeki Gülen Apartmanı No: 16/8'e taşındılar. Babam 1981'de burada vefat etti.",
+    "lat": 41.07976581855259,
+    "lng": 29.044900217567832,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "28",
+    "title": "Göztepe Suyu",
+    "description": "Yakın zamanlara kadar İstanbulun en meşhur menbâ sularından idi. İstanbul'un Karakulak Suyundan sonra en meşhur sularındandır. Gün battıkdan bir saat sonra sabaha kadar kaynakdan çıkan su, çok soğuk olarak akardı, kaynağın en makbul suyu, gece alınan suyu idi.",
+    "lat": 41.07963931482897,
+    "lng": 29.076567291913026,
+    "source": "https://istanbulansiklopedisi.org/handle/rek/1020",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "29",
+    "title": "Ahmet Hamdi Tanpınar",
+    "description": "1944-51 yılları arasında Narmanlı Han'da yaşadı. “Oğlum Behçet, sen bir medeniyetin iflâsı nedir, bilir misin? dedi. İnsan bozulur, insan kalmaz; bir medeniyet insanı insan yapan manevî kıymetler manzumesidir. Anlıyor musun şimdi derdin büyüklüğünü?... Cahilsin okur, öğrenirsin. Gerisin; ilerlersin. Adam yok; yetiştirirsin, günün birinde meydana çıkıverir. Paran yok; kazanırsın. Her şeyin bir çaresi vardır. Fakat insan bozuldu mu, bunun çaresi yoktur. Bizde insanoğlu şirazesiz kalmış..... İnsanı yenibaştan, yeni esaslarla kurmamız lazım; yeni kıymetlerle yaşayan bir insan. Halbuki bu imkansız...”",
+    "lat": 41.029314171018584,
+    "lng": 28.974542058339456,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "ahmet-hamdi-tanpinar.avif"
+  },
+  {
+    "id": "30",
+    "title": "Hüseyin Rahmi Gürpınar",
+    "description": "Burada yaşadı ve burada vefat etti. “Babamın adı Said’dir. Paşa rütbesindedir. Heybeliada’da oturuyorum. Yazarlık yapıyorum. Çocuklarım yoktur. Benim kabahatim bazı bazı nezahetten çok ayrılan çıplak anlatışımdadır. Yalandan hoşlanmayan hakikati veren kalemim sanat gereği olarak çoğunlukla konunun derinliğine iniyor, örtülmesi gereken pisliği karıştırıyor.’",
+    "lat": 40.87722275852312,
+    "lng": 29.092128397416,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "huseyin-rahmi-gurpinar.avif"
+  },
+  {
+    "id": "31",
+    "title": "Sâmiha Ayverdi & Ekrem Hakkı Ayverdi",
+    "description": "Türk kültür dünyasına çok büyük hizmetlerde bulunmuş Ayverdi kardeşler burada yaşadılar. \"Mazhar-ı feyz olamaz düşmeyecek hâke nebât; Mütevâzı‘ olanı rahmet-i Rahmân büyütür.\"",
+    "lat": 41.02274989930232,
+    "lng": 28.943929369170192,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "32",
+    "title": "Sait Faik Abasıyanık",
+    "description": "Sait Faik burada yaşadı, öykülerini burada yazdı. “İşte çocukluğumun ve ilkgençliğimin haritalarındaki adalar beni, sonunda bir gün özlediğim adaya tesadüfen bırakıverdiler. Yaşım orta yaşı bulmuştu ama, nihayet asıl yuvama dönmüştüm. Sanki on dört yaşında sarışın bir oğlanken basıp gitmiştim. Bir motor beni alıp büyük şehirlere götürmüştü. (…) İşte bitkin, işte yorgun, işte hepsini yitirmiş, gittiğim motorla geri dönmüştüm.”",
+    "lat": 40.87955218993319,
+    "lng": 29.06714444356194,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "sait-faik-abasiyanik.avif"
+  },
+  {
+    "id": "33",
+    "title": "Ziya Osman Saba",
+    "description": "Bu sokakta, eski no ile 37 numaralı evde yaşadı. \"Bir daha görüyorum seni dünya gözüyle / Göğün hep üstümde, havan ciğerlerimdedir / Ey doğup yaşadığım yerde her taşını / Öpüp başıma koymak istediğim şehir\"",
+    "lat": 40.993304403801375,
+    "lng": 29.026862698105802,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "34",
+    "title": "Behçet Necatigil",
+    "description": "Şair Behçet Necatigil, 1964-1979 yılları arasında Deniz apt. 23 no’lu dairede yaşamıştır. \"Bir zamanı yeniler, bir gün o da bize benzer / Kalır uzaklarda o dertli anne / Neden bazı şeyleri pek çabuk unuturuz / Çünkü apartımanlar o evlerin yerinde\"",
+    "lat": 41.04698889402531,
+    "lng": 29.00029735322292,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "35",
+    "title": "Şeyh Galip'in Evi",
+    "description": "Büyük divan şairi ve Galata Mevlevihanesi şeyhi, burada 2 numaralı evde yaşadı. \"Hoşça bak zâtına kim zübde-i âlemsin sen / Merdüm-i dîde-i ekvân olan âdemsin sen\"",
+    "lat": 41.04848118503212,
+    "lng": 28.941534375226244,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "36",
+    "title": "Âsaf Hâlet Çelebi'nin Evi",
+    "description": "Şair Âsaf Hâlet Çelebi’nin vefatına kadar oturduğu köşk buradaydı. \"ibrâhîm / içimdeki putları devir / elindeki baltayla / kırılan putların yerine / yenilerini koyan kim\"",
+    "lat": 41.04544856868217,
+    "lng": 29.048601501684228,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "37",
+    "title": "Nur-u Ziya Sokak",
+    "description": "Masonlar Derneği'nin de yer aldığı, eski adı Polonya sokağı. Refik Erduran, Nazım Hikmet'in küçük kız kardeşi Melda ile evlenerek burada yaşamış; Nazım Hikmet de sık sık uğramış. Sokakta Pierre Loti, Franz Von Liszt, Giulio Mongeri gibi isimler yaşamış.",
+    "lat": 41.03159735407848,
+    "lng": 28.97746050570531,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "38",
+    "title": "Fetihkapı",
+    "description": "Fatih Sultan Mehmed, 29 Mayıs 1453 günü şehri fethederek bu kapıdan giriş yaptı.",
+    "lat": 41.021643208946216,
+    "lng": 28.92521661202967,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "fetihkapi.avif"
+  },
+  {
+    "id": "39",
+    "title": "Kılıç Ali Paşa Camii",
+    "description": "Kaptan-ı Derya Kılıç Ali Paşa, cami yaptırmak için Sultan III. Murad'dan yer ister. Sultan da, Kaptan-ı Derya olmasından dolayı Kılıç Ali Paşa'ya denize cami yapmasını söyler. Bunun üzerine Paşa, Mimar Sinan ile anlaşır ve Tophane rıhtımının kenarına taş, toprak, moloz yığarak caminin inşasına başlar. Bu nedenle, Kılıç Ali Paşa Camii'nin deniz üzerine kurulan ilk cami olduğu söylenir.",
+    "lat": 41.02657180866839,
+    "lng": 28.980825412643306,
+    "source": "https://tr.wikipedia.org/wiki/K%C4%B1l%C4%B1%C3%A7_Ali_Pa%C5%9Fa_Camii",
+    "contributor": "istanbulin",
+    "image": "kilic-ali-pasa-camii.avif"
+  },
+  {
+    "id": "40",
+    "title": "Zenbilli Ali Efendi",
+    "description": "Kanuni ve Yavuz dönemi şeyhülislamı. Kendisine sorulan soruları zenbil (sepet) sarkıtarak alır, yanıtlarını da yine zenbille verirmiş. \"Gökten zenbille inmek\" deyiminin kaynağı olduğu söylenir.",
+    "lat": 41.018975993699236,
+    "lng": 28.957254968394583,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "41",
+    "title": "Markiz Pastanesi",
+    "description": "Döneminin ünlü buluşma mekanı, sanatçıların uğrak noktası. \"Belle Epoque duvar çinileri, kibar tenhalığı, Levanten atmosferi, gümüş çatal bıçakları, sahibi Bay Avedis'in güngörmüş üslubu, ona belki de Paris'te okuduğu zaman gittiği Saint Germain kahvelerini, Dome'u yahut Brasserie Lipp'i anımsatıyor olabilirdi.\" - Haldun Taner",
+    "lat": 41.02977953915858,
+    "lng": 28.97537857861847,
+    "source": "",
+    "contributor": "istanbulin",
+    "image": "markiz-pastanesi.avif"
   }
 ]
