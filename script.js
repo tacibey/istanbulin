@@ -10,7 +10,6 @@ function showCopyNotification() {
         }, 300)
     }, 2e3)
 }
-
 function copyShareLink(e, t) {
     e.preventDefault(), e.stopPropagation();
     const o = `${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;
@@ -18,7 +17,6 @@ function copyShareLink(e, t) {
         console.error("URL kopyalanamadı: ", e)
     })
 }
-
 function urlBase64ToUint8Array(t) {
     const e = "=".repeat((4 - t.length % 4) % 4),
         r = (t + e).replace(/-/g, "+").replace(/_/g, "/"),
@@ -28,74 +26,38 @@ function urlBase64ToUint8Array(t) {
     return n
 }
 document.addEventListener('DOMContentLoaded', () => {
+    // SADELEŞTİRİLMİŞ PWA KURULUMU
     function setupPWA() {
         if (!('serviceWorker' in navigator)) return;
-        const VAPID_PUBLIC_KEY = 'BBV9_v6BfCNTQofFSClXZrotX1nI__KFDfF1Z-K6A246oGxuQbRPLunhctdGIm3J-uXeL6CtXMPnMYi2cXZrTU4';
+
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('ServiceWorker kaydedildi.'))
+            .catch(err => console.log('ServiceWorker hatası:', err));
+
         const installButton = document.getElementById('install-button');
-        const notifyButton = document.getElementById('notify-button');
         let deferredPrompt;
-        navigator.serviceWorker.register('/sw.js').then(registration => {
-            console.log("ServiceWorker kaydedildi.");
-            return registration.pushManager.getSubscription().then(() => {
-                updateUI(registration)
-            })
-        }).catch(err => {
-            console.log("ServiceWorker hatası:", err)
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.classList.add('visible');
         });
-        async function updateUI(registration) {
-            if (!registration) return;
-            installButton.classList.remove("visible"), notifyButton.classList.remove("visible");
-            const isStandalone = window.matchMedia("(display-mode: standalone)").matches,
-                canInstall = deferredPrompt && !isStandalone,
-                pushManager = registration.pushManager,
-                currentSubscription = await pushManager.getSubscription(),
-                notificationPermission = Notification.permission;
-            canInstall ? installButton.classList.add("visible") : !isStandalone && "default" === notificationPermission ? notifyButton.classList.add("visible") : isStandalone && "default" === notificationPermission && !currentSubscription && notifyButton.classList.add("visible")
-        }
-        window.addEventListener("beforeinstallprompt", e => {
-            e.preventDefault(), deferredPrompt = e, navigator.serviceWorker.ready.then(updateUI)
-        });
-        installButton.addEventListener("click", async () => {
+
+        installButton.addEventListener('click', async () => {
             if (!deferredPrompt) return;
-            deferredPrompt.prompt(), await deferredPrompt.userChoice, deferredPrompt = null, navigator.serviceWorker.ready.then(updateUI)
+            installButton.classList.remove('visible');
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
         });
-        window.addEventListener("appinstalled", () => {
-            deferredPrompt = null, navigator.serviceWorker.ready.then(updateUI)
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            installButton.classList.remove('visible');
         });
-        notifyButton.addEventListener("click", async () => {
-            const permission = await Notification.requestPermission();
-            const registration = await navigator.serviceWorker.ready;
-            if ("granted" === permission) {
-                console.log("Bildirim izni verildi! Abonelik oluşturulup backend'e gönderiliyor...");
-                try {
-                    const subscription = await registration.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-                    });
-                    // HATA BURADAYDI, DEĞİŞKEN ADI DÜZELTİLDİ
-                    const fetchResponse = await fetch("/.netlify/functions/subscribe", {
-                        method: "POST",
-                        body: JSON.stringify(subscription),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
-                    if (!fetchResponse.ok) {
-                        const errorData = await fetchResponse.text();
-                        // HATA BURADAYDI, 'response' yerine 'fetchResponse' kullanılmalıydı
-                        throw new Error(`Backend'e abonelik kaydedilemedi. Sunucu yanıtı: ${fetchResponse.status} ${errorData}`)
-                    }
-                    console.log("Abonelik başarıyla backend'e kaydedildi.")
-                } catch (error) {
-                    console.error("Abonelik işlemi başarısız oldu:", error)
-                }
-            } else {
-                console.log("Bildirim izni verilmedi.");
-            }
-            navigator.serviceWorker.ready.then(updateUI)
-        })
     }
     setupPWA();
+
     const copyrightElement = document.getElementById('copyright-text');
     if (copyrightElement) {
         copyrightElement.textContent = `© ${new Date().getFullYear()} istanbulin. Tüm Hakları Saklıdır.`
