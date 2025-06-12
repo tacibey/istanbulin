@@ -1,4 +1,5 @@
-const CACHE_NAME = 'istanbulin-cache-v1'; // Önbellek sürümü, bunu değiştirince önbellek yenilenir.
+// DEĞİŞİKLİK: Önbellek sürümünü v2'ye yükselttik.
+const CACHE_NAME = 'istanbulin-cache-v2'; 
 const urlsToCache = [
   '/',
   '/index.html',
@@ -17,8 +18,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Önbellek açıldı');
-        // ÖNEMLİ: addAll atomik bir işlemdir. Biri bile başarısız olursa, hepsi başarısız olur.
+        console.log('Yeni Service Worker kuruluyor, önbellek oluşturuluyor: ' + CACHE_NAME);
         return cache.addAll(urlsToCache);
       })
   );
@@ -33,6 +33,7 @@ self.addEventListener('activate', event => {
           // Bu service worker'a ait olmayan veya eski sürüm olanları sil
           return cacheName.startsWith('istanbulin-cache-') && cacheName !== CACHE_NAME;
         }).map(cacheName => {
+          console.log('Eski önbellek siliniyor:', cacheName);
           return caches.delete(cacheName);
         })
       );
@@ -49,32 +50,10 @@ self.addEventListener('fetch', event => {
         if (response) {
           return response;
         }
-
         // Önbellekte yoksa, ağdan getirmeyi dene
-        return fetch(event.request).then(
-          (networkResponse) => {
-            // Ağdan gelen cevap geçerliyse, hem döndür hem de bir kopyasını önbelleğe al
-            if(!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-              // Sadece kendi origin'imizden gelen istekleri önbelleğe alıyoruz.
-              // Diğerleri (örn: harita katmanları) önbelleğe alınmayacak.
-              return networkResponse;
-            }
-
-            // Cevabı klonla. Bir kopyası önbelleğe, diğeri tarayıcıya gidecek.
-            const responseToCache = networkResponse.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return networkResponse;
-          }
-        ).catch(error => {
-          // Ağ hatası durumunda (çevrimdışı), burada çevrimdışı sayfası gösterilebilir.
-          // Şimdilik basit tutuyoruz.
-          console.log('Ağ isteği başarısız oldu:', error);
-        });
+        return fetch(event.request);
+        // Not: Önceki ağdan alıp önbelleğe ekleme mantığını kaldırdım.
+        // Bu, önbelleğin sadece kurulumda dolmasını sağlar ve daha stabildir.
       })
   );
 });
