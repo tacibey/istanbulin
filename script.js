@@ -26,26 +26,18 @@ function urlBase64ToUint8Array(t) {
     return n
 }
 document.addEventListener('DOMContentLoaded', () => {
-    // SADELEŞTİRİLMİŞ PWA KURULUMU (Sadece Telefona Ekle)
     function setupPWA() {
         if (!('serviceWorker' in navigator)) return;
-
-        navigator.serviceWorker.register('/sw.js')
-            .then(() => console.log('Akıllı ServiceWorker başarıyla kaydedildi.'))
-            .catch(err => console.log('ServiceWorker kaydı başarısız:', err));
-
+        navigator.serviceWorker.register('/sw.js').then(() => console.log('Akıllı ServiceWorker başarıyla kaydedildi.')).catch(err => console.log('ServiceWorker kaydı başarısız:', err));
         const installButton = document.getElementById('install-button');
         let deferredPrompt;
-
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Sadece install butonu varsa göster
             if (installButton) {
                 installButton.classList.add('visible');
             }
         });
-
         if (installButton) {
             installButton.addEventListener('click', async () => {
                 if (!deferredPrompt) return;
@@ -55,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 deferredPrompt = null;
             });
         }
-
         window.addEventListener('appinstalled', () => {
             deferredPrompt = null;
             if (installButton) {
@@ -210,12 +201,21 @@ document.addEventListener('DOMContentLoaded', () => {
         position: 'topright'
     }).addTo(map);
 
-    function goToMarker(e) {
-        const t = allMarkers[e];
-        if (t) {
-            map.setView(t.getLatLng(), 17);
-            t.openPopup();
-        }
+    // DEĞİŞEN FONKSİYON: goToMarker artık daha akıllı
+    function goToMarker(id) {
+        const marker = allMarkers[id];
+        if (!marker) return;
+
+        // Kademeli yakınlaşma mantığı
+        markersLayer.zoomToShowLayer(marker, () => {
+            // Animasyon bittikten sonra kontrol et
+            // Eğer marker hala bir küme içindeyse (yani görünür değilse)
+            // o zaman daha sert bir yöntemle yakınlaş.
+            if (!map.hasLayer(marker)) {
+                map.setView(marker.getLatLng(), 17);
+            }
+            marker.openPopup();
+        });
     }
 
     function createPopupContent(e) {
@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storage.set('lastSeenMarkers', o);
     }
 
+    // openMarkerFromUrl fonksiyonu doğrudan goToMarker'ı çağıracak şekilde kaldı, değişiklik orada
     function openMarkerFromUrl() {
         const e = window.location.hash;
         if (e && e.startsWith('#/')) {
@@ -278,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
         allData = e;
         addMarkers(e);
     }).catch(e => {
-        console.error("Veri çekilirken bir hata oluştu:", e);
-        alert("Harita verileri yüklenirken bir sorun oluştu.");
+        console.error("Veri çekilirken bir hata oluştu:", e), alert("Harita verileri yüklenirken bir sorun oluştu.")
     })
 });
