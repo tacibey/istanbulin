@@ -13,7 +13,8 @@ export const handler = async (event) => {
     const siteID = process.env.NETLIFY_SITE_ID;
     const token = process.env.NETLIFY_API_TOKEN;
 
-    // Eğer bu bilgiler Netlify'da ayarlanmamışsa, hata ver.
+    // Eğer bu bilgiler Netlify'da ayarlanmamışsa, bu hatayı fırlat.
+    // Bu, hata ayıklamayı kolaylaştırır.
     if (!siteID || !token) {
       throw new Error("Site ID veya API Token ortam değişkenleri ayarlanmamış.");
     }
@@ -27,12 +28,15 @@ export const handler = async (event) => {
       };
     }
     
-    // getStore fonksiyonunu, kimlik bilgilerini manuel olarak sağlayarak çağır.
+    // getStore fonksiyonunu, kimlik bilgilerini manuel olarak sağlayarak çağırıyoruz.
+    // Hata mesajının bizden istediği tam olarak buydu.
     const store = getStore("subscriptions", { siteID, token });
     
     const key = toBase64(subscription.endpoint);
 
     await store.setJSON(key, subscription);
+
+    console.log(`Abonelik başarıyla kaydedildi: ${key}`);
 
     return {
       statusCode: 201,
