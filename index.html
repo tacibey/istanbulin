@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- DEĞİŞİKLİK: Cache Busting için versiyon eklendi -->
+    <link rel="stylesheet" href="style.css?v=1.1">
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -34,18 +37,13 @@
 
     <footer class="main-footer">
         <div class="container">
-            <!-- BU BÖLÜM TAMAMEN DÜZELTİLDİ -->
-            <p id="copyright-text">
-                © 2025 istanbulin. 
-                <a href="https://tally.so/r/mYKvZ6" target="_blank" rel="noopener noreferrer" class="footer-contact-link" title="İletişim">📩</a>
-            </p>
+            <p id="copyright-text"></p>
         </div>
         <div id="pwa-actions-container" class="pwa-actions-container">
             <button id="install-button" class="action-button">
                 <span class="action-button-main-text">Telefona Ekle 📲</span>
                 <span class="action-button-subtitle">istanbulin elinin altında olsun</span>
             </button>
-            <!-- Bildirim butonu daha önce kaldırılmıştı -->
         </div>
     </footer>
 
@@ -53,6 +51,8 @@
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <script src="script.js"></script>
+
+    <!-- DEĞİŞİKLİK: Cache Busting için versiyon eklendi -->
+    <script src="script.js?v=1.1"></script>
 </body>
 </html>
