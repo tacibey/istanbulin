@@ -1,8 +1,9 @@
-// DEĞİŞİKLİK: Önbellek sürümünü v2'ye yükselttik.
-const CACHE_NAME = 'istanbulin-cache-v2'; 
+// Önbellek sürümünü tekrar artırıyoruz ki bu yeni kural devreye girsin.
+const CACHE_NAME = 'istanbulin-cache-v3'; 
+
+// DEĞİŞİKLİK: '/' ve '/index.html' listesinden kaldırıldı!
+// Artık sadece uygulamanın iskeleti ve verisi önbelleğe alınıyor.
 const urlsToCache = [
-  '/',
-  '/index.html',
   '/style.css',
   '/script.js',
   '/manifest.json',
@@ -13,24 +14,21 @@ const urlsToCache = [
   'https://unpkg.com/leaflet/dist/leaflet.js'
 ];
 
-// 1. Kurulum (Install) Olayı: Gerekli dosyaları önbelleğe al.
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Yeni Service Worker kuruluyor, önbellek oluşturuluyor: ' + CACHE_NAME);
+        console.log('Yeni Service Worker kuruluyor, v3');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
-// 2. Aktivasyon (Activate) Olayı: Eski önbellekleri temizle.
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.filter(cacheName => {
-          // Bu service worker'a ait olmayan veya eski sürüm olanları sil
           return cacheName.startsWith('istanbulin-cache-') && cacheName !== CACHE_NAME;
         }).map(cacheName => {
           console.log('Eski önbellek siliniyor:', cacheName);
@@ -41,19 +39,23 @@ self.addEventListener('activate', event => {
   );
 });
 
-// 3. Getirme (Fetch) Olayı: Ağ isteklerini yönet.
 self.addEventListener('fetch', event => {
+  // Sadece GET isteklerini yönet
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
+    // Önce önbelleğe bak
     caches.match(event.request)
-      .then(response => {
-        // Önbellekte varsa, oradan döndür
-        if (response) {
-          return response;
+      .then(cachedResponse => {
+        // Önbellekte varsa, onu kullan
+        if (cachedResponse) {
+          return cachedResponse;
         }
-        // Önbellekte yoksa, ağdan getirmeyi dene
+        // Önbellekte yoksa, ağdan iste.
+        // index.html için bu blok çalışacak.
         return fetch(event.request);
-        // Not: Önceki ağdan alıp önbelleğe ekleme mantığını kaldırdım.
-        // Bu, önbelleğin sadece kurulumda dolmasını sağlar ve daha stabildir.
       })
   );
 });
