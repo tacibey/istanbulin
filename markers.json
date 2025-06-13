@@ -408,5 +408,665 @@
     "source": "",
     "contributor": "istanbulin",
     "image": "markiz-pastanesi.avif"
+  },
+  {
+    "id": "42",
+    "title": "Aba, Abacılar",
+    "description": "Kaba yünlü kumaş ve bu kumaştan yapılan giysi. Genellikle esnaf ve dervişler tarafından kullanılırdı. Sultan IV. Murad ve Abaza Mehmed Paşa'nın birer aba cebken yaptırmasıyla kısa süreliğine moda olmuştur. Halk arasında birine aşık olmak anlamına gelen 'abayı yakmak' deyimi bu kumaştan gelir. Geçen asır sonlarına doğru abacılar, Zindankapısiyle Odunkapısı arasında toplanmışlardı",
+    "lat": 41.01887669751949,
+    "lng": 28.967270739607443,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "43",
+    "title": "Abacı Aralığı",
+    "description": "Fatih, Karagümrük'te, Mihrimah Camii karşısına düşen, henüz düzenlenmemiş toprak bir sokaktır. Fevzipaşa caddesiyle Ka'riye yağhanesi sokağı arasında yer alır.",
+    "lat": 41.03012018385151,
+    "lng": 28.93640915220148,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "44",
+    "title": "Abacı Çeşmesi",
+    "description": "Süleymaniye'de, kendi adını taşıyan sokakta bulunan bir çeşmedir. Destari Mustafa Paşa tarafından yaptırıldığı anlaşılmaktadır.",
+    "lat": 41.01748859840659,
+    "lng": 28.96096127040458,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "45",
+    "title": "Abacı Dede Sokağı",
+    "description": "Üsküdar'da Çavuşderesi ile Nuhkuyusu arasında yer alan bir sokaktır. Adını, içinde bulunan Abacı Dede Türbesi'nden alır. Bu sokaktan Beyoğlu ile Beşiktaş arasındaki sırtların güzel bir manzarası vardır.",
+    "lat": 41.01948098693891,
+    "lng": 29.02238588114139,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "46",
+    "title": "Abacıhalim Sokağı",
+    "description": "Halıcıoğlu arkasındaki Çıksalın tepesinde bulunan sokak, Haliç'e, Eyüp'e ve Edirnekapı sırtlarına bakan harika bir manzaraya sahiptir. Özellikle Mihrimah Camii ve Edirnekapı Mezarlığı'nın silüeti buradan çok güzel görünür.",
+    "lat": 41.047275814096714,
+    "lng": 28.94923550911569,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "47",
+    "title": "Abacılar Sokağı",
+    "description": "Edirnekapı'da, Mihrimah Camii'nin dış avlu duvarı ile Fevzipaşa caddesi arasında yer alan, harap ve toprak bir sokaktır.",
+    "lat": 41.02988451442156,
+    "lng": 28.93663960130274,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "48",
+    "title": "Abacılâtif Sokağı",
+    "description": "Beşiktaş, Vişnezade mahallesinde, Spor Caddesi (eski Akaretler) ile Vişnezade Camii arasındadır. Ortasındaki bir dirsek yüzünden daralan ve kapı önlerindeki basamaklarıyla eski İstanbul'u hatırlatan şirin bir sokaktır.",
+    "lat": 41.042758944170615,
+    "lng": 28.99776506839561,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "49",
+    "title": "Abacımahmud Sokağı",
+    "description": "Samatya, Kürkçübaşı mahallesinde, Sulubostan sokağı ile Cerrahpaşa Camii sokağı arasında yer alan, üzerinde otuz kadar ahşap evin bulunduğu bir sokaktır.",
+    "lat": 41.00648152230838,
+    "lng": 28.945331764688706,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "50",
+    "title": "Abacıoğlu",
+    "description": "17. yüzyıl ortalarında yaşamış, gemileri İstanbul ile Karadeniz limanları arasında sefer yapan namlı armatörlerden biridir.",
+    "lat": 41.19124499346706,
+    "lng": 29.099938569248938,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "51",
+    "title": "Abacı Mescidi",
+    "description": "Samatya'da, Davutpaşa iskelesi civarında bulunan ve bugün mevcut olmayan bir mescitti. Bitişiğindeki meşhur İspanakçızade Mustafa Paşa konağının yanmasıyla, bulunduğu yer uzun süre 'İspanakçı viranesi' olarak anılmıştır.",
+    "lat": 41.004205367801966,
+    "lng": 28.945275759628657,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "52",
+    "title": "Abai Mescidi",
+    "description": "Samatya'da, Davutpaşa iskelesi civarındaki Bekâr Bey Sokağı'nda bulunan ve Rifai şeyhi Süleyman Abai tarafından yaptırılan mescittir. Bugün yalnızca mihrap duvarı ile minare kaidesi kalmış bir harabedir.",
+    "lat": 41.004757198119755,
+    "lng": 28.944102421854414,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "53",
+    "title": "Abalıoğlu (Yunus Nadi)",
+    "description": "Cumhuriyet gazetesinin kurucusu, ünlü gazeteci ve politika adamı. Mütareke yıllarında, işgal altındaki İstanbul'da her tehlikeyi göze alarak matbaasını Ankara'ya kaçırmış ve gazetesini Milli Mücadele'nin merkezinde çıkarmaya devam etmiştir. Cumhuriyet gazetesi uzun yıllar buradaki Pembe Köşk'teydi.",
+    "lat": 41.01063453463206,
+    "lng": 28.974695224788615,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "54",
+    "title": "Abanoz Sokağı",
+    "description": "Beyoğlu'nda, Balo Sokağı ile Sakızağacı Caddesi arasında bulunan ve İstanbul'un umumi evlerinin yer aldığı sokaktır. Meşrutiyet'in ilanıyla, eskiden Yeniçarşı'da bulunan bu evler buraya taşınmıştır. Birinci Cihan Harbi yıllarında sokağın adı 'Lale Sokağı' idi.",
+    "lat": 41.03567219551723,
+    "lng": 28.978799502610645,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "55",
+    "title": "Abasıyanık (Sait Faik)",
+    "description": "Cumhuriyet dönemi edebiyatının en önemli hikayecilerinden. Eserlerinde İstanbul'un gözden uzak köşelerini, adaları, balıkçıları ve sıradan insanları eşsiz bir dille anlatmıştır. Burgazada'daki evi bugün müze olarak korunmaktadır.",
+    "lat": 40.88120042000959,
+    "lng": 29.067478173895225,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "56",
+    "title": "Abaza Modası",
+    "description": "17. yüzyılda, Sultan IV. Murad'ın gözdelerinden Abaza Mehmed Paşa'nın kendine has giyim tarzının İstanbul'un kibar gençleri arasında yayılmasıyla oluşan akımdır. Paşa'nın idamından sonra bile 'Abaza kesimi kaftan', 'Abazalı kavuk' gibi kıyafetler yıllarca popüler kalmıştır. Kuyucu Murat Paşa Türbesine gömüldü.",
+    "lat": 41.01064223804811,
+    "lng": 28.959682718133116,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "57",
+    "title": "Abdi, Abdürrezzak",
+    "description": "Türk tuluat tiyatrosunun büyük komiği. Şehzadebaşı'ndaki Handehane-i Osmani tiyatrosunu kurmuştur. Bir oyunda 'Bu çizme memur maaşları gibi bir türlü çıkmıyor!' demesi üzerine Sultan Abdülhamid'in ertesi gün memurlara maaş dağıttığı, fakat Abdi'yi bir daha saraya çıkarmadığı rivayet edilir. Kapitülasyonların kaldırıldığı gün vefat etmiştir.",
+    "lat": 41.013016208846224,
+    "lng": 28.95869307438527,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "58",
+    "title": "Abdi (Bekçi)",
+    "description": "Son ortaoyunculardan namlı bir sanatkârdı ve 'zenne' rolüne çıkardı. Asıl mesleği Selâmsız semtinin bekçiliğiydi. Kavuklu Hamdi'nin takımında oynar, esprili ve işveli tavırlarıyla Hamdi'ye nükteler söyletir, halkı kahkahalara boğardı.",
+    "lat": 41.023518954983174,
+    "lng": 29.027232223217382,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "59",
+    "title": "Abdullah (Arab)",
+    "description": "II. Abdülhamid devrinin ünlü kabadayılarından ve 'Onikiler' çetesinin reisi. Aslen Kürt olmasına rağmen esmerliğinden ötürü 'Arap' lakabıyla anılırdı. Saraydan himaye gördüğü, Aksaray ve Beyoğlu'ndaki birçok mekânı haraca bağladığı rivayet edilir. En bilinen olayı, Çerkes Mehmed'i Direklerarası'nda vurmasıdır.",
+    "lat": 41.012821523308546,
+    "lng": 28.95931337382487,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "60",
+    "title": "Abdullah Ağa (Bostancıbaşı)",
+    "description": "III. Murad devri bostancıbaşılarından ve hayırsever bir zattır. Beylerbeyi'ndeki camisine vakıf sağlamak için padişahtan yardım istediğinde, Sultan Murad'ın namaz kılarken atıyla dolaşabildiği yerleri vakfetmesi rivayet edilir. Abdullah Ağa da bu kısa sürede Kuzguncuk'tan Kısıklı'ya kadar olan araziyi dolaşmıştır.",
+    "lat": 41.03940915751318,
+    "lng": 29.042061227634544,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "61",
+    "title": "Abdullah Ağa Çeşmesi",
+    "description": "Silivrikapı'da Uzunyusuf mahallesinde bulunan bir çeşme. Aslen Babüssaade Ağası Abdullah Ağa tarafından yaptırılmış, sonradan harabe haline gelince Sultan Abdülmecid'in validesi Bezmialem Sultan tarafından 1841'de tamir ettirilmiştir. Kitabesinde bu tamirat anlatılır.",
+    "lat": 41.00718720800666,
+    "lng": 28.92720178136366,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "62",
+    "title": "Abdullah Ağa Hamamı",
+    "description": "Beylerbeyi, Istavroz'da, Abdullah Ağa Camii'nin yanıbaşında yer alan ve Bostancıbaşı Abdullah Ağa tarafından yaptırılan bir hamamdır. Uzun süre atıl kaldıktan sonra 20. yüzyıl başlarında yıkılmış, 1943'te enkazı kaldırılarak yeri avlu haline getirilmiştir.",
+    "lat": 41.0428730925486,
+    "lng": 29.04283439535031,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "63",
+    "title": "Abdullah Ağa Mektebi",
+    "description": "Bostancıbaşı Abdullah Ağa'nın hayratından olan eski ve namlı bir mahalle mektebi. Beylerbeyi, Istavroz'da bulunur. Bina, günümüzde Istavroz Polis Karakolu olarak kullanılmaktadır.",
+    "lat": 41.04416993169058,
+    "lng": 29.043474681310848,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "64",
+    "title": "Abdullah Biraderler",
+    "description": "Abdülaziz devrinin en ünlü fotoğrafçıları. Aslen Ermeni olan kardeşler, Sultan tarafından 'Ressam-ı Hazret-i Şehriyari' unvanıyla onurlandırılmışlardır. Beyoğlu'ndaki stüdyoları devlet ricalinin ve kibarların uğrak yeriydi. Gördükleri himaye ve lütuf karşılığında sonradan Müslüman olmuşlardır.",
+    "lat": 41.02852222553833,
+    "lng": 28.974176783169288,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "65",
+    "title": "Abdullah Cevdet (Doktor)",
+    "description": "Jön Türkler neslinden, serbest fikirli düşünür, şair ve göz hekimi. Dini konulardaki cüretkar yazıları ve tercümeleri nedeniyle 'dinsiz' olarak tanınmıştır. Vefatında cenaze namazının kılınıp kılınmayacağı tartışma yaratmış, Ayasofya imamı 'Tövbe-i nasuh olabilir' diyerek namazı kıldırmıştır.",
+    "lat": 41.01540667840325,
+    "lng": 28.920783555154472,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "66",
+    "title": "Abdullah Paşa (Deli)",
+    "description": "II. Mahmud'un sadrazamlarından. Asıl adı Hamdullah'tır. Gençliğinde Çengelköy'de kayıkçılık yapmış, sonra sarayda hamlacı olmuş ve Bostancıbaşılığa kadar yükselmiştir. Sert mizacı ve halk arasındaki şöhretiyle bilinirdi. İzmit'te vefat etmiştir.",
+    "lat": 41.051630448325156,
+    "lng": 29.05104472486864,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "67",
+    "title": "Abdullahpaşa Yalısı, Şerifler Yalısı",
+    "description": "Emirgân'da, Emirgân Camii önünde bulunan tarihi yapı. IV. Murad'ın nedimi Emirgüne Han'ın sahil sarayından günümüze kalan tek parça olduğu rivayet edilir. İçindeki fıskiyeli salonu, mermer havuzu ve oyma işçiliği ile Boğaziçi'nin en değerli yapılarından biridir. Son sahibi Mekke Emiri Şerif Abdülilah Paşa'dır.",
+    "lat": 41.10401862534722,
+    "lng": 29.05596608797006,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "68",
+    "title": "Abdullah Zühdi",
+    "description": "II. Meşrutiyet dönemi gazetecilerinden ve romancılarından. Bir Fransız operet kumpanyasındaki Madmazel Violette'e aşık olmuş, kadının dikkatini çekmek için paradideki yerinden fesini sahneye düşürdüğü anlatılır. Galata'nın eğlence alemlerini ve sefaletini eserlerinde ustalıkla tasvir etmiştir.",
+    "lat": 41.02718785867963,
+    "lng": 28.972922099859968,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "69",
+    "title": "Abdülaziz",
+    "description": "32. Osmanlı padişahı. Avrupa'ya seyahat eden ilk ve tek padişahtır. Mahmud Nedim Paşa'nın etkisiyle girdiği mali buhran ve artan hoşnutsuzluk sonucu, Mithat Paşa ve Hüseyin Avni Paşa'nın öncülüğündeki bir darbeyle tahttan indirilmiştir. Hal' edildikten birkaç gün sonra Feriye Sarayı'nda bilekleri kesilmiş halde bulunmuştur. Ölümü intihar mı cinayet mi olduğu hâlâ tartışmalıdır.",
+    "lat": 41.04570920217458,
+    "lng": 29.02022506839572,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "70",
+    "title": "Abdülbaki Efendi Camii",
+    "description": "Üsküdar, Sultantepe'de, Servilik Caddesi üzerinde bulunan 17. yüzyıl yapısı bir cami. Kapısı üstündeki kitabede 1644 (H. 1054) yılında bir hayır sahibi tarafından yaptırıldığı, 1877'de ise Şevket Paşa tarafından tamir ettirildiği yazılıdır.",
+    "lat": 41.02766272131172,
+    "lng": 29.022545034286534,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "71",
+    "title": "Abdülhak Hamid Tarhan",
+    "description": "Tanzimat sonrası Türk şiirinin en büyük isimlerinden olan Şair-i Âzam, hayatının son yıllarını Maçka Palas'ın bir dairesinde geçirmiştir. Bu daire, dönemin edebiyat ve sanat dünyasının önemli bir buluşma noktası haline gelmiştir.",
+    "lat": 41.04763197141241,
+    "lng": 28.99425143533186,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "72",
+    "title": "Abdülhak Molla Yalısı",
+    "description": "Bebek'te, vapur iskelesi karşısında bulunan ve II. Mahmud'un hekimbaşısı Abdülhak Molla'ya ait olan tarihi yalı. Sonradan Cevdet Paşa'ya geçmiş, en sonunda ise Mabeyinci Faik Bey tarafından satın alınarak tamamen yenilenmiştir. Günümüzde yerinde modern apartmanlar bulunmaktadır.",
+    "lat": 41.04651874290787,
+    "lng": 29.04908735993994,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "73",
+    "title": "Abdülhalim Memduh",
+    "description": "II. Abdülhamid devrinin ateşli hürriyetperverlerinden, şair ve hukuk talebesi. Sert muhalefeti ve pervasızlığıyla tanınırdı. Bir gün Tepebaşı Bahçesi'nde, bando Hamidiye Marşı'nı çalarken masanın mermerine padişah aleyhinde hicivli bir beyit yazdığı rivayet edilir. Jurnal üzerine yakalanıp sürgüne gönderilmiş, Avrupa'da vefat etmiştir.",
+    "lat": 41.031539022042104,
+    "lng": 28.972107723690083,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "74",
+    "title": "Abdülhamid I.",
+    "description": "27. Osmanlı padişahı. Şehzadeliğinde aşık olduğu Ruhşah adlı kadına, padişah olduktan sonra yazdığı 'Ruhşahım, Hamidin sana kurban ola' diye başlayan içli mektubu meşhurdur. Bahçekapı'da kendi adını taşıyan imaret, sebil ve türbeden oluşan bir külliye yaptırmıştır.",
+    "lat": 41.01557225018565,
+    "lng": 28.974161526318337,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "75",
+    "title": "Abdülhamid I. Sebili",
+    "description": "Türk Rokokosu'nun en güzel eserlerinden. Aslen Bahçekapı'daki Hamidiye Külliyesi'nin köşesinde yer alırken, Dördüncü Vakıf Han'ın inşası sırasında sökülerek bugünkü yeri olan Gülhane Parkı Soğukçeşme kapısı karşısına taşınmıştır. Kitabesi şair Seyyid Vehbi'ye, yazısı hattat Yesarizade'ye aittir.",
+    "lat": 41.010384960283815,
+    "lng": 28.97875007629721,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "76",
+    "title": "Abdülhamid II.",
+    "description": "34. Osmanlı padişahı. 33 yıllık saltanatı boyunca devleti Yıldız Sarayı'ndan idare etmiş ve burayı imparatorluğun merkezi haline getirmiştir. Vehmi ve jurnalciliğe olan düşkünlüğü ile tanınır. Gece yatağında, kendisine maceralı polis romanları okutarak uykuya daldığı rivayet edilir.",
+    "lat": 41.050184200162136,
+    "lng": 29.011697783740246,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "77",
+    "title": "Abdülhamid II. Devrinde Gazeteler ve Sansür",
+    "description": "II. Abdülhamid döneminde basına uygulanan sıkı denetim. 'Hürriyet', 'ihtilal' gibi kelimeler yasaktı. Vehim o derece ileriydi ki, Veliaht Murad ve Reşad'ı hatırlattığı için 'murad' ve 'reşad' kelimeleri bile metinlerden çıkarılırdı. Hatta bir sansür memurunun, bir matematik kitabındaki yıldıza benzeyen 'x' işaretini sildiği rivayet edilir.",
+    "lat": 41.00977037547812,
+    "lng": 28.9739545799007,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "78",
+    "title": "Abdülaziz Efendi (Karaçelebizade)",
+    "description": "17. yüzyılın en renkli ve nüfuzlu şeyhülislamlarından. Sultan İbrahim'in hal'inde ve katlinde önemli rol oynamıştır. Samatya'daki konağında vezirleri kıskandıran bir haşmetle yaşar, hizmetindeki yakışıklı gençleri kendine has kıyafetlerle giydirerek 'topuk seyri' yapmaktan zevk aldığı rivayet edilir.",
+    "lat": 41.00026507005052,
+    "lng": 28.92990465043641,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "79",
+    "title": "Abdülmecid",
+    "description": "31. Osmanlı padişahı ve Tanzimat Fermanı'nı ilan eden hükümdar. Batı kültürüne ve müziğine düşkünlüğü, nezaketi ve israfıyla tanınır. Saltanatının en büyük eseri, mimar Balyan ailesine yaptırdığı ve devletin hazinesini zora sokan Dolmabahçe Sarayı'dır. İçki düşkünlüğü yüzünden genç yaşta veremden vefat etmiştir.",
+    "lat": 41.03952842561395,
+    "lng": 29.001403534809274,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "80",
+    "title": "Abdülmecid Efendi (Halife)",
+    "description": "Son Osmanlı Halifesi. Sultan Abdülaziz'in oğlu olan Abdülmecid, resim ve müzik gibi sanatlara düşkünlüğüyle tanınırdı. Saltanatın kaldırılmasından sonra TBMM tarafından halife seçilmiş, ancak 1924'te halifeliğin de kaldırılmasıyla ailesiyle birlikte yurt dışına sürülmüştür. Sürgüne Feriye Sarayı'ndan gönderilmiştir.",
+    "lat": 41.045733476781905,
+    "lng": 29.0203452181193,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "81",
+    "title": "Abdülvedud Camii",
+    "description": "Ayvansaray kapısı dışında bulunan ve halk arasında 'Yavedud Camii' olarak da bilinen mescit. İstanbul'un fethinde bulunduğu söylenen Buharalı Şeyh Abdülvedud tarafından kurulmuştur. Bugünkü yapı, Dördüncü Mehmed'in kızı Hatice Sultan tarafından ihya edilen ve 1804'te tekrar tamir edilen şeklidir.",
+    "lat": 41.04081426127636,
+    "lng": 28.941066219987054,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "82",
+    "title": "Abud Efendi (Mehmed)",
+    "description": "Geçen yüzyılın en itibarlı tüccarlarından. Dürüstlüğü ve halkçılığıyla tanınırdı. 1896'daki et buhranında, celeplerin ihtikârına karşı kendi imkânlarıyla dört vapur dolusu hayvan getirtip fiyatları düşürerek halkın sevgisini kazanmıştır. Ticarethanesi Mercan'daydı.",
+    "lat": 41.01282201270034,
+    "lng": 28.967125497314875,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "83",
+    "title": "Acem Ali Bey",
+    "description": "Ahmed Midhat Efendi'nin 'Dürdane Hanım' romanının baş kahramanı. Galata'nın en azılı kabadayılarını bıçağı altından geçiren, on kişiyi dağıtan bu 'Acem güzeli' delikanlı, aslında erkek kılığında dolaşan Dürdane Hanım'dan başkası değildir.",
+    "lat": 41.02590100315477,
+    "lng": 28.97296503029485,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "84",
+    "title": "Acemin Evi",
+    "description": "Sultan Abdülaziz devrinde, Çapa Çeşmesi civarında Acem İbrahim adlı bir İranlı tarafından işletilen, şehrin en meşhur gizli umumi evlerinden biri. 'Kumru', 'Cihanyandı', 'Sidikli Perver' gibi namlı fahişelerin çalıştığı bu mekana, dönemin paşaları ve Aksaray'ın Onikiler çetesi gibi kabadayıları devam ederdi.",
+    "lat": 41.0162381109621,
+    "lng": 28.93179650487819,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "85",
+    "title": "Acemioğlanlar Hamamı",
+    "description": "Şehzadebaşı'nda bulunan tarihi hamam. Osmanlı'nın ünlü Acemioğlanlar Kışlası'ndan günümüze kalan tek yapıdır. Ocakların kaldırılmasından sonra çarşı hamamı olarak işletilmeye başlanmıştır. Türk kışla hamam mimarisinin ayaktaki tek örneği olması bakımından büyük bir kıymet taşır.",
+    "lat": 41.01235949328501,
+    "lng": 28.95893043558133,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "86",
+    "title": "Adile Sultan",
+    "description": "II. Mahmud'un kızı, divan sahibi şair bir sultan. Cömertliği, dindarlığı ve sanatçılara olan himayesiyle tanınırdı. Fındıklı'daki yalısı, dönemin alimlerinin, şeyhlerinin ve sanatçılarının toplandığı bir kültür merkeziydi. Nakşibendi tarikatına mensuptu ve Bâlâ Tekkesi'ne devam ederdi.",
+    "lat": 41.030233021861655,
+    "lng": 28.98941926863735,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "87",
+    "title": "Adliye Sarayı Yangını",
+    "description": "3-4 Aralık 1933 gecesi, bugün Sultanahmet Adliyesi'nin bulunduğu eski binada çıkan büyük yangın. O dönemde Maliye ve Adliye Nezareti olarak kullanılan bina, yarım milyondan fazla dava dosyasıyla birlikte tamamen yanmıştır. Yangının söndürülmesi sırasında, bitişiğindeki Ayasofya Hamamı'nda bulunan 30 tonluk benzin deposunun korunması büyük bir başarı olmuştur.",
+    "lat": 41.0070785310223,
+    "lng": 28.974671166268838,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "88",
+    "title": "Afife",
+    "description": "Sahneye çıkan ilk Türk-Müslüman kadın tiyatro sanatçısı. 1923'te Kadıköy'deki Hale Tiyatrosu'nda 'Jale' takma adıyla sahneye çıktığında olaylar çıkmış, polis müdahale etmişti. Sanat hayatı parlak başlamasına rağmen, uyuşturucu bağımlılığı yüzünden trajik bir şekilde son bulmuş ve genç yaşta sefalet içinde ölmüştür.",
+    "lat": 40.98749864883817,
+    "lng": 29.027009152541183,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "89",
+    "title": "Afife Kadın",
+    "description": "17. yüzyıl ortalarında, güzelliği ve zekasıyla Sultan IV. Mehmed'i kendine bağlamış bir saraylı. Padişah tahttan indirilip Şimşirlik dairesine hapsedildiğinde, karısı Gülnuş Sultan'la birlikte yanına sadece Afife Kadın'ı almıştır. Padişahla karşılıklı şiirler söylediği ve bir destan yazdığı rivayet edilir.",
+    "lat": 41.013330801369385,
+    "lng": 28.98339158934355,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "90",
+    "title": "Afyoncu Baba",
+    "description": "Asıl adı Ahmed Efendi olan, 18. yüzyılın namlı afyon tiryakisi. Günde elli dirhem afyon tükettiği ve 134 yaşında vefat ettiği söylenir. Edirnekapı dışında, Lalizade Türbesi civarındaki kabri, o civarın görülmeye değer yerlerinden biri olarak bilinir.",
+    "lat": 41.046467677671714,
+    "lng": 28.933601706917166,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "91",
+    "title": "Ağa Camii",
+    "description": "İstiklal Caddesi üzerinde, Galatasaray Ağası Şeyhülharem Hüseyin Ağa tarafından 1596'da yaptırılan cami. Zamanla birçok onarım görmüştür. Avlusundaki fıskiyeli mermer havuz Eyüp'teki Oluklubayır Tekkesi'nden, Mimar Sinan eseri olan şadırvanı ise Kasımpaşa'daki Sinan Paşa Camii'nden getirilmiştir.",
+    "lat": 41.03522289611335,
+    "lng": 28.98067875482367,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "92",
+    "title": "Ağaoğlu (Ahmed)",
+    "description": "Ünlü gazeteci, fikir adamı ve Türkçülük akımının öncülerinden. Ziya Gökalp ve Yusuf Akçora ile birlikte Türk Ocağı ve Türk Yurdu dergisinin kurucularındandır. İttihat ve Terakki ricali arasında bulunması nedeniyle Mütareke'de Malta'ya sürülmüştür. Siyasi hayatı çetin mücadelelerle geçmiştir.",
+    "lat": 41.00908188218144,
+    "lng": 28.973915648749543,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "93",
+    "title": "Ahmed I.",
+    "description": "14 yaşında tahta çıkan 14. Osmanlı padişahı. Dindar kişiliğiyle tanınır. Peygamber sevgisinin bir nişanesi olarak, Hz. Muhammed'in ayak izi şeklinde mücevherli bir sorguç yaptırmış ve bunu mübarek günlerde takmıştır. İstanbul'un en muhteşem yapılarından olan Sultanahmet Camii'ni o yaptırmıştır.",
+    "lat": 41.00530424326013,
+    "lng": 28.977114189546185,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "94",
+    "title": "Ahmed III.",
+    "description": "Lale Devri olarak bilinen dönemin padişahı. Sanata ve eğlenceye düşkünlüğüyle tanınır. Sadrazamı Nevşehirli Damad İbrahim Paşa ile birlikte İstanbul'u saraylar, köşkler ve bahçelerle donatmıştır. Patrona Halil İsyanı ile tahttan indirilmiş, ömrünün son yıllarını Topkapı Sarayı'nda mahpus olarak geçirmiştir.",
+    "lat": 41.0053191143723,
+    "lng": 28.976916889769697,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "95",
+    "title": "Ahmed III. Meydan Çeşmesi (Babıhümayun)",
+    "description": "Topkapı Sarayı'nın ana kapısı Babıhümayun önünde yer alan, Türk Rokokosu'nun şaheseri. Üzerindeki 14 beyitlik kaside şair Seyyid Vehbi'ye ait olmakla birlikte, son mısra olan 'Aç besmeleyle iç suyu Han Ahmed'e eyle dua'yı bizzat Sultan III. Ahmed'in söylediği rivayet edilir.",
+    "lat": 41.00840380932609,
+    "lng": 28.98161611998584,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "96",
+    "title": "Ahmed III. Kütüphanesi",
+    "description": "Topkapı Sarayı'nın üçüncü avlusunda, Arz Odası'nın önünde bulunan Lale Devri yapısı. Saraydaki dağınık halde bulunan kitapları bir araya toplamak amacıyla yaptırılmıştır. Padişahın, temelini Sultanahmet Camii'nin temelinde kullanılan altın kazma ile attığı rivayet edilir. Mimarisi, çinileri ve alçı işçiliğiyle bir sanat harikasıdır.",
+    "lat": 41.01315058222257,
+    "lng": 28.985488119463724,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "97",
+    "title": "Ahmed Çelebi (Hezarfen)",
+    "description": "17. yüzyılda yaşamış, kendi yaptığı kanatlarla uçmayı başaran efsanevi Türk bilgini. Evliya Çelebi'nin anlattığına göre, lodoslu bir havada Galata Kulesi'nden kanatlarıyla havalanmış ve Boğaz'ı geçerek Üsküdar'daki Doğancılar Meydanı'na inmiştir. Sultan IV. Murad bu başarıyı ödüllendirmiş, ancak 'bu adam pek korkulacak biridir' diyerek onu Cezayir'e sürmüştür.",
+    "lat": 41.01871918293687,
+    "lng": 29.013167538444947,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "98",
+    "title": "Ahmed Cevdet Paşa",
+    "description": "Tanzimat devrinin büyük devlet adamı, hukukçusu ve tarihçisi. Ünlü 'Mecelle'yi hazırlayan heyetin başında bulunmuştur. Kızı Fatma Aliye Hanım'a anlattığına göre, gençliğinde ilim ve fikir hayatına girmesiyle birlikte bir ağa tutulduğunu, çabaladıkça dolaştığını, ağdan ve bağdan kurtulayım dedikçe yeni kayıtlar içine düştüğünü' söylemiştir.",
+    "lat": 40.95721176042616,
+    "lng": 29.088899078071105,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "99",
+    "title": "Ahmed Midhat Efendi",
+    "description": "II. Abdülhamid devrinin en üretken yazarı, gazetecisi ve halk hocası. 'Hace-i Evvel' (İlk Hoca) olarak anılır. Yazı yazmayı bir tutku haline getirmiş, günde en az beş sayfa yazdığı söylenir. Hayatının son yıllarını Beykoz'daki yalısında ve çiftliğinde geçirmiş, Darüşşafaka'da vefat etmiştir.",
+    "lat": 41.13685764024332,
+    "lng": 29.086640264450065,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "100",
+    "title": "Ahmed Paşa Camii",
+    "description": "Kanuni'nin damadı ve sadrazamı Kara Ahmed Paşa tarafından yaptırılan, Mimar Sinan'ın en olgun eserlerinden biri. Paşa'nın idamıyla inşaatı yarım kalmış, on yıl sonra tekrar başlanarak tamamlanmıştır. Mermer minberi, ince işçiliğiyle Türk sanatının şaheserlerinden sayılır.",
+    "lat": 41.02107803321464,
+    "lng": 28.929456787444664,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "101",
+    "title": "Ahmed Rasim",
+    "description": "İstanbul'u ve gündelik hayatını eşsiz bir dille anlatan büyük yazar ve gazeteci. Şehir Mektupları, Fuhş-i Atik, Gecelerim gibi eserlerinde 19. yüzyıl sonu İstanbul'unu tüm canlılığıyla resmetmiştir. \"Ahmed Rasim'in eserlerini sıkarsak, İstanbul'un kokusu, ıtrı damlar\" denir. Heybeliada'da vefat etmiştir.",
+    "lat": 40.87460749811919,
+    "lng": 29.090271896246964,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "102",
+    "title": "Ahmed Vefik Paşa",
+    "description": "Tanzimat devrinin en renkli devlet adamı, dil bilgini ve tiyatro kurucusu. Moliere'den yaptığı çeviri ve adaptasyonlarla tanınır. Kaba ve eksantrik tavırları dillere destandır. Rumelihisarı'ndaki köşkü ve kütüphanesi, meşhur Robert Kolej'in kurulduğu arazinin bir kısmını oluşturmuştur.",
+    "lat": 41.0681336544145,
+    "lng": 29.033342760177142,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "103",
+    "title": "Ahmetli Köyü",
+    "description": "Şile'ye bağlı, havası ve suyu güzel, pitoresk bir köy. Köyde ilginç bir gelenek vardır: Yeni gelinler, zifafın onuncu günü Zağarcıbaşı Çeşmesi'ne götürülür. Gelin, muradının olması ve evliliğinin tatlı geçmesi için kitabe taşına ballı yağ sürer.",
+    "lat": 41.147547646021195,
+    "lng": 29.580573164028127,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "104",
+    "title": "Akbaba",
+    "description": "Yusuf Ziya Ortaç ve Orhan Seyfi Orhon tarafından 1922'de kurulmuş, Türkiye'nin en uzun ömürlü siyasi mizah dergisi. Yarım asra yakın yayın hayatıyla bir mektep haline gelmiş, birçok mizah yazarı ve karikatüristin yetişmesine vesile olmuştur. Kurucularından Yusuf Ziya, 'Akbabacı' lakabıyla anılır.",
+    "lat": 41.013966776308386,
+    "lng": 28.975050904873864,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "105",
+    "title": "Aksaray Yangınları",
+    "description": "Aksaray semtini defalarca küle çeviren büyük yangınlar. Bunların en büyüğü, 23 Temmuz 1911 Pazar günü (Meşrutiyet Bayramı) çıkmış ve 17 saat sürmüştür. Uzunçarşı'dan başlayıp Aksaray ve Langa'yı içine alan yangında 2400 ev, 3000 dükkân ve 16 cami yanarak İstanbul tarihinin en büyük felaketlerinden biri yaşanmıştır.",
+    "lat": 41.01463935160772,
+    "lng": 28.96743892606473,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "106",
+    "title": "Akşam Gazetesi",
+    "description": "1918'de Necmeddin Sadak, Kâzım Şinasi Dersan ve Ali Naci Karacan tarafından kurulan, İstanbul'un köklü gazetelerinden. Milli Mücadele yıllarında Anadolu'daki kurtuluş hareketini desteklemiş, harf inkılabı sırasında ise yeni harfleri halka öğretmekte bir okul görevi görmüştür.",
+    "lat": 41.01118781097506,
+    "lng": 28.977234052665345,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
+  },
+  {
+    "id": "107",
+    "title": "Alafranga Baloz",
+    "description": "II. Abdülhamid devrinde Galata'nın meşhur balozlarından. Diğer balozlardan farklı olarak, müşterileri genellikle yabancı gemilerin mürettebatı, Rum tezgâhtarlar ve Levantenlerdi. Bu mekanda orkestra eşliğinde polka, mazurka ve vals gibi danslar edilirdi. Galata'daki balozların en temizi ve gürültüsüzü olarak bilinirdi.",
+    "lat": 41.02466039598717,
+    "lng": 28.977979799152564,
+    "source": "İA (R.E.Koçu)",
+    "contributor": "istanbulin",
+    "image": ""
   }
 ]
