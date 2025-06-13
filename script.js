@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     const darkTheme = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19, // Yine de 19'a kadar gitmesine izin ver (dijital zoom)
-        maxNativeZoom: 19, // Ama gerçek resimlerin 16'da bittiğini söyle
+        maxZoom: 16, // 
+        maxNativeZoom: 16, // 
         noWrap: true
     });
 
