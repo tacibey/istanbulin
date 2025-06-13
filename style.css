@@ -151,3 +151,75 @@ body.dark-theme .custom-marker-icon.new-marker {
     .popup-text-content { max-height: 180px; overflow-y: auto; }
 }
 #botpoison-challenge { display: none; }
+/* Site Paylaşım Butonu Stilleri */
+.site-share-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+.site-share-button {
+    background-color: var(--new-item-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.site-share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.site-share-popup {
+    position: absolute;
+    bottom: 110%; /* Butonun hemen üzerinde */
+    right: 0;
+    background-color: var(--dark-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    /* Başlangıçta gizli */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.site-share-popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.share-option {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.share-option:hover {
+    transform: scale(1.2);
+}
+
+/* Tam ekran modunda PWA butonları ve paylaşım butonunu gizle */
+body.map-is-fullscreen .pwa-actions-container,
+body.map-is-fullscreen .site-share-container {
+    display: none;
+}
