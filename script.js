@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- ADIM 1: ÖNCE SADECE HARİTAYI ÇİZ ---
-    // Bu blok, mümkün olan en hızlı LCP'yi sağlar.
     const map = L.map('map', { attributionControl: false }).setView([41.0082, 28.9784], 13);
     const themeToggleButton = document.getElementById('theme-toggle-button');
     const lightTheme = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 20 });
@@ -24,9 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(savedTheme);
 
 
-    // --- ADIM 2: GERİ KALAN HER ŞEYİ GECİKMELİ YÜKLE ---
-    // Bu fonksiyon, harita çizildikten sonra çalışarak ana iş parçacığını bloklamaz.
+    // --- ADIM 2: GERİ KALAN HER ŞEYİ İLK ETKİLEŞİMDEN SONRA YÜKLE ---
+    let markersLoaded = false;
     function setupControlsAndMarkers() {
+        // Bu fonksiyonun sadece bir kez çalışmasını garantile
+        if (markersLoaded) return;
+        markersLoaded = true;
+
+        console.log("Kullanıcı etkileşimi algılandı, işaretçiler ve kontroller yükleniyor...");
+
         function showCopyNotification(text = "URL Kopyalandı!") {
             const e = document.getElementById("copy-notification");
             e && e.remove();
@@ -257,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('hashchange', openMarkerFromUrl, false);
     }
     
-    // Geri kalan her şeyi küçük bir gecikmeyle çalıştır.
-    setTimeout(setupControlsAndMarkers, 50);
+    // İşaretçileri ve kontrolleri, kullanıcı haritayla etkileşime girince YALNIZCA BİR KEZ yükle.
+    map.once('mousedown touchstart movestart zoomstart', setupControlsAndMarkers);
 
 });
