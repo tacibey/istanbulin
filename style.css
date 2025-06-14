@@ -66,6 +66,7 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .popup-text-content p:last-child { margin-bottom: 0; }
 .popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
 .popup-text-content a:hover { text-decoration: underline; }
+.popup-actions { display: flex; justify-content: space-between; align-items: center; }
 .leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
 .leaflet-popup-close-button:hover { color: #ddd !important; }
 .leaflet-control-custom a { background-position: 50% 50%; background-repeat: no-repeat; display: block; }
@@ -80,8 +81,9 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .leaflet-control-fullscreen .fullscreen-icon { width: 26px; height: 26px; background-size: 16px 16px; }
 .leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM10 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 15 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 13.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/></svg>'); }
 .leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 0 4.5 0h-3A1.5 1.5 0 0 0 0 1.5v3a.5.5 0 0 1-1 0v-3A2.5 2.5 0 0 1 2.5-1h3zM0 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 4 14.5v-3a.5.5 0 0 1-.5-.5zM10.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 10 4.5v-3a.5.5 0 0 1 .5-.5zM16 10.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1 0-1h3A1.5 1.5 0 0 1 12 7.5v3a.5.5 0 0 1 .5.5z"/></svg>'); }
-.share-link-container a { text-decoration: none; cursor: pointer; font-size: 1.1em; vertical-align: middle; }
-.share-link-container a:hover { opacity: 0.7; }
+.share-link-container, .directions-link-container { font-size: 0.9em; margin: 0; }
+.share-link-container a, .directions-link-container a { text-decoration: none; cursor: pointer; font-size: 1.1em; vertical-align: middle; }
+.share-link-container a:hover, .directions-link-container a:hover { opacity: 0.7; }
 #copy-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 12px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); z-index: 10002; font-size: 1em; font-weight: 500; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease; }
 #copy-notification.show { opacity: 1; visibility: visible; bottom: 50px; }
 .pwa-actions-container { position: fixed; bottom: 0; left: 0; width: 100%; padding: 20px; padding-bottom: calc(20px + env(safe-area-inset-bottom)); box-sizing: border-box; z-index: 10001; display: flex; justify-content: center; align-items: center; gap: 15px; pointer-events: none; }
@@ -93,7 +95,7 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .yeni-container { max-width: 800px; margin: 40px auto; padding: 20px; flex-grow: 1; background-color: var(--primary-bg-color); }
 .yeni-content h2 { font-size: 2em; margin-bottom: 5px; }
 .yeni-content .instruction { font-size: 1.1em; color: var(--accent-color); margin-top: 0; margin-bottom: 5px; }
-.yeni-content .helper-text { font-size: 0.9em; color: #888; margin-top: 0; margin-bottom: 30px; background-color: #f0f0f0; padding: 10px; border-radius: 5px; }
+.yeni-content .helper-text { font-size: 0.9em; color: #555; margin-top: 0; margin-bottom: 30px; background-color: #f0f0f0; padding: 10px; border-radius: 5px; }
 .yeni-form .form-group { margin-bottom: 20px; }
 .yeni-form label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
 .yeni-form input[type="text"], .yeni-form input[type="url"], .yeni-form textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-family: 'Roboto', sans-serif; font-size: 1em; }
