@@ -1,21 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     function showCopyNotification(text = "URL Kopyalandı!") {
-        const e = document.getElementById("copy-notification");
-        e && e.remove();
-        const t = document.createElement("div");
-        t.id = "copy-notification", t.textContent = text, document.body.appendChild(t), setTimeout(() => {t.classList.add("show")}, 10), setTimeout(() => {t.classList.remove("show"), setTimeout(() => {t.remove()}, 300)}, 2e3)
+        const notification = document.getElementById("copy-notification");
+        if (notification) {
+            notification.remove();
+        }
+        const newNotification = document.createElement("div");
+        newNotification.id = "copy-notification";
+        newNotification.textContent = text;
+        document.body.appendChild(newNotification);
+        setTimeout(() => { newNotification.classList.add("show") }, 10);
+        setTimeout(() => {
+            newNotification.classList.remove("show");
+            setTimeout(() => { newNotification.remove() }, 300);
+        }, 2000);
     }
-    function copyShareLink(e, t) {
-        e.preventDefault(), e.stopPropagation();
-        const o = `${window.location.origin}${window.location.pathname.replace("index.html","")}#/${t}`;
-        navigator.clipboard.writeText(o).then(() => showCopyNotification()).catch(e => {console.error("URL kopyalanamadı: ", e)})
+
+    function copyShareLink(event, markerId) {
+        event.preventDefault();
+        event.stopPropagation();
+        const url = `${window.location.origin}${window.location.pathname.replace("index.html","")}#/${markerId}`;
+        navigator.clipboard.writeText(url).then(() => {
+            showCopyNotification();
+        }).catch(err => {
+            console.error("URL kopyalanamadı: ", err);
+        });
     }
     window.copyShareLink = copyShareLink;
     
-    // NEW: Function to track page views in GA for SPA
     function trackPageView(path, title) {
       if (typeof gtag !== 'function') {
-        console.warn("Google Analytics (gtag) is not available.");
+        // console.warn("Google Analytics (gtag) is not available.");
         return;
       }
       gtag('event', 'page_view', {
@@ -127,15 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!marker) return;
 
         markersLayer.zoomToShowLayer(marker, () => {
-            // Pan the map to position the marker in the lower part of the screen
-            const offset = map.getSize().y * -0.25; // Negative value pans map up, so content appears lower
+            const offset = map.getSize().y * -0.25; 
             map.panBy([0, offset], { animate: true });
             marker.openPopup();
         });
     }
 
     function formatDescription(description) {
-        // Find text within curly or standard double quotes and make it italic
         return description.replace(/(“[^”]*”|"[^"]*")/g, '<i>$&</i>');
     }
 
@@ -143,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let imageUrl = '';
         if (markerData.image) {
             if (markerData.image.startsWith('http')) {
-                // Use image proxy for external images for optimization
                 imageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(markerData.image)}&w=300&h=200&fit=cover&output=webp`;
             } else {
                 imageUrl = `images/${markerData.image}`;
@@ -214,13 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = hash.substring(2);
             goToMarker(id);
             
-            // Track view in GA
             const markerData = allData.find(m => m.id.toString() === id);
             if (markerData) {
                 trackPageView(hash, `${markerData.title} | istanbulin`);
             }
-        } else {
-            // Track homepage view if hash is empty or different
+        } else if (allData.length > 0) { // Sadece veriler yüklendikten sonra ana sayfayı takip et
             trackPageView(location.pathname, document.title);
         }
     }
@@ -238,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let unreadIds = allIds.filter(id => !readIds.has(id));
             
             if (unreadIds.length === 0) {
-                // If all markers have been read, shuffle from all markers
                 unreadIds = allIds;
             }
 
@@ -258,6 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
             allData = data;
             addMarkers(data);
             setupShuffle();
+            if(!window.location.hash.startsWith("#/")) {
+                openMarkerFromUrl(); // Track initial homepage view after data is loaded
+            }
         })
         .catch(error => {
             console.error("Veri çekilirken bir hata oluştu:", error);
