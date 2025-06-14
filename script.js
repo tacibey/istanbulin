@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedDescription = formatDescription(markerData.description);
         
         const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${markerData.lat},${markerData.lng}`;
-        const directionsHtml = `<p class="directions-link-container"><strong>Yol Tarifi: <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></strong></p>`;
-        const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${markerData.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
+        const directionsHtml = `<p class="action-link"><strong>Yol Tarifi:</strong><a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></p>`;
+        const shareHtml = `<p class="action-link"><strong>Paylaş:</strong><a href="#" onclick="copyShareLink(event, '${markerData.id}')" title="Bu yerin linkini kopyala">🔗</a></p>`;
 
         return `
             ${imageHtml}
