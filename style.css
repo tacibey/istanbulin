@@ -54,9 +54,6 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     border-radius: 50%; 
     width: 26px !important; 
     height: 26px !important; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
     font-size: 1.65em; 
     color: var(--icon-text-color); 
     font-weight: normal; 
@@ -65,9 +62,10 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
     cursor: pointer; 
     font-family: 'Gotico Antiqua', serif !important; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-    /* YENİ: Merkezlemeyi daha da garantilemek için eklendi */
-    line-height: 1; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* --- YENİ VE KESİN HİZALAMA YÖNTEMİ --- */
+    text-align: center;
+    line-height: 26px !important; /* Yüksekliğe eşit olmalı */
 }
 .custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
