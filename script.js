@@ -109,19 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
     L.control.search = (e => new L.Control.Search(e));
     L.control.search({ position: 'topright' }).addTo(map);
 
-    function goToMarker(id, isFromUrl = false) {
-        const markerData = allData.find(m => m.id.toString() === id.toString());
-        if (!markerData) return;
-
+    function goToMarker(id) {
         const marker = allMarkers[id];
         if (!marker) return;
 
         markersLayer.zoomToShowLayer(marker, () => {
-            if (isFromUrl && window.innerWidth < 768) {
-                // For mobile, pan down to better show the popup
-                const offset = map.getSize().y * 0.15; // 15% of map height
-                map.panBy([0, -offset], { animate: true });
-            }
+            // Pan the map to position the marker in the lower part of the screen
+            const offset = map.getSize().y * -0.25; // Negative value pans map up, so content appears lower
+            map.panBy([0, offset], { animate: true });
             marker.openPopup();
         });
     }
@@ -145,8 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${markerData.title}" loading="lazy" onerror="this.style.display='none';">` : '';
         const sourceHtml = markerData.source ? (markerData.source.startsWith('http') ? `<p><strong><a href="${markerData.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${markerData.source}</p>`) : '';
         const contributorHtml = markerData.contributor ? `<p><strong>Ekleyen:</strong> ${markerData.contributor}</p>` : '';
-        const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${markerData.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
         const formattedDescription = formatDescription(markerData.description);
+        
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${markerData.lat},${markerData.lng}`;
+        const directionsHtml = `<p class="directions-link-container"><strong>Yol Tarifi: <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></strong></p>`;
+        const shareHtml = `<p class="share-link-container"><strong>Paylaş: <a href="#" onclick="copyShareLink(event, '${markerData.id}')" title="Bu yerin linkini kopyala">🔗</a></strong></p>`;
 
         return `
             ${imageHtml}
@@ -155,7 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${formattedDescription}</p>
                 ${sourceHtml}
                 ${contributorHtml}
-                ${shareHtml}
+                <div class="popup-actions">
+                    ${directionsHtml}
+                    ${shareHtml}
+                </div>
             </div>
         `;
     }
@@ -197,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openMarkerFromUrl() {
         const hash = window.location.hash;
         if (hash && hash.startsWith("#/")) {
-            goToMarker(hash.substring(2), true);
+            goToMarker(hash.substring(2));
         }
     }
 
@@ -220,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const randomId = unreadIds[Math.floor(Math.random() * unreadIds.length)];
             goToMarker(randomId);
+            window.location.hash = `/${randomId}`;
         });
     }
 
