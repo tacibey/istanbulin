@@ -91,14 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     themeToggleButton.addEventListener('click', () => { const currentTheme = localStorage.getItem('mapTheme') || 'light'; const newTheme = currentTheme === 'light' ? 'dark' : 'light'; applyTheme(newTheme); });
     const savedTheme = localStorage.getItem('mapTheme') || 'light';
-    applyTheme(savedTheme);
+    applyTheme(savedTheme); // Harita katmanını hemen ekler.
 
     L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | CartoDB' }).addTo(map);
     L.control.locate({ position: 'topleft', setView: 'once', flyTo: true, strings: { title: "Mevcut Konumumu Göster" } }).addTo(map);
     const storage = { get: e=>{try{const t=localStorage.getItem(e);return t?JSON.parse(t):[]}catch(e){return console.error("LocalStorage okunamadı:",e),[]}}, set:(e,t)=>{try{localStorage.setItem(e,JSON.stringify(t))}catch(e){console.error("LocalStorage'a yazılamadı:",e)}}};
     let readMarkers = new Set(storage.get('readMarkers'));
     function markAsRead(e) { if (!readMarkers.has(e.toString())) { readMarkers.add(e.toString()); storage.set('readMarkers', Array.from(readMarkers)); } }
+    
     const markersLayer = L.markerClusterGroup();
+    map.addLayer(markersLayer); // PERFORMANS: Marker katmanını en başta haritaya ekle.
+
     const allMarkers = {};
     let allData = [];
     function directSearch(e) { const t=e.toLowerCase().trim();return t?allData.filter(e=>e.title.toLowerCase().includes(t)||e.description.toLowerCase().includes(t)||e.id.toString()===t):[]}
@@ -158,10 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    function addMarkers(data) {
-        data.forEach(markerData => {
+    // PERFORMANS: İşaretçileri parçalar halinde işleyen yeni fonksiyon
+    function processMarkersInChunks(data, index, chunkSize) {
+        const chunk = data.slice(index, index + chunkSize);
+
+        chunk.forEach(markerData => {
             const isNew = !readMarkers.has(markerData.id.toString());
-            // --- DOĞRU ÇÖZÜM: Orijinal kod üzerinden sadece boyutlar küçültüldü ---
             const icon = L.divIcon({
                 className: isNew ? "custom-marker-icon new-marker" : "custom-marker-icon",
                 html: "i",
@@ -189,9 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
             markersLayer.addLayer(marker);
             allMarkers[markerData.id] = marker;
         });
-        map.addLayer(markersLayer);
-        openMarkerFromUrl();
+
+        const nextIndex = index + chunkSize;
+        if (nextIndex < data.length) {
+            // Bir sonraki parçayı işlemeye geçmeden önce tarayıcıya nefes aldır.
+            setTimeout(() => processMarkersInChunks(data, nextIndex, chunkSize), 0);
+        } else {
+            // Tüm işaretçiler yüklendiğinde URL'den gelen işaretçiyi aç.
+            openMarkerFromUrl();
+        }
     }
+
 
     function openMarkerFromUrl() {
         const hash = window.location.hash;
@@ -231,8 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             allData = data;
-            addMarkers(data);
             setupShuffle();
+            // PERFORMANS: İşaretçileri parçalar halinde işlemeyi başlat.
+            processMarkersInChunks(data, 0, 30); // 30'arlık parçalar halinde
         })
         .catch(error => {
             console.error("Veri çekilirken bir hata oluştu:", error);
