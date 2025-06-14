@@ -189,19 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // --- YENİ YAKLAŞIM: SVG İKON KULLANIMI ---
-    const iconSvg = '<svg class="marker-svg-content" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg"><path d="M4 6C4 5.44772 4.44772 5 5 5C5.55228 5 6 5.44772 6 6V11C6 11.5523 5.55228 12 5 12C4.44772 12 4 11.5523 4 11V6Z" /><path d="M4 3C4 2.44772 4.44772 2 5 2C5.55228 2 6 2.44772 6 3V3C6 3.55228 5.55228 4 5 4C4.44772 4 4 3.55228 4 3V3Z" /></svg>';
-
     function addMarkers(data) {
         data.forEach(markerData => {
             const isNew = !readMarkers.has(markerData.id.toString());
             
+            // --- KESİN ÇÖZÜM: İkonun içine içerik yazmayı bırakıyoruz.
             const icon = L.divIcon({
                 className: isNew ? "custom-marker-icon new-marker" : "custom-marker-icon",
-                html: iconSvg, // "i" yerine SVG kodunu kullanıyoruz
-                iconSize: [22, 22],
-                iconAnchor: [11, 22],
-                popupAnchor: [0, -20]
+                html: '', // HTML içeriği boş. Tüm görünüm CSS'den gelecek.
+                iconSize: [20, 20],
+                iconAnchor: [10, 20],
+                popupAnchor: [0, -18]
             });
 
             const marker = L.marker([markerData.lat, markerData.lng], { icon: icon });
@@ -210,10 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     markAsRead(markerData.id);
                     marker.setIcon(L.divIcon({
                         className: "custom-marker-icon",
-                        html: iconSvg, // "i" yerine SVG kodunu kullanıyoruz
-                        iconSize: [22, 22],
-                        iconAnchor: [11, 22],
-                        popupAnchor: [0, -20]
+                        html: '', // HTML içeriği boş.
+                        iconSize: [20, 20],
+                        iconAnchor: [10, 20],
+                        popupAnchor: [0, -18]
                     }));
                 }
                 window.location.hash = `/${markerData.id}`;
