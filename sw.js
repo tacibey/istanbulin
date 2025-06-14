@@ -1,7 +1,5 @@
-// Önbellek sürümünü tekrar artırıyoruz ki bu yeni kurallar devreye girsin.
-const CACHE_NAME = 'istanbulin-dynamic-cache-v1';
+const CACHE_NAME = 'istanbulin-dynamic-cache-v2'; // Cache versiyonunu artırdım
 
-// Uygulama iskeleti - Bunlar her zaman önbellekten gelsin.
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
@@ -10,16 +8,10 @@ const APP_SHELL_URLS = [
   '/manifest.json',
   '/images/icon-192x192.png',
   '/images/icon-512x512.png',
-  'https://unpkg.com/leaflet/dist/leaflet.css',
-  'https://unpkg.com/leaflet/dist/leaflet.js'
+  'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap',
+  '/Rusch-GoticoAntiqua100G.otf'
 ];
 
-// Dinamik içerik - Bunlar için Stale-While-Revalidate kullanılacak.
-const DYNAMIC_CONTENT_URLS = [
-    '/markers.json'
-];
-
-// Kurulum: Uygulama iskeletini önbelleğe al
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -27,54 +19,69 @@ self.addEventListener('install', event => {
         console.log('Service Worker kuruluyor: Uygulama iskeleti önbelleğe alınıyor.');
         return cache.addAll(APP_SHELL_URLS);
       })
+      .then(() => self.skipWaiting()) // Yeni SW'nin hemen aktif olmasını sağla
   );
 });
 
-// Aktivasyon: Eski önbellekleri temizle
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames
           .filter(name => name.startsWith('istanbulin-') && name !== CACHE_NAME)
-          .map(name => caches.delete(name))
+          .map(name => {
+            console.log('Eski cache siliniyor:', name);
+            return caches.delete(name);
+          })
       );
-    })
+    }).then(() => self.clients.claim()) // SW'nin kontrolü hemen almasını sağla
   );
 });
 
-// Fetch: İstekleri yönet
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Sadece kendi origin'imizden veya unpkg'den gelen GET isteklerini yönet
-  if (request.method !== 'GET' || (!url.origin.startsWith(self.location.origin) && !url.origin.includes('unpkg.com'))) {
+  // Sadece GET isteklerini ve belirli domain'leri handle et
+  if (request.method !== 'GET') {
     return;
   }
 
-  // Stale-While-Revalidate stratejisi (markers.json için)
-  if (DYNAMIC_CONTENT_URLS.includes(url.pathname)) {
+  // markers.json için Network-First stratejisi
+  if (url.pathname.endsWith('/markers.json')) {
     event.respondWith(
-      caches.open(CACHE_NAME).then(cache => {
-        return cache.match(request).then(cachedResponse => {
-          const fetchPromise = fetch(request).then(networkResponse => {
+      fetch(request)
+        .then(networkResponse => {
+          // AĞDAN GELEN YANITI ÖNBELLEĞE KAYDET
+          return caches.open(CACHE_NAME).then(cache => {
             cache.put(request, networkResponse.clone());
             return networkResponse;
           });
-          // Önbellekte varsa onu anında döndür, arka planda ağı kontrol et.
-          // Yoksa, ağdan gelmesini bekle.
-          return cachedResponse || fetchPromise;
-        });
-      })
+        })
+        .catch(() => {
+          // AĞ HATASI OLURSA ÖNBELLEKTEN GETİR
+          return caches.match(request);
+        })
     );
     return;
   }
-  
-  // Cache First stratejisi (Uygulama iskeleti için)
+
+  // Diğer tüm istekler için Cache-First stratejisi (Uygulama İskeleti)
   event.respondWith(
-    caches.match(request).then(response => {
-      return response || fetch(request);
+    caches.match(request).then(cachedResponse => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(request).then(networkResponse => {
+        // İsteğe bağlı olarak, dinamik olarak yüklenen diğer kaynakları da önbelleğe alabilirsiniz.
+        return caches.open(CACHE_NAME).then(cache => {
+            // Sadece belirli kaynakları cache'le, örneğin unpkg.com'dan gelenler
+           if (url.origin.includes('unpkg.com') || url.origin.includes('cartocdn.com')) {
+               cache.put(request, networkResponse.clone());
+           }
+           return networkResponse;
+        });
+      });
     })
   );
 });
