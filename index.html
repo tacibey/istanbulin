@@ -6,13 +6,13 @@
     <title>istanbulin - İstanbul İnteraktif Kültür Atlası</title>
     <meta name="description" content="İstanbul'un kültürel, tarihi ve edebi hafızasını taşıyan mekanları interaktif bir harita üzerinde keşfedin. Filmlerin çekildiği, romanların geçtiği, önemli figürlerin yaşadığı yerler. Ve çok daha fazlası.">
     <link rel="manifest" href="/manifest.json">
+    <!-- YENİ: İkon fontunu öncelikli olarak yükleyerek kayma sorununu engelliyoruz -->
+    <link rel="preload" href="/Rusch-GoticoAntiqua100G.otf" as="font" type="font/otf" crossorigin>
     <meta name="theme-color" content="#0a0908">
     <link rel="apple-touch-icon" href="/images/icon-192x192.png">
 
-    <!-- FOUC sorununu çözmek için style.css'i doğrudan yüklüyoruz -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Diğer CSS dosyaları performansı çok etkilemediği için asenkron yüklenebilir -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" media="print" onload="this.media='all'">
