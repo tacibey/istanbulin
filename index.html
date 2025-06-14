@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-T">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>istanbulin - İstanbul İnteraktif Kültür Atlası</title>
+    <meta name="description" content="İstanbul'un kültürel, tarihi ve edebi hafızasını taşıyan mekanları interaktif bir harita üzerinde keşfedin. Filmlerin çekildiği, romanların geçtiği, şairlerin yaşadığı yerler.">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0a0908">
     <link rel="apple-touch-icon" href="/images/icon-192x192.png">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Non-blocking CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    
+    <noscript>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+      <link rel="stylesheet" href="style.css">
+    </noscript>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +53,7 @@
 
     <footer class="main-footer">
         <div class="footer-container">
-            <button id="shuffle-button" title="Rastgele">🔀</button>
+            <button id="shuffle-button" title="Rastgele Bir Yer Göster">🔀</button>
             <p id="copyright-text"></p>
         </div>
         <div id="pwa-actions-container" class="pwa-actions-container">
@@ -60,10 +73,10 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8"></script>
-    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" defer></script>
+    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="UTF-8" defer></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js" defer></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
