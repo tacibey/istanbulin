@@ -11,6 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
         navigator.clipboard.writeText(o).then(() => showCopyNotification()).catch(e => {console.error("URL kopyalanamadı: ", e)})
     }
     window.copyShareLink = copyShareLink;
+    
+    // NEW: Function to track page views in GA for SPA
+    function trackPageView(path, title) {
+      if (typeof gtag !== 'function') {
+        console.warn("Google Analytics (gtag) is not available.");
+        return;
+      }
+      gtag('event', 'page_view', {
+        page_title: title,
+        page_location: window.location.origin + path,
+        page_path: path
+      });
+    }
 
     function setupSiteShare() {
         const shareButton = document.getElementById('site-share-button');
@@ -198,7 +211,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function openMarkerFromUrl() {
         const hash = window.location.hash;
         if (hash && hash.startsWith("#/")) {
-            goToMarker(hash.substring(2));
+            const id = hash.substring(2);
+            goToMarker(id);
+            
+            // Track view in GA
+            const markerData = allData.find(m => m.id.toString() === id);
+            if (markerData) {
+                trackPageView(hash, `${markerData.title} | istanbulin`);
+            }
+        } else {
+            // Track homepage view if hash is empty or different
+            trackPageView(location.pathname, document.title);
         }
     }
 
@@ -220,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const randomId = unreadIds[Math.floor(Math.random() * unreadIds.length)];
-            goToMarker(randomId);
             window.location.hash = `/${randomId}`;
         });
     }
