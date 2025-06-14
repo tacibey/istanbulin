@@ -165,9 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const icon = L.divIcon({
                 className: isNew ? "custom-marker-icon new-marker" : "custom-marker-icon",
                 html: "i",
-                iconSize: [22, 22],      /* Küçültüldü (20px + 2*1px border) */
-                iconAnchor: [11, 22],    /* Küçültüldü (width/2, height) */
-                popupAnchor: [0, -20]   /* Küçültüldü */
+                iconSize: [22, 22],
+                iconAnchor: [11, 22],
+                popupAnchor: [0, -20]
             });
 
             const marker = L.marker([markerData.lat, markerData.lng], { icon: icon });
