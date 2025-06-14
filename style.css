@@ -51,7 +51,6 @@ body.map-is-fullscreen .main-header, body.map-is-fullscreen .main-footer { displ
 body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 .leaflet-marker-icon { background-image: none !important; }
 
-/* Orijinal kod üzerinden sadece boyutlar küçültüldü */
 .custom-marker-icon {
     border-radius: 50%;
     width: 20px !important; /* Küçültüldü */
@@ -59,8 +58,7 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.25em; /* Küçültüldü */
-    line-height: 20px !important; /* Yeni yüksekliğe göre eklendi */
+    font-size: 1.3em; /* Küçültüldü */
     color: var(--icon-text-color);
     font-weight: normal;
     background-color: var(--icon-background-color);
@@ -69,8 +67,8 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     cursor: pointer;
     font-family: 'Gotico Antiqua', serif !important;
     transition: background-color 0.3s ease, color 0.3s ease;
-    -webkit-font-smoothing: antialiased; /* Render kalitesi için eklendi */
-    -moz-osx-font-smoothing: grayscale; /* Render kalitesi için eklendi */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
