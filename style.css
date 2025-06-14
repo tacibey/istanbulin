@@ -50,7 +50,25 @@ body.dark-theme #map { background-color: #262626; }
 body.map-is-fullscreen .main-header, body.map-is-fullscreen .main-footer { display: none; }
 body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 .leaflet-marker-icon { background-image: none !important; }
-.custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; transition: background-color 0.3s ease, color 0.3s ease; }
+.custom-marker-icon { 
+    border-radius: 50%; 
+    width: 26px !important; 
+    height: 26px !important; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 1.65em; 
+    color: var(--icon-text-color); 
+    font-weight: normal; 
+    background-color: var(--icon-background-color); 
+    border: 2px solid var(--secondary-bg-color); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    cursor: pointer; 
+    font-family: 'Gotico Antiqua', serif !important; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+    /* YENİ: Merkezlemeyi daha da garantilemek için eklendi */
+    line-height: 1; 
+}
 .custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
 body.dark-theme .custom-marker-icon { background-color: #E0E0E0; color: #1a1a1a; border-color: #333333; }
@@ -79,8 +97,8 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .search-results .result-item:last-child { border-bottom: none; }
 .search-results .result-item:hover { background-color: var(--primary-bg-color); }
 .leaflet-control-fullscreen .fullscreen-icon { width: 26px; height: 26px; background-size: 16px 16px; }
-.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM10 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 15 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 13.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/></svg>'); }
-.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 0 4.5 0h-3A1.5 1.5 0 0 0 0 1.5v3a.5.5 0 0 1-1 0v-3A2.5 2.5 0 0 1 2.5-1h3zM0 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 4 14.5v-3a.5.5 0 0 1-.5-.5zM10.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 10 4.5v-3a.5.5 0 0 1 .5-.5zM16 10.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1 0-1h3A1.5 1.5 0 0 1 12 7.5v3a.5.5 0 0 1 .5.5z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23333" d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-4zM10 .5a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-4a.5.5 0 0 0-.5-.5h-4zM.5 10a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H1v-3a.5.5 0 0 0-1 0v4zM15 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-4z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23333" d="M5.5 0a.5.5 0 0 0 0 1H4v1.5a.5.5 0 0 0 1 0V1h1.5a.5.5 0 0 0 0-1h-3zM.5 4.5a.5.5 0 0 0 0 1H2V7a.5.5 0 0 0 1 0V5.5h1.5a.5.5 0 0 0 0-1h-3zM10.5.5a.5.5 0 0 0-.5.5V2H11.5a.5.5 0 0 0 0-1h-1zM15.5 4.5a.5.5 0 0 0-.5-.5H13.5v-1.5a.5.5 0 0 0-1 0V4.5h-1.5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zM.5 11.5a.5.5 0 0 0 .5.5H2V13.5a.5.5 0 0 0 1 0V12h1.5a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5zM15.5 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1H13.5v1.5a.5.5 0 0 0 1 0v-1.5h1.5a.5.5 0 0 0 .5-.5z"/></svg>'); }
 .action-link { font-size: 0.9em; margin: 0; }
 .action-link strong { font-weight: 500;}
 .action-link a { text-decoration: none; cursor: pointer; font-size: 1.2em; vertical-align: middle; margin-left: 4px; }
