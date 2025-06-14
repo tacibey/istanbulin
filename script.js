@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const shareOptions = document.querySelectorAll('.share-option');
 
         if (!shareButton || !sharePopup) return;
-        
-        const shareText = 'İstanbul İnteraktif Kültür Atlası "istanbulin" yayında. Teşrif etmez miydiniz? ⓘ https://istanbulin.org';
+        const shareText = 'İstanbul İnteraktif Kültür Atlası "istanbulin" yayında. Teşrif etmez miydiniz? ✨ https://istanbulin.org';
         const shareUrl = 'https://istanbulin.org';
         const encodedShareText = encodeURIComponent(shareText);
 
@@ -60,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const copyrightElement = document.getElementById('copyright-text');
     if (copyrightElement) {
-        copyrightElement.innerHTML = `© ${new Date().getFullYear()} istanbulin. <a href="https://tally.so/r/mYKvZ6" target="_blank" rel="noopener noreferrer" title="İletişim">✉️</a>`;
+        copyrightElement.innerHTML = `© ${new Date().getFullYear()} istanbulin. <a href="https://tally.so/r/mYKvZ6" target="_blank" rel="noopener noreferrer" class="footer-contact-link" title="İletişim">📧</a>`;
     }
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
@@ -78,9 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map', { attributionControl: false, layers: [] }).setView([41.0082, 28.9784], 13);
     const themeToggleButton = document.getElementById('theme-toggle-button');
     const lightTheme = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
         maxZoom: 20
     });
     const darkTheme = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
         maxZoom: 20
     });
 
@@ -102,10 +105,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const allMarkers = {};
     let allData = [];
     function directSearch(e) { const t=e.toLowerCase().trim();return t?allData.filter(e=>e.title.toLowerCase().includes(t)||e.description.toLowerCase().includes(t)||e.id.toString()===t):[]}
-    L.Control.Fullscreen = L.Control.extend({onAdd:function(e){const t=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");return this._link=L.DomUtil.create("a","fullscreen-icon fullscreen-enter",t),this._link.href="#",this._link.title="Tam Ekran",L.DomEvent.on(this._link,"click",L.DomEvent.stop).on(this._link,"click",this._toggleFullscreen,this),t},_toggleFullscreen:function(){document.body.classList.toggle("map-is-fullscreen")},_updateIcon:function(){if(document.body.classList.contains("map-is-fullscreen")){this._link.classList.remove("fullscreen-enter"),this._link.classList.add("fullscreen-exit"),this._link.title="Tam Ekrandan Çık"}else{this._link.classList.remove("fullscreen-exit"),this._link.classList.add("fullscreen-enter"),this._link.title="Tam Ekran"}}});
+    
+    // --- TAM EKRAN KONTROLÜ DÜZELTİLDİ ---
+    L.Control.Fullscreen = L.Control.extend({
+        onAdd: function(map) {
+            const container = L.DomUtil.create("div", "leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");
+            this._link = L.DomUtil.create("a", "fullscreen-icon", container);
+            this._link.href = "#";
+            
+            this._updateIcon(); // Başlangıç ikonunu ve başlığını ayarla
+
+            L.DomEvent.on(this._link, "click", L.DomEvent.stop).on(this._link, "click", this._toggleFullscreen, this);
+            
+            return container;
+        },
+        
+        _toggleFullscreen: function() {
+            document.body.classList.toggle("map-is-fullscreen");
+            this._updateIcon(); // Tıkladıktan sonra ikonu ve başlığı güncelle
+        },
+
+        _updateIcon: function() {
+            if (document.body.classList.contains("map-is-fullscreen")) {
+                this._link.innerHTML = "⮧"; // Tam ekrandan çıkma ikonu
+                this._link.title = "Tam Ekrandan Çık";
+            } else {
+                this._link.innerHTML = "⛶"; // Tam ekrana girme ikonu
+                this._link.title = "Tam Ekran";
+            }
+        }
+    });
+    // --- DÜZELTME SONU ---
+    
     L.control.fullscreen = (e => new L.Control.Fullscreen(e));
     L.control.fullscreen({ position: 'topright' }).addTo(map);
-    L.Control.Search = L.Control.extend({onAdd:function(e){return this._container=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom"),this._button=L.DomUtil.create("a","leaflet-control-search",this._container),this._button.innerHTML='<span class="search-icon">🔍</span>',this._button.href="#",this._button.title="Ara",this._form=L.DomUtil.create("div","leaflet-control-search-expanded",this._container),this._input=L.DomUtil.create("input","search-input",this._form),this._input.type="text",this._input.placeholder="Ara...",this._results=L.DomUtil.create("div","search-results",this._form),L.DomUtil.addClass(this._form,"leaflet-hidden"),L.DomEvent.on(this._button,"click",L.DomEvent.stop).on(this._button,"click",this._toggle,this),L.DomEvent.on(this._input,"input",this._search,this),L.DomEvent.on(this._form,"click",L.DomEvent.stop),L.DomEvent.on(e,"click",this._hide,this),this._container},_toggle:function(){L.DomUtil.hasClass(this._form,"leaflet-hidden")?(L.DomUtil.removeClass(this._form,"leaflet-hidden"),this._input.focus()):this._hide()},_hide:function(){this._input.value="",this._results.innerHTML="",L.DomUtil.addClass(this._form,"leaflet-hidden")},_search:function(){const e=this._input.value,t=directSearch(e);this._displayResults(t)},_displayResults:function(e){this._results.innerHTML="",e.length>0&&this._input.value&&e.slice(0,10).forEach(e=>{const t=L.DomUtil.create("div","result-item",this._results);t.textContent=e.title,L.DomEvent.on(t,"click",()=>{goToMarker(e.id),this._hide()})})}});
+
+    L.Control.Search = L.Control.extend({onAdd:function(e){return this._container=L.DomUtil.create("div","leaflet-bar leaflet-control leaflet-control-custom"),this._button=L.DomUtil.create("a","leaflet-control-search",this._container),this._button.innerHTML='<span class="search-icon">🔎</span>',this._button.href="#",this._button.title="Ara",this._form=L.DomUtil.create("div","leaflet-control-search-expanded",this._container),this._input=L.DomUtil.create("input","search-input",this._form),this._input.type="text",this._input.placeholder="Ara...",this._results=L.DomUtil.create("div","search-results",this._form),L.DomUtil.addClass(this._form,"leaflet-hidden"),L.DomEvent.on(this._button,"click",L.DomEvent.stop).on(this._button,"click",this._toggle,this),L.DomEvent.on(this._input,"input",this._search,this),L.DomEvent.on(this._form,"click",L.DomEvent.stop),L.DomEvent.on(e,"click",this._hide,this),this._container},_toggle:function(){L.DomUtil.hasClass(this._form,"leaflet-hidden")?(L.DomUtil.removeClass(this._form,"leaflet-hidden"),this._input.focus()):this._hide()},_hide:function(){this._input.value="",this._results.innerHTML="",L.DomUtil.addClass(this._form,"leaflet-hidden")},_search:function(){const e=this._input.value,t=directSearch(e);this._displayResults(t)},_displayResults:function(e){this._results.innerHTML="",e.length>0&&this._input.value&&e.slice(0,10).forEach(e=>{const t=L.DomUtil.create("div","result-item",this._results);t.textContent=e.title,L.DomEvent.on(t,"click",()=>{goToMarker(e.id),this._hide()})})}});
     L.control.search = (e => new L.Control.Search(e));
     L.control.search({ position: 'topright' }).addTo(map);
 
@@ -114,15 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!marker) return;
 
         markersLayer.zoomToShowLayer(marker, () => {
-            // Pan the map to position the marker in the lower part of the screen
-            const offset = map.getSize().y * -0.25; // Negative value pans map up, so content appears lower
+            const offset = map.getSize().y * -0.25; 
             map.panBy([0, offset], { animate: true });
             marker.openPopup();
         });
     }
 
     function formatDescription(description) {
-        // Find text within curly or standard double quotes and make it italic
         return description.replace(/(“[^”]*”|"[^"]*")/g, '<i>$&</i>');
     }
 
@@ -130,20 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let imageUrl = '';
         if (markerData.image) {
             if (markerData.image.startsWith('http')) {
-                // Use image proxy for external images for optimization
-                imageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(markerData.image)}&w=300&h=200&fit=cover&output=webp`;
+                imageUrl = markerData.image;
             } else {
                 imageUrl = `images/${markerData.image}`;
             }
         }
-        
         const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${markerData.title}" loading="lazy" onerror="this.style.display='none';">` : '';
         const sourceHtml = markerData.source ? (markerData.source.startsWith('http') ? `<p><strong><a href="${markerData.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${markerData.source}</p>`) : '';
         const contributorHtml = markerData.contributor ? `<p><strong>Ekleyen:</strong> ${markerData.contributor}</p>` : '';
         const formattedDescription = formatDescription(markerData.description);
-        
         const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${markerData.lat},${markerData.lng}`;
-        const directionsHtml = `<p class="action-link"><strong>Yol Tarifi:</strong><a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🧭</a></p>`;
+        const directionsHtml = `<p class="action-link"><strong>Yol Tarifi:</strong><a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" title="Google Haritalar'da yol tarifi al">🗺️</a></p>`;
         const shareHtml = `<p class="action-link"><strong>Paylaş:</strong><a href="#" onclick="copyShareLink(event, '${markerData.id}')" title="Bu yerin linkini kopyala">🔗</a></p>`;
 
         return `
@@ -213,9 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const readIds = new Set(storage.get('readMarkers'));
 
             let unreadIds = allIds.filter(id => !readIds.has(id));
-            
             if (unreadIds.length === 0) {
-                // If all markers have been read, shuffle from all markers
                 unreadIds = allIds;
             }
 
