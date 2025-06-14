@@ -106,14 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let allData = [];
     function directSearch(e) { const t=e.toLowerCase().trim();return t?allData.filter(e=>e.title.toLowerCase().includes(t)||e.description.toLowerCase().includes(t)||e.id.toString()===t):[]}
     
-    // --- TAM EKRAN KONTROLÜ DÜZELTİLDİ ---
     L.Control.Fullscreen = L.Control.extend({
         onAdd: function(map) {
             const container = L.DomUtil.create("div", "leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");
             this._link = L.DomUtil.create("a", "fullscreen-icon", container);
             this._link.href = "#";
             
-            this._updateIcon(); // Başlangıç ikonunu ve başlığını ayarla
+            this._updateIcon(); 
 
             L.DomEvent.on(this._link, "click", L.DomEvent.stop).on(this._link, "click", this._toggleFullscreen, this);
             
@@ -122,20 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         _toggleFullscreen: function() {
             document.body.classList.toggle("map-is-fullscreen");
-            this._updateIcon(); // Tıkladıktan sonra ikonu ve başlığı güncelle
+            this._updateIcon(); 
         },
 
         _updateIcon: function() {
             if (document.body.classList.contains("map-is-fullscreen")) {
-                this._link.innerHTML = "⮧"; // Tam ekrandan çıkma ikonu
+                this._link.innerHTML = "⮧"; 
                 this._link.title = "Tam Ekrandan Çık";
             } else {
-                this._link.innerHTML = "⛶"; // Tam ekrana girme ikonu
+                this._link.innerHTML = "⛶"; 
                 this._link.title = "Tam Ekran";
             }
         }
     });
-    // --- DÜZELTME SONU ---
     
     L.control.fullscreen = (e => new L.Control.Fullscreen(e));
     L.control.fullscreen({ position: 'topright' }).addTo(map);
@@ -194,24 +192,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function addMarkers(data) {
         data.forEach(markerData => {
             const isNew = !readMarkers.has(markerData.id.toString());
+            // --- İKON BOYUTU/KONUMU GÜNCELLENDİ (1/2) ---
             const icon = L.divIcon({
                 className: isNew ? "custom-marker-icon new-marker" : "custom-marker-icon",
                 html: "i",
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -25]
+                iconSize: [22, 22],      // Küçültüldü
+                iconAnchor: [11, 22],    // Küçültüldü
+                popupAnchor: [0, -20]    // Küçültüldü
             });
 
             const marker = L.marker([markerData.lat, markerData.lng], { icon: icon });
             marker.on("click", () => {
                 if (isNew) {
                     markAsRead(markerData.id);
+                    // --- İKON BOYUTU/KONUMU GÜNCELLENDİ (2/2) ---
                     marker.setIcon(L.divIcon({
                         className: "custom-marker-icon",
                         html: "i",
-                        iconSize: [30, 30],
-                        iconAnchor: [15, 30],
-                        popupAnchor: [0, -25]
+                        iconSize: [22, 22],      // Küçültüldü
+                        iconAnchor: [11, 22],    // Küçültüldü
+                        popupAnchor: [0, -20]    // Küçültüldü
                     }));
                 }
                 window.location.hash = `/${markerData.id}`;
