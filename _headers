@@ -1,7 +1,0 @@
-/*
-  Content-Security-Policy: default-src 'self' https://*.unpkg.com https://*.cartocdn.com https://images.weserv.nl https://*.tally.so; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://*.unpkg.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://*.unpkg.com https://*.tally.so; connect-src 'self' https://*.tally.so; frame-src https://*.tally.so;
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-  Cross-Origin-Opener-Policy: same-origin
