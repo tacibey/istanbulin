@@ -17,95 +17,52 @@ body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: var(--text-co
 body:not(.yeni-page-body) { overflow: hidden; }
 .yeni-page-body { height: auto; min-height: 100%; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; }
+.main-header { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); flex-shrink: 0; position: relative; z-index: 1001; }
 .main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .logo-container { text-align: left; margin: 0; flex-grow: 1; }
 #logo-link { text-decoration: none; color: inherit; }
 .main-header h1 { font-family: 'Gotico Antiqua', serif; margin: 0; font-size: 3.5em; font-weight: normal; line-height: 0.9; letter-spacing: -4px; }
 .main-header .subtitle { margin: 0; font-size: 0.85em; opacity: 0.7; }
 
-/* DEĞİŞİKLİK: Header aksiyonları için konteyner */
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.header-action-icon {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--light-text-color);
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    opacity: 0.8;
-}
-.header-action-icon:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-.header-action-icon.add-place {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2.2em;
-    font-weight: 300;
-    line-height: 1;
-}
-.header-action-icon.theme-toggle {
-    font-size: 1.5em;
-    position: relative;
-    width: 1.2em; /* İkonların genişliği kadar */
-    height: 1.2em;
-}
-.theme-toggle .sun-icon, .theme-toggle .moon-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+.header-actions { display: flex; align-items: center; gap: 15px; }
+.header-action-icon { background: none; border: none; padding: 0; margin: 0; cursor: pointer; text-decoration: none; color: var(--light-text-color); transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.8; }
+.header-action-icon:hover { opacity: 1; transform: scale(1.1); }
+.header-action-icon.add-place { font-family: 'Roboto', sans-serif; font-size: 2.2em; font-weight: 300; line-height: 1; }
+.header-action-icon.theme-toggle { font-size: 1.5em; position: relative; width: 1.2em; height: 1.2em; }
+.theme-toggle .sun-icon, .theme-toggle .moon-icon { position: absolute; top: 0; left: 0; transition: opacity 0.3s ease, transform 0.3s ease; }
 
-/* TEMA GEÇİŞ STİLLERİ */
-/* Başlangıçta Ay ikonu gizli */
 .theme-toggle .moon-icon { opacity: 0; transform: translateY(-10px); }
-/* Karanlık mod aktif olduğunda */
 body.dark-theme .theme-toggle .sun-icon { opacity: 0; transform: translateY(10px); }
 body.dark-theme .theme-toggle .moon-icon { opacity: 1; transform: translateY(0); }
 
 .map-container { flex-grow: 1; display: flex; overflow: hidden; position: relative; }
-#map { height: 100%; width: 100%; background-color: #aac2ca; } /* Karanlık harita yüklenirkenki arka plan rengi */
+#map { height: 100%; width: 100%; background-color: #aac2ca; } 
 
-/* YENİ: Karanlık harita için filtre */
-body.dark-theme #map {
-    background-color: #262626;
-}
+body.dark-theme #map { background-color: #262626; }
 
-.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; }
+.main-footer { background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 20px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); flex-shrink: 0; margin-top: auto; position: relative; z-index: 1001; }
+.main-footer .footer-container { display: flex; justify-content: center; align-items: center; position: relative; }
 .main-footer p { margin: 0; font-size: 0.9em; opacity: 0.8; }
-.footer-contact-link { text-decoration: none; font-size: 1.2em; margin-left: 10px; transition: transform 0.2s ease; display: inline-block; }
-.footer-contact-link:hover { transform: scale(1.2); }
+#copyright-text a { color: var(--light-text-color); text-decoration: none; }
+#shuffle-button { background: none; border: none; cursor: pointer; color: var(--light-text-color); font-size: 1.5em; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); opacity: 0.8; transition: transform 0.2s ease, opacity 0.2s ease; padding: 5px; line-height: 1; }
+#shuffle-button:hover { opacity: 1; transform: scale(1.2) translateY(-45%); }
+
 body.map-is-fullscreen .main-header, body.map-is-fullscreen .main-footer { display: none; }
 body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 .leaflet-marker-icon { background-image: none !important; }
 .custom-marker-icon { border-radius: 50%; width: 26px !important; height: 26px !important; display: flex; justify-content: center; align-items: center; font-size: 1.65em; color: var(--icon-text-color); font-weight: normal; background-color: var(--icon-background-color); border: 2px solid var(--secondary-bg-color); box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-family: 'Gotico Antiqua', serif !important; transition: background-color 0.3s ease, color 0.3s ease; }
 .custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
-/* YENİ: Karanlık modda pinlerin renkleri */
-body.dark-theme .custom-marker-icon {
-    background-color: #E0E0E0;
-    color: #1a1a1a;
-    border-color: #333333;
-}
-body.dark-theme .custom-marker-icon.new-marker {
-    background-color: #2ecc71; /* Yeşil kalabilir */
-    color: white; /* Harf beyaz olsun */
-}
+body.dark-theme .custom-marker-icon { background-color: #E0E0E0; color: #1a1a1a; border-color: #333333; }
+body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; color: white; }
 
 .leaflet-popup-content-wrapper { border-radius: 8px; background-color: var(--secondary-bg-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 .leaflet-popup-content { margin: 0 !important; padding: 0 !important; width: 300px !important; line-height: 1.5; }
-.leaflet-popup-content img { width: 100%; height: auto; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+.leaflet-popup-content img { width: 100%; height: auto; max-height: 200px; object-fit: cover; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px; }
 .popup-text-content { padding: 15px; }
 .popup-text-content h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.2em; color: var(--text-color); font-weight: 700; }
 .popup-text-content p { margin: 0 0 8px 0; font-size: 0.95em; color: #555; }
+.popup-text-content p i { font-style: italic; }
 .popup-text-content p:last-child { margin-bottom: 0; }
 .popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
 .popup-text-content a:hover { text-decoration: underline; }
@@ -121,11 +78,11 @@ body.dark-theme .custom-marker-icon.new-marker {
 .search-results .result-item:last-child { border-bottom: none; }
 .search-results .result-item:hover { background-color: var(--primary-bg-color); }
 .leaflet-control-fullscreen .fullscreen-icon { width: 26px; height: 26px; background-size: 16px 16px; }
-.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>'); }
-.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM10 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 15 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 13.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 0 4.5 0h-3A1.5 1.5 0 0 0 0 1.5v3a.5.5 0 0 1-1 0v-3A2.5 2.5 0 0 1 2.5-1h3zM0 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 4 14.5v-3a.5.5 0 0 1-.5-.5zM10.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 10 4.5v-3a.5.5 0 0 1 .5-.5zM16 10.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1 0-1h3A1.5 1.5 0 0 1 12 7.5v3a.5.5 0 0 1 .5.5z"/></svg>'); }
 .share-link-container a { text-decoration: none; cursor: pointer; font-size: 1.1em; vertical-align: middle; }
 .share-link-container a:hover { opacity: 0.7; }
-#copy-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 12px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); z-index: 10000; font-size: 1em; font-weight: 500; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease; }
+#copy-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: var(--dark-bg-color); color: var(--light-text-color); padding: 12px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); z-index: 10002; font-size: 1em; font-weight: 500; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease; }
 #copy-notification.show { opacity: 1; visibility: visible; bottom: 50px; }
 .pwa-actions-container { position: fixed; bottom: 0; left: 0; width: 100%; padding: 20px; padding-bottom: calc(20px + env(safe-area-inset-bottom)); box-sizing: border-box; z-index: 10001; display: flex; justify-content: center; align-items: center; gap: 15px; pointer-events: none; }
 .action-button { background-color: var(--new-item-color); color: white; border: none; padding: 12px 24px; border-radius: 50px; font-family: 'Roboto', sans-serif; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.25); transition: all 0.3s ease; opacity: 0; visibility: hidden; transform: translateY(20px); pointer-events: auto; text-align: center; }
@@ -143,83 +100,24 @@ body.dark-theme .custom-marker-icon.new-marker {
 .yeni-form textarea { resize: vertical; }
 .yeni-form button[type="submit"] { width: 100%; padding: 15px; background-color: var(--place-cami-color); color: white; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
 .yeni-form button[type="submit"]:hover { background-color: #3a7ac2; }
+
+.site-share-container { position: fixed; bottom: 20px; right: 20px; z-index: 10000; }
+.site-share-button { background-color: var(--new-item-color); color: white; border: none; border-radius: 20px; padding: 8px 16px; font-size: 0.9em; font-weight: 500; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.2s ease; }
+.site-share-button:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.25); }
+.site-share-popup { position: absolute; bottom: 110%; right: 0; background-color: var(--dark-bg-color); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 5px; display: flex; gap: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; }
+.site-share-popup.visible { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.share-option { background: none; border: none; color: white; font-size: 1.8em; padding: 5px; cursor: pointer; line-height: 1; transition: transform 0.2s ease; }
+.share-option:hover { transform: scale(1.2); }
+
+body.map-is-fullscreen .pwa-actions-container,
+body.map-is-fullscreen .site-share-container { display: none; }
+
 @media (max-width: 768px) {
     .main-header .container { flex-direction: row; align-items: center; }
     .logo-container { text-align: left; }
     .main-header h1 { font-size: 2.8em; }
     .yeni-container { margin-top: 20px; }
     .popup-text-content { max-height: 180px; overflow-y: auto; }
+    #shuffle-button { font-size: 1.4em; }
 }
 #botpoison-challenge { display: none; }
-/* Site Paylaşım Butonu Stilleri */
-.site-share-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10000;
-}
-
-.site-share-button {
-    background-color: var(--new-item-color);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 0.9em;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: all 0.2s ease;
-}
-
-.site-share-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-}
-
-.site-share-popup {
-    position: absolute;
-    bottom: 110%; /* Butonun hemen üzerinde */
-    right: 0;
-    background-color: var(--dark-bg-color);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 25px;
-    padding: 5px;
-    display: flex;
-    gap: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    /* Başlangıçta gizli */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.site-share-popup.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.share-option {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8em;
-    padding: 5px;
-    cursor: pointer;
-    line-height: 1;
-    transition: transform 0.2s ease;
-}
-
-.share-option:hover {
-    transform: scale(1.2);
-}
-
-/* Tam ekran modunda PWA butonları ve paylaşım butonunu gizle */
-body.map-is-fullscreen .pwa-actions-container,
-body.map-is-fullscreen .site-share-container {
-    display: none;
-}
