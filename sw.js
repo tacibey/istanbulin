@@ -1,4 +1,5 @@
-const CACHE_NAME = 'istanbulin-dynamic-cache-v2'; // Cache versiyonunu artırdım
+// Cache versiyonunu artırdık. Bu, eski devasa cache'in silinmesini sağlayacak.
+const CACHE_NAME = 'istanbulin-dynamic-cache-v3'; 
 
 const APP_SHELL_URLS = [
   '/',
@@ -19,7 +20,7 @@ self.addEventListener('install', event => {
         console.log('Service Worker kuruluyor: Uygulama iskeleti önbelleğe alınıyor.');
         return cache.addAll(APP_SHELL_URLS);
       })
-      .then(() => self.skipWaiting()) // Yeni SW'nin hemen aktif olmasını sağla
+      .then(() => self.skipWaiting()) 
   );
 });
 
@@ -34,7 +35,7 @@ self.addEventListener('activate', event => {
             return caches.delete(name);
           })
       );
-    }).then(() => self.clients.claim()) // SW'nin kontrolü hemen almasını sağla
+    }).then(() => self.clients.claim()) 
   );
 });
 
@@ -42,41 +43,42 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Sadece GET isteklerini ve belirli domain'leri handle et
   if (request.method !== 'GET') {
     return;
   }
 
-  // markers.json için Network-First stratejisi
+  // markers.json için "network first, then cache" stratejisi
   if (url.pathname.endsWith('/markers.json')) {
     event.respondWith(
       fetch(request)
         .then(networkResponse => {
-          // AĞDAN GELEN YANITI ÖNBELLEĞE KAYDET
           return caches.open(CACHE_NAME).then(cache => {
             cache.put(request, networkResponse.clone());
             return networkResponse;
           });
         })
         .catch(() => {
-          // AĞ HATASI OLURSA ÖNBELLEKTEN GETİR
+          // Ağ bağlantısı yoksa cache'den ver
           return caches.match(request);
         })
     );
     return;
   }
 
-  // Diğer tüm istekler için Cache-First stratejisi (Uygulama İskeleti)
+  // Diğer tüm istekler için "cache first, then network" stratejisi
   event.respondWith(
     caches.match(request).then(cachedResponse => {
+      // Cache'de varsa, oradan ver
       if (cachedResponse) {
         return cachedResponse;
       }
+      
+      // Cache'de yoksa, ağdan iste
       return fetch(request).then(networkResponse => {
-        // İsteğe bağlı olarak, dinamik olarak yüklenen diğer kaynakları da önbelleğe alabilirsiniz.
+        // Sadece belirli kaynakları cache'le
         return caches.open(CACHE_NAME).then(cache => {
-            // Sadece belirli kaynakları cache'le, örneğin unpkg.com'dan gelenler
-           if (url.origin.includes('unpkg.com') || url.origin.includes('cartocdn.com')) {
+           // ÖNEMLİ: Harita parçalarını (tiles) cache'lemiyoruz. Sadece kütüphaneleri alıyoruz.
+           if (url.origin.includes('unpkg.com')) {
                cache.put(request, networkResponse.clone());
            }
            return networkResponse;
