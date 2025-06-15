@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('mapTheme', theme);
     }
     
-    const savedTheme = localStorage.getItem('mapTheme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    // DÜZELTME: Sistem temasını kontrol eden kod kaldırıldı. Artık varsayılan her zaman 'light'.
+    const savedTheme = localStorage.getItem('mapTheme') || 'light';
     applyTheme(savedTheme);
 
 
@@ -109,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | CartoDB' }).addTo(map);
         L.control.locate({ position: 'topleft', setView: 'once', flyTo: true, strings: { title: "Mevcut Konumumu Göster" } }).addTo(map);
         
-        // DÜZELTME: Tam ekran butonu Unicode ikonlarla oluşturuluyor
         L.Control.Fullscreen = L.Control.extend({
             onAdd: function(map) {
                 const container = L.DomUtil.create("div", "leaflet-bar leaflet-control leaflet-control-custom leaflet-control-fullscreen");
@@ -125,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             _updateIcon: function() {
                 if (document.body.classList.contains("map-is-fullscreen")) {
-                    this._link.innerHTML = "⮧";
+                    // DÜZELTME: Mobilde bozuk görünen karakter 'X' ile değiştirildi.
+                    this._link.innerHTML = "X";
                     this._link.title = "Tam Ekrandan Çık";
                 } else {
                     this._link.innerHTML = "⛶";
