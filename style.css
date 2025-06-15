@@ -44,12 +44,13 @@ body.dark-theme #map { background-color: #262626; }
 body.map-is-fullscreen .main-header, body.map-is-fullscreen .main-footer { display: none; }
 body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 .leaflet-marker-icon { background-image: none !important; }
-
-/* DÜZELTME: 'i' harfini ortalamak için flexbox yerine line-height kullanıldı. */
 .custom-marker-icon { 
     border-radius: 50%; 
     width: 26px !important; 
     height: 26px !important; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     font-size: 1.65em; 
     color: var(--icon-text-color); 
     font-weight: normal; 
@@ -59,8 +60,6 @@ body.map-is-fullscreen .map-container { position: fixed; top: 0; left: 0; width:
     cursor: pointer; 
     font-family: 'Gotico Antiqua', serif !important; 
     transition: background-color 0.3s ease, color 0.3s ease;
-    text-align: center; /* Yatayda ortala */
-    line-height: 26px !important; /* Dikeyde ortala (yüksekliğe eşit) */
 }
 .custom-marker-icon.new-marker { background-color: var(--new-item-color); }
 
@@ -77,7 +76,15 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .popup-text-content p:last-child { margin-bottom: 0; }
 .popup-text-content a { color: var(--place-cami-color); text-decoration: none; font-weight: 600; }
 .popup-text-content a:hover { text-decoration: underline; }
-.popup-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+/* DÜZELTME: Popup aksiyonlarını dikeyde hizala */
+.popup-actions { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 10px; 
+    padding-top: 10px; 
+    border-top: 1px solid var(--border-color); 
+}
 .leaflet-popup-close-button { padding: 8px 8px 0 0; color: white !important; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 20px !important; }
 .leaflet-popup-close-button:hover { color: #ddd !important; }
 .leaflet-control-custom a { background-position: 50% 50%; background-repeat: no-repeat; display: block; }
@@ -89,19 +96,9 @@ body.dark-theme .custom-marker-icon.new-marker { background-color: #2ecc71; colo
 .search-results .result-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.9em; }
 .search-results .result-item:last-child { border-bottom: none; }
 .search-results .result-item:hover { background-color: var(--primary-bg-color); }
-
-/* DÜZELTME: Tam ekran butonu için yeni stil */
-.leaflet-control-fullscreen .fullscreen-icon {
-    width: 26px;
-    height: 26px;
-    text-align: center;
-    font-size: 20px;
-    line-height: 26px;
-    font-weight: bold;
-    color: #333;
-    background-image: none !important; /* Eski bozuk SVG'yi temizle */
-}
-
+.leaflet-control-fullscreen .fullscreen-icon { width: 26px; height: 26px; background-size: 16px 16px; }
+.leaflet-control-fullscreen a.fullscreen-enter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23333" d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-4zM10 .5a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-4a.5.5 0 0 0-.5-.5h-4zM.5 10a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H1v-3a.5.5 0 0 0-1 0v4zM15 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-4z"/></svg>'); }
+.leaflet-control-fullscreen a.fullscreen-exit { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23333" d="M5.5 0a.5.5 0 0 0 0 1H4v1.5a.5.5 0 0 0 1 0V1h1.5a.5.5 0 0 0 0-1h-3zM.5 4.5a.5.5 0 0 0 0 1H2V7a.5.5 0 0 0 1 0V5.5h1.5a.5.5 0 0 0 0-1h-3zM10.5.5a.5.5 0 0 0-.5.5V2H11.5a.5.5 0 0 0 0-1h-1zM15.5 4.5a.5.5 0 0 0-.5-.5H13.5v-1.5a.5.5 0 0 0-1 0V4.5h-1.5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zM.5 11.5a.5.5 0 0 0 .5.5H2V13.5a.5.5 0 0 0 1 0V12h1.5a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5zM15.5 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1H13.5v1.5a.5.5 0 0 0 1 0v-1.5h1.5a.5.5 0 0 0 .5-.5z"/></svg>'); }
 .action-link { font-size: 0.9em; margin: 0; }
 .action-link strong { font-weight: 500;}
 .action-link a { text-decoration: none; cursor: pointer; font-size: 1.2em; vertical-align: middle; margin-left: 4px; }
@@ -139,5 +136,9 @@ body.map-is-fullscreen .pwa-actions-container, body.map-is-fullscreen .site-shar
     .yeni-container { margin-top: 20px; }
     .popup-text-content { max-height: 180px; overflow-y: auto; }
     #shuffle-button { font-size: 1.4em; }
+    /* DÜZELTME: Sadece mobil için, görselsiz popup'lara min-height ekle */
+    .leaflet-popup-content:not(:has(img)) .popup-text-content {
+        min-height: 150px;
+    }
 }
 #botpoison-challenge { display: none; }
