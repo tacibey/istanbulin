@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('mapTheme', theme);
     }
     
-    // DÜZELTME: Sistem temasını kontrol eden kod kaldırıldı. Artık varsayılan her zaman 'light'.
     const savedTheme = localStorage.getItem('mapTheme') || 'light';
     applyTheme(savedTheme);
 
@@ -125,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             _updateIcon: function() {
                 if (document.body.classList.contains("map-is-fullscreen")) {
-                    // DÜZELTME: Mobilde bozuk görünen karakter 'X' ile değiştirildi.
                     this._link.innerHTML = "X";
                     this._link.title = "Tam Ekrandan Çık";
                 } else {
@@ -177,7 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const imageHtml = imageUrl ? `<img src="${imageUrl}" alt="${markerData.title}" loading="lazy" onerror="this.style.display='none';">` : '';
-            const sourceHtml = markerData.source ? (markerData.source.startsWith('http') ? `<p><strong><a href="${markerData.source}" target="_blank" rel="noopener noreferrer">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${markerData.source}</p>`) : '';
+            // DÜZELTME: Kaynak linkine nofollow eklendi
+            const sourceHtml = markerData.source ? (markerData.source.startsWith('http') ? `<p><strong><a href="${markerData.source}" target="_blank" rel="noopener noreferrer nofollow">Kaynak</a></strong></p>` : `<p><strong>Kaynak:</strong> ${markerData.source}</p>`) : '';
             const contributorHtml = markerData.contributor ? `<p><strong>Ekleyen:</strong> ${markerData.contributor}</p>` : '';
             const formattedDescription = formatDescription(markerData.description);
             
