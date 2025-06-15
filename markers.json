@@ -259,16 +259,16 @@
     "contributor": "istanbulin",
     "image": "https://cdnuploads.aa.com.tr/uploads/Contents/2022/01/27/thumbs_b_c_78a88713270ee86c9771e7d621983c76.jpg"
   },
-  {
-    "id": "27",
-    "title": "Özdemir Asaf'ın Evi (Vefatı)",
-    "description": "Kızı Seda Arun: Acıbadem'deki ev yıkılıp yerine apartman yapılacağı için babam ve kardeşlerim Küçük Bebek Caddesi'ndeki Gülen Apartmanı No: 16/8'e taşındılar. Babam 1981'de burada vefat etti.",
-    "lat": 41.07976581855259,
-    "lng": 29.044900217567832,
-    "source": "",
-    "contributor": "istanbulin",
-    "image": "https://cdnuploads.aa.com.tr/uploads/Contents/2022/01/27/thumbs_b_c_78a88713270ee86c9771e7d621983c76.jpg"
-  },
+{
+  "id": "27",
+  "title": "Özdemir Asaf'ın Evi (Vefatı)",
+  "description": "Kızı Seda Arun: Acıbadem'deki ev yıkılıp yerine apartman yapılacağı için babam ve kardeşlerim Küçük Bebek Caddesi'ndeki Gülen Apartmanı No: 16/8'e taşındılar. Babam 1981'de burada vefat etti. \"Gelmesen önemli değil, gelsen önemli olurdu.\"",
+  "lat": 41.07976581855259,
+  "lng": 29.044900217567832,
+  "source": "",
+  "contributor": "istanbulin",
+  "image": "https://cdnuploads.aa.com.tr/uploads/Contents/2022/01/27/thumbs_b_c_78a88713270ee86c9771e7d621983c76.jpg"
+},
   {
     "id": "28",
     "title": "Göztepe Suyu",
@@ -647,7 +647,7 @@
     "lng": 28.920783555154472,
     "source": "İA (R.E.Koçu)",
     "contributor": "istanbulin",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/0/08/Abdullah_Dschewdet.jpg"
+    "image": "https://biyo-prod.s3.eu-central-1.amazonaws.com/biography/photo/profile/77997e410d9b1efc14b9f61ca0d0fcdd.webp"
   },
   {
     "id": "66",
