@@ -5,35 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>istanbulin - İstanbul İnteraktif Kültür Atlası</title>
     <meta name="description" content="İstanbul'un kültürel, tarihi ve edebi hafızasını taşıyan mekanları interaktif bir harita üzerinde keşfedin. Filmlerin çekildiği, romanların geçtiği, önemli figürlerin yaşadığı yerler. Ve çok daha fazlası.">
-    
-    <!-- PERFORMANS: Harita ve font sunucularına önceden bağlan -->
-    <link rel="preconnect" href="https://a.basemaps.cartocdn.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link rel="manifest" href="/manifest.json">
+    <!-- YENİ: İkon fontunu öncelikli olarak yükleyerek kayma sorununu engelliyoruz -->
+    <link rel="preload" href="/Rusch-GoticoAntiqua100G.otf" as="font" type="font/otf" crossorigin>
     <meta name="theme-color" content="#0a0908">
     <link rel="apple-touch-icon" href="/images/icon-192x192.png">
 
-    <!-- Ana stil dosyasını doğrudan yükle -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Diğer kütüphaneleri ve fontları asenkron yükle -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" media="print" onload="this.media='all'">
-
+    
     <noscript>
       <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
       <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
       <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
       <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
       <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
     </noscript>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
@@ -74,7 +68,7 @@
                 <button class="share-option" data-platform="facebook">ⓕ</button>
                 <button class="share-option" data-platform="twitter">𝕏</button>
                 <button class="share-option" data-platform="whatsapp">✆</button>
-                <button class="share-option" data-platform="copy">🗐</button>
+                <button class="share-option" data-platform="copy">⿻</button>
             </div>
             <button id="site-share-button" class="site-share-button">Paylaş</button>
         </div>
